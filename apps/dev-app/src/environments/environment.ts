@@ -11,7 +11,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44305/',
+    issuer: 'https://localhost:44383/',
     clientId: 'AbpNgAntDesign_App',
     scope: 'offline_access AbpNgAntDesign',
     responseType: 'code',
@@ -19,7 +19,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44305',
+      url: 'https://localhost:44383',
       rootNamespace: 'AbpNgAntDesign',
     },
     AbpAccount: {

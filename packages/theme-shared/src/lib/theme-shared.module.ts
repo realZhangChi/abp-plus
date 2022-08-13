@@ -36,6 +36,44 @@ import { httpErrorConfigFactory, HTTP_ERROR_CONFIG } from './tokens/http-error.t
 import { DateParserFormatter } from './utils/date-parser-formatter';
 import { CONFIRMATION_ICONS, DEFAULT_CONFIRMATION_ICONS } from './tokens/confirmation-icons.token';
 
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+
+const ZORRO = [
+  NzLayoutModule,
+  NzMenuModule,
+  NzIconModule,
+  NzDropDownModule,
+  NzButtonModule,
+  NzAlertModule,
+  NzNotificationModule,
+  NzAvatarModule,
+  NzDividerModule,
+  NzTabsModule,
+  NzFormModule,
+  NzInputModule,
+  NzCheckboxModule,
+  NzModalModule,
+  NzTableModule,
+  NzGridModule,
+  NzSpaceModule,
+];
+
 const declarationsWithExports = [
   BreadcrumbComponent,
   BreadcrumbItemsComponent,
@@ -59,9 +97,10 @@ const declarationsWithExports = [
     NgxValidateCoreModule,
     NgbPaginationModule,
     EllipsisModule,
+    ...ZORRO,
   ],
   declarations: [...declarationsWithExports, HttpErrorWrapperComponent],
-  exports: [NgxDatatableModule, EllipsisModule, ...declarationsWithExports],
+  exports: [NgxDatatableModule, EllipsisModule, ...declarationsWithExports, ...ZORRO],
   providers: [DatePipe],
 })
 export class BaseThemeSharedModule {}
