@@ -1,5 +1,5 @@
 import { CoreModule, noop } from '@abp/ng.core';
-import { ThemeSharedModule } from '@abp/ng.theme.shared';
+import { ThemeSharedModule, ToasterService } from '@abp/ng.theme.shared';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -25,38 +25,40 @@ import { BASIC_THEME_NAV_ITEM_PROVIDERS } from './providers/nav-item.provider';
 import { BASIC_THEME_STYLES_PROVIDERS } from './providers/styles.provider';
 import { BASIC_THEME_USER_MENU_PROVIDERS } from './providers/user-menu.provider';
 
+import { ZorroToasterService } from './services/zorro-toaster.service';
+
 export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, EmptyLayoutComponent];
 
 @NgModule({
-    declarations: [
-        ...LAYOUTS,
-        ValidationErrorComponent,
-        LogoComponent,
-        NavItemsComponent,
-        RoutesComponent,
-        CurrentUserComponent,
-        LanguagesComponent,
-        PageAlertContainerComponent,
-        TenantBoxComponent,
-        AuthWrapperComponent,
-    ],
-    exports: [
-        ...LAYOUTS,
-        ValidationErrorComponent,
-        LogoComponent,
-        NavItemsComponent,
-        RoutesComponent,
-        CurrentUserComponent,
-        LanguagesComponent,
-        PageAlertContainerComponent,
-    ],
-    imports: [
-        CoreModule,
-        ThemeSharedModule,
-        NgbCollapseModule,
-        NgbDropdownModule,
-        NgxValidateCoreModule,
-    ]
+  declarations: [
+    ...LAYOUTS,
+    ValidationErrorComponent,
+    LogoComponent,
+    NavItemsComponent,
+    RoutesComponent,
+    CurrentUserComponent,
+    LanguagesComponent,
+    PageAlertContainerComponent,
+    TenantBoxComponent,
+    AuthWrapperComponent,
+  ],
+  exports: [
+    ...LAYOUTS,
+    ValidationErrorComponent,
+    LogoComponent,
+    NavItemsComponent,
+    RoutesComponent,
+    CurrentUserComponent,
+    LanguagesComponent,
+    PageAlertContainerComponent,
+  ],
+  imports: [
+    CoreModule,
+    ThemeSharedModule,
+    NgbCollapseModule,
+    NgbDropdownModule,
+    NgxValidateCoreModule,
+  ],
 })
 export class BaseThemeBasicModule {}
 
@@ -90,6 +92,10 @@ export class ThemeBasicModule {
           useFactory: noop,
           multi: true,
           deps: [LazyStyleHandler],
+        },
+        {
+          provide: ToasterService,
+          useClass: ZorroToasterService,
         },
       ],
     };

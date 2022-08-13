@@ -15,6 +15,7 @@ import {
 })
 export class RoutesComponent {
   @Input() smallScreen?: boolean;
+  @Input() isCollapsed: boolean;
 
   @ViewChildren('childrenContainer') childrenContainers!: QueryList<ElementRef<HTMLDivElement>>;
 

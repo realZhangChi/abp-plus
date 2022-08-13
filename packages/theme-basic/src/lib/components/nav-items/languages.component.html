@@ -1,0 +1,17 @@
+<div nz-dropdown [nzDropdownMenu]="menu" *ngIf="((dropdownLanguages$ | async)?.length || 0) > 0">
+  <i nz-icon nzType="global"></i>
+  {{ defaultLanguage$ | async }}
+  <i nz-icon nzType="down"></i>
+</div>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable>
+    <li
+      nz-menu-item
+      *ngFor="let lang of this.languages$ | async"
+      [nzSelected]="lang.cultureName == selectedLangCulture"
+      (click)="onChangeLang(lang.cultureName || '')"
+    >
+      {{ lang?.displayName }}
+    </li>
+  </ul>
+</nz-dropdown-menu>

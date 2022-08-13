@@ -8,7 +8,7 @@ export const environment = {
   application: {
     baseUrl,
     name: 'AbpNgAntDesign',
-    logoUrl: '',
+    logoUrl: 'https://ng.ant.design/assets/img/logo.svg',
   },
   oAuthConfig: {
     issuer: 'https://localhost:44383/',

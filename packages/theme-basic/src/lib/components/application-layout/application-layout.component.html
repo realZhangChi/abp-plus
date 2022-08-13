@@ -1,4 +1,4 @@
-<nav
+<!-- <nav
   class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm flex-column flex-md-row mb-4"
   id="main-navbar"
   style="min-height: 4rem"
@@ -42,9 +42,50 @@
   </div>
 </nav>
 
-<!-- [@slideFromBottom]="outlet.isActivated && outlet.activatedRoute?.routeConfig?.path" TODO: throws ExpressionChangedAfterItHasBeenCheck when animation is active. It should be fixed -->
 <div class="container">
   <abp-page-alert-container></abp-page-alert-container>
 
   <router-outlet #outlet="outlet"></router-outlet>
-</div>
+</div> -->
+
+<nz-layout class="app-layout">
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <abp-logo *abpReplaceableTemplate="{ componentKey: service.logoComponentKey }"></abp-logo>
+    <abp-routes
+      *abpReplaceableTemplate="{
+        componentKey: service.routesComponentKey,
+        inputs: {
+          smallScreen: { value: service.smallScreen }
+        }
+      }"
+      [isCollapsed]="isCollapsed"
+    ></abp-routes>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+        </span>
+        <abp-nav-items
+          *abpReplaceableTemplate="{
+            componentKey: service.navItemsComponentKey
+          }"
+        ></abp-nav-items>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <abp-page-alert-container></abp-page-alert-container>
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

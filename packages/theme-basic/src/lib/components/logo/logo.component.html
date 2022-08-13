@@ -1,0 +1,7 @@
+<div class="sidebar-logo">
+  <a routerLink="/">
+    <img *ngIf="appInfo.logoUrl" [src]="appInfo.logoUrl" [alt]="appInfo.name" />
+    <h1>{{ appInfo.name }}</h1>
+  </a>
+</div>
+
