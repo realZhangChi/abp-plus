@@ -53,6 +53,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 const ZORRO = [
   NzLayoutModule,
@@ -72,6 +73,7 @@ const ZORRO = [
   NzTableModule,
   NzGridModule,
   NzSpaceModule,
+  NzBreadCrumbModule
 ];
 
 const declarationsWithExports = [

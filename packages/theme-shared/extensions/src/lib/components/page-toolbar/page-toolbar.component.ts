@@ -23,7 +23,7 @@ export class PageToolbarComponent<R = any>
   extends AbstractActionsComponent<ToolbarActionList<R>>
   implements HasCreateInjectorPipe<R>
 {
-  defaultBtnClass = 'btn btn-sm btn-primary';
+  defaultBtnClass = 'default';
 
   getData = () => this.data;
 

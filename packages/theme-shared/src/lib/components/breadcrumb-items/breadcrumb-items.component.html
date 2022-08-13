@@ -1,18 +1,13 @@
-<ol class="breadcrumb" *ngIf="items.length">
-  <li class="breadcrumb-item">
-    <a routerLink="/"><i class="fa fa-home"></i> </a>
-  </li>
-  <li
-    *ngFor="let item of items; let last = last"
-    class="breadcrumb-item"
-    [class.active]="last"
-    aria-current="page"
-  >
+<nz-breadcrumb *ngIf="items.length">
+  <nz-breadcrumb-item>
+    <a routerLink="/"><i nz-icon nzType="home"></i></a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngFor="let item of items; let last = last" [class.active]="last">
     <ng-container
       *ngTemplateOutlet="item.path ? linkTemplate : textTemplate; context: { $implicit: item }"
     ></ng-container>
-  </li>
-</ol>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
 
 <ng-template #linkTemplate let-item>
   <a [routerLink]="item.path"> {{ item.name | abpLocalization }}</a>

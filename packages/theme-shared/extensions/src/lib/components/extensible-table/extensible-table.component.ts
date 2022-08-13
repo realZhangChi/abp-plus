@@ -23,6 +23,7 @@ import {
   TrackByFunction,
   Type,
 } from '@angular/core';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ePropType } from '../../enums/props.enum';
@@ -174,5 +175,22 @@ export class ExtensibleTableComponent<R = any> implements OnChanges {
 
       return record;
     });
+  }
+
+  onShortChange(prop: string, order: 'descend' | 'ascend' | null): void {
+    const sortOrder = order?.substring(0, order.length - 3);
+    if (sortOrder) {
+      this.list.sortKey = prop;
+      this.list.sortOrder = sortOrder;
+    }
+  }
+
+  onQueryParamsChange(params: NzTableQueryParams): void {
+    if (this.list.page !== params.pageIndex - 1) {
+      this.list.page = params.pageIndex - 1;
+    }
+    if (this.list.maxResultCount != params.pageSize) {
+      this.list.maxResultCount = params.pageSize;
+    }
   }
 }

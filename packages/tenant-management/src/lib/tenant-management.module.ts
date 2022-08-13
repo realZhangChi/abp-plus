@@ -1,3 +1,4 @@
+import { PageModule } from '@abp/ng.components/page';
 import { CoreModule, LazyModuleFactory } from '@abp/ng.core';
 import { FeatureManagementModule } from '@abp/ng.feature-management';
 import { ThemeSharedModule } from '@abp/ng.theme.shared';
@@ -28,6 +29,7 @@ import {
     NgbDropdownModule,
     FeatureManagementModule,
     UiExtensionsModule,
+    PageModule
   ],
 })
 export class TenantManagementModule {

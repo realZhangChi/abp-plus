@@ -10,7 +10,7 @@ export const DEFAULT_TENANTS_TOOLBAR_ACTIONS = ToolbarAction.createMany<TenantDt
       component.openFeaturesModal('');
     },
     permission: 'FeatureManagement.ManageHostFeatures',
-    icon: 'fa fa-cog',
+    icon: 'setting',
   },
   {
     text: 'AbpTenantManagement::NewTenant',
@@ -19,6 +19,7 @@ export const DEFAULT_TENANTS_TOOLBAR_ACTIONS = ToolbarAction.createMany<TenantDt
       component.addTenant();
     },
     permission: 'AbpTenantManagement.Tenants.Create',
-    icon: 'fa fa-plus',
+    icon: 'plus',
+    btnClass: 'primary'
   },
 ]);
