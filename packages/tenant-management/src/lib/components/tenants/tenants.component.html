@@ -27,18 +27,23 @@
     </ng-template>
 
     <ng-template #abpBody>
-      <form [formGroup]="tenantForm" (ngSubmit)="save()" [validateOnSubmit]="true">
+      <form nz-form nzLayout="vertical" [formGroup]="tenantForm" (ngSubmit)="save()" [validateOnSubmit]="true">
         <abp-extensible-form [selectedRecord]="selected"></abp-extensible-form>
       </form>
     </ng-template>
 
     <ng-template #abpFooter>
-      <button abpClose type="button" class="btn btn-secondary">
+      <button nz-button abpClose type="button">
         {{ 'AbpTenantManagement::Cancel' | abpLocalization }}
       </button>
-      <abp-button iconClass="fa fa-check" (click)="save()" [disabled]="tenantForm?.invalid">{{
-        'AbpTenantManagement::Save' | abpLocalization
-      }}</abp-button>
+      <abp-button
+        iconClass="check"
+        buttonClass="primary"
+        [abpLoading]="modalBusy"
+        (click)="save()"
+        [disabled]="tenantForm?.invalid"
+        >{{ 'AbpTenantManagement::Save' | abpLocalization }}</abp-button
+      >
     </ng-template>
   </abp-modal>
 

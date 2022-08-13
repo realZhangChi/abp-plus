@@ -62,10 +62,10 @@ export class ExtensibleFormPropComponent implements OnChanges, AfterViewInit {
 
   readonly!: boolean;
 
-  disabledFn = (data:PropData) => false;
-  
+  disabledFn = (data: PropData) => false;
+
   get disabled() {
-      return this.disabledFn(this.data)
+    return this.disabledFn(this.data);
   }
 
   private readonly form: FormGroup;
@@ -120,6 +120,10 @@ export class ExtensibleFormPropComponent implements OnChanges, AfterViewInit {
       this.form.get(addTypeaheadTextSuffix(name));
     const valueControl = this.form.get(extraPropName) || this.form.get(name);
     return [keyControl, valueControl];
+  }
+
+  isPropRequired() {
+    return this.validators.some(isRequired);
   }
 
   private setAsterisk() {
@@ -179,7 +183,7 @@ export class ExtensibleFormPropComponent implements OnChanges, AfterViewInit {
 
     if (options) this.options$ = options(this.data);
     if (readonly) this.readonly = readonly(this.data);
-     
+
     if (disabled) {
       this.disabledFn = disabled;
     }

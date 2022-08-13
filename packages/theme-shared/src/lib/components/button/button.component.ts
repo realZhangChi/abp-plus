@@ -16,16 +16,18 @@ import {
   template: `
     <button
       #button
+      nz-button
       [id]="buttonId"
       [attr.type]="buttonType"
       [attr.form]="formName"
-      [ngClass]="buttonClass"
+      [nzType]="buttonClass"
       [disabled]="loading || disabled"
       (click.stop)="click.next($event); abpClick.next($event)"
       (focus)="focus.next($event); abpFocus.next($event)"
       (blur)="blur.next($event); abpBlur.next($event)"
     >
-      <i [ngClass]="icon" class="me-1"></i><ng-content></ng-content>
+      <i *ngIf="iconClass || this.loading" nz-icon [nzType]="icon" class="me-1"></i
+      ><ng-content></ng-content>
     </button>
   `,
 })
@@ -34,11 +36,11 @@ export class ButtonComponent implements OnInit {
   buttonId = '';
 
   @Input()
-  buttonClass = 'btn btn-primary';
+  buttonClass = 'primary';
 
   @Input()
   buttonType = 'button';
-  
+
   @Input()
   formName?: string = undefined;
 
@@ -70,7 +72,7 @@ export class ButtonComponent implements OnInit {
   buttonRef!: ElementRef<HTMLButtonElement>;
 
   get icon(): string {
-    return `${this.loading ? 'fa fa-spinner fa-spin' : this.iconClass || 'd-none'}`;
+    return `${this.loading ? 'loading' : this.iconClass || null}`;
   }
 
   constructor(private renderer: Renderer2) {}

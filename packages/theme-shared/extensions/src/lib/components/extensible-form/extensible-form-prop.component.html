@@ -1,4 +1,23 @@
-<div
+<nz-form-item
+  *abpPermission="prop.permission; runChangeDetection: false"
+  [ngSwitch]="getComponent(prop)"
+>
+  <ng-template [ngTemplateOutlet]="label"></ng-template>
+  <nz-form-control [nzValidateStatus]="isInvalid ? 'error' : 'success'">
+    <input
+      #field
+      nz-input
+      [id]="prop.id"
+      [formControlName]="prop.name"
+      [autocomplete]="prop.autocomplete"
+      [type]="getType(prop)"
+      [abpDisabled]="disabled"
+      [readonly]="readonly"
+    />
+  </nz-form-control>
+</nz-form-item>
+
+<!-- <div
   class="mb-3 form-group"
   *abpPermission="prop.permission; runChangeDetection: false"
   [ngSwitch]="getComponent(prop)"
@@ -133,10 +152,10 @@
       class="form-control"
     ></textarea>
   </ng-template>
-</div>
+</div> -->
 
 <ng-template #label let-classes>
-  <label [htmlFor]="prop.id" [ngClass]="classes || 'form-label'"
-    >{{ prop.displayName | abpLocalization }} {{ asterisk }}</label
-  >
+  <nz-form-label [htmlFor]="prop.id" [nzRequired]="isPropRequired()">{{
+    prop.displayName | abpLocalization
+  }}</nz-form-label>
 </ng-template>
