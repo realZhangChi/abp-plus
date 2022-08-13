@@ -22,7 +22,7 @@ import { AbstractActionsComponent } from '../abstract-actions/abstract-actions.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridActionsComponent<R = any> extends AbstractActionsComponent<EntityActionList<R>> {
-  @Input() icon = 'fa fa-cog';
+  @Input() icon = 'setting';
 
   @Input() readonly index: number;
 
