@@ -35,8 +35,9 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
     return this._visible;
   }
   set visible(value: boolean) {
-    if (typeof value !== 'boolean') return;
-    this.toggle$.next(value);
+    this._visible = value;
+    // if (typeof value !== 'boolean') return;
+    // this.toggle$.next(value);
   }
 
   @Input()
@@ -89,7 +90,7 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
   private toggle$ = new Subject<boolean>();
 
   get modalWindowRef() {
-    return document.querySelector(`ngb-modal-window.${this.modalIdentifier}`);
+    return document.querySelector(`nz-modal-container.${this.modalIdentifier}`);
   }
 
   get isFormDirty(): boolean {
@@ -108,7 +109,7 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
     this.initToggleStream();
   }
   ngOnInit(): void {
-    this.modalRefService.register(this);
+    // this.modalRefService.register(this);
   }
 
   dismiss(mode: ModalDismissMode) {
@@ -161,6 +162,7 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
   }
 
   ngOnDestroy(): void {
+    console.log('ngOnDestroy')
     this.modalRefService.unregister(this);
     this.toggle(false);
     this.destroy$.next();
@@ -174,11 +176,9 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
 
       this.isConfirmationOpen = true;
       this.confirmationService
-        .warn(
-          'AbpUi::AreYouSureYouWantToCancelEditingWarningMessage',
-          'AbpUi::AreYouSure',
-          { dismissible: false },
-        )
+        .warn('AbpUi::AreYouSureYouWantToCancelEditingWarningMessage', 'AbpUi::AreYouSure', {
+          dismissible: false,
+        })
         .subscribe((status: Confirmation.Status) => {
           this.isConfirmationOpen = false;
           if (status === Confirmation.Status.confirm) {

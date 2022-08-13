@@ -1,4 +1,31 @@
-<ng-content></ng-content>
+<nz-modal
+  [(nzVisible)]="_visible"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  [nzWrapClassName]="this.modalIdentifier"
+  (nzOnCancel)="close()"
+>
+  <ng-template #modalTitle>
+    <div *ngIf="abpHeader" id="abp-modal-header">
+      <ng-container *ngTemplateOutlet="abpHeader"></ng-container>
+    </div>
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div *ngIf="abpBody" id="abp-modal-body">
+      <ng-container *ngTemplateOutlet="abpBody"></ng-container>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <div *ngIf="abpFooter" id="abp-modal-footer" class="modal-footer">
+      <ng-container *ngTemplateOutlet="abpFooter"></ng-container>
+    </div>
+  </ng-template>
+</nz-modal>
+
+<!-- <ng-content></ng-content>
 
 <ng-template #modalContent let-modal>
   <div *ngIf="abpHeader" id="abp-modal-header" class="modal-header">
@@ -18,4 +45,4 @@
   <div *ngIf="abpFooter" id="abp-modal-footer" class="modal-footer">
     <ng-container *ngTemplateOutlet="abpFooter"></ng-container>
   </div>
-</ng-template>
+</ng-template> -->
