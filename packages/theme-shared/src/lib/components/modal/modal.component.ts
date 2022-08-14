@@ -13,7 +13,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { fromEvent, Subject } from 'rxjs';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { fromEvent, Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { Confirmation } from '../../models/confirmation';
 import { ConfirmationService } from '../../services/confirmation.service';
@@ -35,9 +36,8 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
     return this._visible;
   }
   set visible(value: boolean) {
-    this._visible = value;
-    // if (typeof value !== 'boolean') return;
-    // this.toggle$.next(value);
+    if (typeof value !== 'boolean') return;
+    this.toggle$.next(value);
   }
 
   @Input()
@@ -67,6 +67,12 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
   @ContentChild(ButtonComponent, { static: false, read: ButtonComponent })
   abpSubmit?: ButtonComponent;
 
+  @ViewChild('nzModalTitle') nzModalTitle: TemplateRef<any>;
+
+  @ViewChild('nzModalContent') nzModalContent: TemplateRef<any>;
+
+  @ViewChild('nzModalFooter') nzModalFooter: TemplateRef<any>;
+
   @Output() readonly visibleChange = new EventEmitter<boolean>();
 
   @Output() readonly init = new EventEmitter<void>();
@@ -80,6 +86,8 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
   _busy = false;
 
   modalRef!: NgbModalRef;
+
+  nzModalRef!: NzModalRef;
 
   isConfirmationOpen = false;
 
@@ -105,11 +113,12 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
     private suppressUnsavedChangesWarningToken: boolean,
     private modal: NgbModal,
     private modalRefService: ModalRefService,
+    private nzModal: NzModalService,
   ) {
     this.initToggleStream();
   }
   ngOnInit(): void {
-    // this.modalRefService.register(this);
+    this.modalRefService.register(this);
   }
 
   dismiss(mode: ModalDismissMode) {
@@ -136,58 +145,75 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
     this.visibleChange.emit(value);
 
     if (!value) {
-      this.modalRef?.dismiss();
+      this.nzModalRef?.close();
       this.disappear.emit();
       this.destroy$.next();
       return;
     }
 
     setTimeout(() => this.listen(), 0);
-    this.modalRef = this.modal.open(this.modalContent, {
-      size: 'md',
-      centered: false,
-      keyboard: false,
-      scrollable: true,
-      beforeDismiss: () => {
-        if (!this.visible) return true;
-
-        this.close();
-        return !this.visible;
+    this.nzModalRef = this.nzModal.create({
+      nzTitle: this.nzModalTitle,
+      nzContent: this.nzModalContent,
+      nzFooter: this.nzModalFooter,
+      nzWrapClassName: this.modalIdentifier,
+      nzOnCancel: () => {
+        console.log('nzOnCancel');
+        // return new Promise((resolve, reject)=> resolve(false));
+        return this.nzModalCloseable$.toPromise();
       },
-      ...this.options,
-      windowClass: `${this.options.windowClass || ''} ${this.modalIdentifier}`,
     });
-
     this.appear.emit();
   }
 
   ngOnDestroy(): void {
-    console.log('ngOnDestroy')
+    console.log('ngOnDestroy');
     this.modalRefService.unregister(this);
     this.toggle(false);
     this.destroy$.next();
   }
 
+  get nzModalCloseable$(): Observable<boolean> {
+    return new Observable(subscriber => {
+      if (this.busy) {
+        subscriber.next(false);
+        return;
+      }
+
+      if (this.isFormDirty && !this.suppressUnsavedChangesWarning) {
+        if (this.isConfirmationOpen) {
+          subscriber.next(false);
+          return;
+        }
+
+        this.isConfirmationOpen = true;
+        this.confirmationService
+          .warn('AbpUi::AreYouSureYouWantToCancelEditingWarningMessage', 'AbpUi::AreYouSure', {
+            dismissible: false,
+          })
+          .subscribe((status: Confirmation.Status) => {
+            this.isConfirmationOpen = false;
+            if (status === Confirmation.Status.confirm) {
+              this.visible = false;
+              subscriber.complete();
+            } else {
+              subscriber.next(false);
+              subscriber.complete();
+            }
+          });
+      } else {
+        this.visible = false;
+        subscriber.complete();
+      }
+    });
+  }
+
   close() {
-    if (this.busy) return;
-
-    if (this.isFormDirty && !this.suppressUnsavedChangesWarning) {
-      if (this.isConfirmationOpen) return;
-
-      this.isConfirmationOpen = true;
-      this.confirmationService
-        .warn('AbpUi::AreYouSureYouWantToCancelEditingWarningMessage', 'AbpUi::AreYouSure', {
-          dismissible: false,
-        })
-        .subscribe((status: Confirmation.Status) => {
-          this.isConfirmationOpen = false;
-          if (status === Confirmation.Status.confirm) {
-            this.visible = false;
-          }
-        });
-    } else {
-      this.visible = false;
-    }
+    this.nzModalCloseable$.subscribe(closeable => {
+      if (closeable) {
+        this.visible = false;
+      }
+    });
   }
 
   listen() {

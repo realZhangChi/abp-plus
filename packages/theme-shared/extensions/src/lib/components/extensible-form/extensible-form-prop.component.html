@@ -2,19 +2,52 @@
   *abpPermission="prop.permission; runChangeDetection: false"
   [ngSwitch]="getComponent(prop)"
 >
-  <ng-template [ngTemplateOutlet]="label"></ng-template>
-  <nz-form-control [nzValidateStatus]="isInvalid ? 'error' : 'success'">
-    <input
-      #field
-      nz-input
-      [id]="prop.id"
-      [formControlName]="prop.name"
-      [autocomplete]="prop.autocomplete"
-      [type]="getType(prop)"
-      [abpDisabled]="disabled"
-      [readonly]="readonly"
-    />
-  </nz-form-control>
+  <ng-template ngSwitchCase="input">
+    <ng-template [ngTemplateOutlet]="label"></ng-template>
+    <nz-form-control [nzValidateStatus]="isInvalid ? 'error' : 'success'">
+      <input
+        #field
+        nz-input
+        [id]="prop.id"
+        [formControlName]="prop.name"
+        [autocomplete]="prop.autocomplete"
+        [type]="getType(prop)"
+        [abpDisabled]="disabled"
+        [readonly]="readonly"
+      />
+    </nz-form-control>
+  </ng-template>
+
+  <ng-template ngSwitchCase="hidden">
+    <input nz-input [formControlName]="prop.name" type="hidden" />
+  </ng-template>
+
+  <ng-template ngSwitchCase="checkbox">
+    <nz-form-item>
+      <nz-form-control>
+        <label nz-checkbox [formControlName]="prop.name" [abpDisabled]="disabled">
+          <span>
+            I have read the
+            <a>agreement</a>
+          </span>
+        </label>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="form-check" validationTarget>
+      <input
+        #field
+        [id]="prop.id"
+        [formControlName]="prop.name"
+        [abpDisabled]="disabled"
+        type="checkbox"
+        class="form-check-input"
+      />
+      <ng-template
+        [ngTemplateOutlet]="label"
+        [ngTemplateOutletContext]="{ $implicit: 'form-check-label' }"
+      ></ng-template>
+    </div>
+  </ng-template>
 </nz-form-item>
 
 <!-- <div
