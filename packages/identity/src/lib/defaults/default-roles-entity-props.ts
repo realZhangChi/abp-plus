@@ -2,6 +2,7 @@ import { escapeHtmlChars, LocalizationService } from '@abp/ng.core';
 import { IdentityRoleDto } from '@abp/ng.identity/proxy';
 import { EntityProp, ePropType } from '@abp/ng.theme.shared/extensions';
 import { of } from 'rxjs';
+import { RoleNameCellComponent } from '../components/roles/role-name-cell/role-name-cell.component';
 
 export const DEFAULT_ROLES_ENTITY_PROPS = EntityProp.createMany<IdentityRoleDto>([
   {
@@ -9,25 +10,26 @@ export const DEFAULT_ROLES_ENTITY_PROPS = EntityProp.createMany<IdentityRoleDto>
     name: 'name',
     displayName: 'AbpIdentity::RoleName',
     sortable: true,
-    valueResolver: data => {
-      const l10n = data.getInjected(LocalizationService);
-      const t = l10n.instant.bind(l10n);
-      const { isDefault, isPublic, name } = data.record;
-
-      return of(
-        escapeHtmlChars(name) +
-          (isDefault
-            ? `<span class="badge rounded-pill bg-success ms-1">${t(
-                'AbpIdentity::DisplayName:IsDefault',
-              )}</span>`
-            : '') +
-          (isPublic
-            ? `<span class="badge rounded-pill bg-info ms-1">${t(
-                'AbpIdentity::DisplayName:IsPublic',
-              )}</span>`
-            : '') +
-          `<nz-tag [nzColor]="'magenta'">magenta</nz-tag>`,
-      );
-    },
+    component: RoleNameCellComponent,
+    //     valueResolver: data => {
+    //       const l10n = data.getInjected(LocalizationService);
+    //       const t = l10n.instant.bind(l10n);
+    //       const { isDefault, isPublic, name } = data.record;
+    //
+    //       return of(
+    //         escapeHtmlChars(name) +
+    //           (isDefault
+    //             ? `<span class="badge rounded-pill bg-success ms-1">${t(
+    //                 'AbpIdentity::DisplayName:IsDefault',
+    //               )}</span>`
+    //             : '') +
+    //           (isPublic
+    //             ? `<span class="badge rounded-pill bg-info ms-1">${t(
+    //                 'AbpIdentity::DisplayName:IsPublic',
+    //               )}</span>`
+    //             : '') +
+    //           `<nz-tag [nzColor]="'magenta'">magenta</nz-tag>`,
+    //       );
+    //     },
   },
 ]);

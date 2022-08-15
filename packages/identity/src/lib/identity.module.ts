@@ -6,6 +6,7 @@ import { UiExtensionsModule } from '@abp/ng.theme.shared/extensions';
 import { ModuleWithProviders, NgModule, NgModuleFactory } from '@angular/core';
 import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxValidateCoreModule } from '@ngx-validate/core';
+import { RoleNameCellComponent } from './components/roles/role-name-cell/role-name-cell.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { UsersComponent } from './components/users/users.component';
 import { IdentityExtensionsGuard } from './guards/extensions.guard';
@@ -20,7 +21,7 @@ import {
 } from './tokens/extensions.token';
 
 @NgModule({
-  declarations: [RolesComponent, UsersComponent],
+  declarations: [RolesComponent, UsersComponent, RoleNameCellComponent],
   exports: [RolesComponent, UsersComponent],
   imports: [
     CoreModule,
