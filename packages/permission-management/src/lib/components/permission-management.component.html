@@ -6,76 +6,67 @@
         {{ entityDisplayName || data.entityDisplayName }}
       </h4>
     </ng-template>
-    <ng-template #abpBody>
-      <div class="form-check mb-2">
-        <input
-          #selectAllInAllTabsRef
-          type="checkbox"
-          id="select-all-in-all-tabs"
-          name="select-all-in-all-tabs"
-          class="form-check-input"
-          [(ngModel)]="selectAllTab"
-          (click)="onClickSelectAll()"
-        />
-        <label class="form-check-label" for="select-all-in-all-tabs">{{
-          'AbpPermissionManagement::SelectAllInAllTabs' | abpLocalization
-        }}</label>
-      </div>
 
-      <hr class="mt-2 mb-2" />
+    <ng-template #abpBody>
+      <label
+        nz-checkbox
+        #selectAllInAllTabsRef
+        [(ngModel)]="selectAllTab"
+        (ngModelChange)="onClickSelectAll()"
+        [nzIndeterminate]="selectAllInAllTabsIndeterminate"
+        nzId="select-all-in-all-tabs"
+        name="select-all-in-all-tabs"
+        >{{ 'AbpPermissionManagement::SelectAllInAllTabs' | abpLocalization }}
+      </label>
+
+      <nz-divider></nz-divider>
       <div class="row">
-        <div class="overflow-scroll col-md-4">
-          <ul class="nav nav-pills flex-column">
-            <li *ngFor="let group of data.groups; trackBy: trackByFn" class="nav-item">
-              <a
-                *ngIf="{ assignedCount: getAssignedCount(group.name) } as count"
-                class="nav-link pointer"
-                [class.active]="selectedGroup?.name === group?.name"
-                (click)="onChangeGroup(group)"
-              >
+        <nz-tabset nzTabPosition="left">
+          <ng-container *ngFor="let group of data.groups; trackBy: trackByFn">
+            <nz-tab
+              *ngIf="{ assignedCount: getAssignedCount(group.name) } as count"
+              [nzTitle]="tabTitle"
+              (nzClick)="onChangeGroup(group)"
+            >
+              <ng-container *ngTemplateOutlet="content"></ng-container>
+
+              <ng-template #tabTitle>
                 <div [class.font-weight-bold]="count.assignedCount">
                   {{ group?.displayName }}
                   <span>({{ count.assignedCount }})</span>
                 </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-8 overflow-scroll">
+              </ng-template>
+            </nz-tab>
+          </ng-container>
+        </nz-tabset>
+
+        <ng-template #content>
           <h4>{{ selectedGroup?.displayName }}</h4>
-          <hr class="mt-2 mb-3" />
+          <nz-divider></nz-divider>
           <div class="ps-1 pt-1">
-            <div class="form-check mb-2">
-              <input
-                #selectAllInThisTabsRef
-                type="checkbox"
-                id="select-all-in-this-tabs"
-                name="select-all-in-this-tabs"
-                class="form-check-input"
-                [(ngModel)]="selectThisTab"
-                (click)="onClickSelectThisTab()"
-              />
-              <label class="form-check-label" for="select-all-in-this-tabs">{{
-                'AbpPermissionManagement::SelectAllInThisTab' | abpLocalization
-              }}</label>
-            </div>
-            <hr class="mb-3" />
+            <label
+              #selectAllInThisTabsRef
+              nz-checkbox
+              [(ngModel)]="selectThisTab"
+              (ngModelChange)="onClickSelectThisTab()"
+              [nzIndeterminate]="selectAllInThisTabsIndeterminate"
+              nzId="select-all-in-this-tabs"
+              name="select-all-in-this-tabs"
+              >{{ 'AbpPermissionManagement::SelectAllInThisTab' | abpLocalization }}
+            </label>
+            <nz-divider></nz-divider>
             <div
               *ngFor="let permission of selectedGroupPermissions; let i = index; trackBy: trackByFn"
               [ngStyle]="permission.style"
-              class="form-check mb-2"
+              class="mb-2"
             >
-              <input
+              <label
                 #permissionCheckbox
-                type="checkbox"
-                [checked]="getChecked(permission.name)"
-                [value]="getChecked(permission.name)"
-                [attr.id]="permission.name"
-                class="form-check-input"
-                [disabled]="isGrantedByOtherProviderName(permission.grantedProviders)"
-                (click)="onClickCheckbox(permission, permissionCheckbox.value)"
-              />
-              <label class="form-check-label" [attr.for]="permission.name"
+                nz-checkbox
+                [ngModel]="getChecked(permission.name)"
+                (ngModelChange)="onClickCheckbox(permission, $event)"
+                [nzId]="permission.name"
+                [nzDisabled]="isGrantedByOtherProviderName(permission.grantedProviders)"
                 >{{ permission.displayName }}
                 <ng-container *ngIf="!hideBadges">
                   <span
@@ -87,16 +78,19 @@
               </label>
             </div>
           </div>
-        </div>
+        </ng-template>
       </div>
     </ng-template>
+
     <ng-template #abpFooter>
-      <button type="button" class="btn btn-secondary" abpClose>
-        {{ 'AbpIdentity::Cancel' | abpLocalization }}
-      </button>
-      <abp-button iconClass="fa fa-check" (click)="submit()">{{
-        'AbpIdentity::Save' | abpLocalization
-      }}</abp-button>
+      <nz-space>
+        <button *nzSpaceItem nz-button type="button" abpClose>
+          {{ 'AbpIdentity::Cancel' | abpLocalization }}
+        </button>
+        <abp-button *nzSpaceItem iconClass="check" (click)="submit()">{{
+          'AbpIdentity::Save' | abpLocalization
+        }}</abp-button>
+      </nz-space>
     </ng-template>
   </ng-container>
 </abp-modal>

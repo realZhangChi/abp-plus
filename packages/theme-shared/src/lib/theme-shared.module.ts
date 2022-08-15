@@ -54,6 +54,10 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 const ZORRO = [
   NzLayoutModule,
@@ -73,7 +77,11 @@ const ZORRO = [
   NzTableModule,
   NzGridModule,
   NzSpaceModule,
-  NzBreadCrumbModule
+  NzBreadCrumbModule,
+  NzSelectModule,
+  NzDatePickerModule,
+  NzTimePickerModule,
+  NzTagModule,
 ];
 
 const declarationsWithExports = [

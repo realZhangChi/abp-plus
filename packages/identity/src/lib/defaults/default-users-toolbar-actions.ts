@@ -10,6 +10,7 @@ export const DEFAULT_USERS_TOOLBAR_ACTIONS = ToolbarAction.createMany<IdentityUs
       component.add();
     },
     permission: 'AbpIdentity.Users.Create',
-    icon: 'fa fa-plus',
+    icon: 'plus',
+    btnClass: 'primary'
   },
 ]);

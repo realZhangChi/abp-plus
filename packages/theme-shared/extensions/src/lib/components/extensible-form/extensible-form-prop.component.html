@@ -23,30 +23,97 @@
   </ng-template>
 
   <ng-template ngSwitchCase="checkbox">
-    <nz-form-item>
-      <nz-form-control>
-        <label nz-checkbox [formControlName]="prop.name" [abpDisabled]="disabled">
-          <span>
-            I have read the
-            <a>agreement</a>
-          </span>
-        </label>
-      </nz-form-control>
-    </nz-form-item>
-    <div class="form-check" validationTarget>
-      <input
-        #field
+    <nz-form-control validationTarget>
+      <label
+        nz-checkbox
+        [nzId]="prop.id"
+        [htmlFor]="prop.id"
+        [nzRequired]="isPropRequired()"
+        [formControlName]="prop.name"
+        [abpDisabled]="disabled"
+        >{{ prop.displayName | abpLocalization }}
+      </label>
+    </nz-form-control>
+  </ng-template>
+
+  <ng-template ngSwitchCase="select">
+    <ng-template [ngTemplateOutlet]="label"></ng-template>
+    <nz-form-control [nzValidateStatus]="isInvalid ? 'error' : 'success'">
+      <nz-select [id]="prop.id" [formControlName]="prop.name" [abpDisabled]="disabled">
+        <nz-option
+          *ngFor="let option of options$ | async; trackBy: track.by('value')"
+          [nzValue]="option.value"
+          [nzLabel]="option.key"
+        ></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </ng-template>
+
+  <ng-template ngSwitchCase="multiselect">
+    <ng-template [ngTemplateOutlet]="label"></ng-template>
+    <nz-form-control [nzValidateStatus]="isInvalid ? 'error' : 'success'">
+      <nz-select
+        nzMode="multiple"
         [id]="prop.id"
         [formControlName]="prop.name"
         [abpDisabled]="disabled"
-        type="checkbox"
-        class="form-check-input"
+      >
+        <nz-option
+          *ngFor="let option of options$ | async; trackBy: track.by('value')"
+          [nzValue]="option.value"
+          [nzLabel]="option.key"
+        ></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </ng-template>
+
+  <!-- TODO -->
+  <ng-template ngSwitchCase="typeahead">
+    <ng-template [ngTemplateOutlet]="label"></ng-template>
+    <div #typeahead class="position-relative" validationStyle validationTarget>
+      <input
+        #field
+        [id]="prop.id"
+        [autocomplete]="prop.autocomplete"
+        [abpDisabled]="disabled"
+        [ngbTypeahead]="search"
+        [editable]="false"
+        [inputFormatter]="typeaheadFormatter"
+        [resultFormatter]="typeaheadFormatter"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="typeaheadModel"
+        (selectItem)="setTypeaheadValue($event.item)"
+        (blur)="setTypeaheadValue(typeaheadModel)"
+        [class.is-invalid]="typeahead.classList.contains('is-invalid')"
+        class="form-control"
       />
-      <ng-template
-        [ngTemplateOutlet]="label"
-        [ngTemplateOutletContext]="{ $implicit: 'form-check-label' }"
-      ></ng-template>
+      <input [formControlName]="prop.name" type="hidden" />
     </div>
+  </ng-template>
+
+  <ng-template ngSwitchCase="date">
+    <ng-template [ngTemplateOutlet]="label"></ng-template>
+    <nz-form-control [nzValidateStatus]="isInvalid ? 'error' : 'success'">
+      <nz-date-picker [id]="prop.id" [formControlName]="prop.name"></nz-date-picker>
+    </nz-form-control>
+  </ng-template>
+
+  <ng-template ngSwitchCase="time">
+    <ng-template [ngTemplateOutlet]="label"></ng-template>
+    <nz-form-control [nzValidateStatus]="isInvalid ? 'error' : 'success'">
+      <nz-time-picker [formControlName]="prop.name" [nzFormat]="timeFormat"></nz-time-picker>
+    </nz-form-control>
+  </ng-template>
+
+  <ng-template ngSwitchCase="dateTime">
+    <ng-template [ngTemplateOutlet]="label"></ng-template>
+    <nz-form-control [nzValidateStatus]="isInvalid ? 'error' : 'success'">
+      <nz-date-picker
+        [nzShowTime]="{ nzUse12Hours: meridian, nzFormat: timeFormat }"
+        [id]="prop.id"
+        [formControlName]="prop.name"
+      ></nz-date-picker>
+    </nz-form-control>
   </ng-template>
 </nz-form-item>
 

@@ -157,13 +157,26 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
       nzContent: this.nzModalContent,
       nzFooter: this.nzModalFooter,
       nzWrapClassName: this.modalIdentifier,
+      nzWidth: this.getNzModalWidth(this.options.size),
       nzOnCancel: () => {
-        console.log('nzOnCancel');
-        // return new Promise((resolve, reject)=> resolve(false));
         return this.nzModalCloseable$.toPromise();
       },
     });
     this.appear.emit();
+  }
+
+  private getNzModalWidth(size?: string) {
+    switch (size) {
+      case 'sm':
+        return 300;
+      case 'lg':
+        return 800;
+      case 'xl':
+        return 1140;
+      case 'md':
+      default:
+        return 520;
+    }
   }
 
   ngOnDestroy(): void {

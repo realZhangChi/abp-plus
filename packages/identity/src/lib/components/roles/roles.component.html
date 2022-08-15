@@ -1,23 +1,10 @@
-<div id="identity-roles-wrapper" class="card">
-  <div class="card-header">
-    <div class="row">
-      <div class="col col-md-6">
-        <h5 class="card-title">{{ 'AbpIdentity::Roles' | abpLocalization }}</h5>
-      </div>
-      <div class="text-end col col-md-6">
-        <abp-page-toolbar [record]="data.items"></abp-page-toolbar>
-      </div>
-    </div>
-  </div>
-
-  <div class="card-body">
-    <abp-extensible-table
-      [data]="data.items"
-      [recordsTotal]="data.totalCount"
-      [list]="list"
-    ></abp-extensible-table>
-  </div>
-</div>
+<abp-page [title]="'AbpIdentity::Roles' | abpLocalization" [toolbar]="data.items">
+  <abp-extensible-table
+    [data]="data.items"
+    [recordsTotal]="data.totalCount"
+    [list]="list"
+  ></abp-extensible-table>
+</abp-page>
 
 <abp-modal [(visible)]="isModalVisible" [busy]="modalBusy">
   <ng-template #abpHeader>
@@ -31,12 +18,14 @@
   </ng-template>
 
   <ng-template #abpFooter>
-    <button type="button" class="btn btn-secondary" abpClose>
-      {{ 'AbpIdentity::Cancel' | abpLocalization }}
-    </button>
-    <abp-button iconClass="fa fa-check" [disabled]="form?.invalid" (click)="save()">{{
-      'AbpIdentity::Save' | abpLocalization
-    }}</abp-button>
+    <nz-space>
+      <button *nzSpaceItem nz-button type="button" abpClose>
+        {{ 'AbpIdentity::Cancel' | abpLocalization }}
+      </button>
+      <abp-button *nzSpaceItem iconClass="check" [disabled]="form?.invalid" (click)="save()">{{
+        'AbpIdentity::Save' | abpLocalization
+      }}</abp-button>
+    </nz-space>
   </ng-template>
 </abp-modal>
 

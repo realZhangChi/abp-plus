@@ -1,113 +1,175 @@
-<h2>{{ 'AbpSettingManagement::Menu:Emailing' | abpLocalization }}</h2>
+<h2 style="font-size: 18px">{{ 'AbpSettingManagement::Menu:Emailing' | abpLocalization }}</h2>
 
-<hr class="my-3" />
+<nz-divider></nz-divider>
 
-<form *ngIf="form" [formGroup]="form" (ngSubmit)="submit()" [validateOnSubmit]="true">
-  <div class="mb-3 form-group">
-    <label class="form-label">{{
-      'AbpSettingManagement::DefaultFromDisplayName' | abpLocalization
-      }}</label>
-    <input type="text" class="form-control" formControlName="defaultFromDisplayName" />
-  </div>
-  <div class="mb-3 form-group">
-    <label class="form-label">{{
-      'AbpSettingManagement::DefaultFromAddress' | abpLocalization
-      }}</label>
-    <input type="text" class="form-control" formControlName="defaultFromAddress" />
-  </div>
-  <div class="mb-3 form-group">
-    <label class="form-label">{{ 'AbpSettingManagement::SmtpHost' | abpLocalization }}</label>
-    <input type="text" class="form-control" formControlName="smtpHost" />
-  </div>
-  <div class="mb-3 form-group">
-    <label class="form-label">{{ 'AbpSettingManagement::SmtpPort' | abpLocalization }}</label>
-    <input type="number" class="form-control" formControlName="smtpPort" />
-  </div>
+<form
+  nz-form
+  nzLayout="vertical"
+  *ngIf="form"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  [validateOnSubmit]="true"
+>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="defaultFromDisplayName">
+      {{ 'AbpSettingManagement::DefaultFromDisplayName' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <input nz-input formControlName="defaultFromDisplayName" id="defaultFromDisplayName" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="defaultFromAddress">
+      {{ 'AbpSettingManagement::DefaultFromAddress' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <input nz-input formControlName="defaultFromAddress" id="defaultFromAddress" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="smtpHost">
+      {{ 'AbpSettingManagement::SmtpHost' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <input nz-input formControlName="smtpHost" id="smtpHost" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="smtpPort">
+      {{ 'AbpSettingManagement::SmtpPort' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <input type="number" nz-input formControlName="smtpPort" id="smtpPort" />
+    </nz-form-control>
+  </nz-form-item>
 
-  <div class="form-check mb-2">
-    <input type="checkbox" id="smtp-enable-ssl" class="form-check-input" formControlName="smtpEnableSsl" />
-    <label class="form-check-label" for="smtp-enable-ssl">{{
-      'AbpSettingManagement::SmtpEnableSsl' | abpLocalization
-      }}</label>
-  </div>
-  <div class="form-check mb-2">
-    <input type="checkbox" id="smtp-use-default-credentials" class="form-check-input"
-      formControlName="smtpUseDefaultCredentials" />
-    <label class="form-check-label" for="smtp-use-default-credentials">{{
-      'AbpSettingManagement::SmtpUseDefaultCredentials' | abpLocalization
-      }}</label>
-  </div>
+  <nz-form-item>
+    <label nz-checkbox formControlName="smtpEnableSsl">
+      {{ 'AbpSettingManagement::SmtpEnableSsl' | abpLocalization }}
+    </label>
+  </nz-form-item>
 
-  <div [@collapse]="{
+  <nz-form-item>
+    <label nz-checkbox formControlName="smtpUseDefaultCredentials">
+      {{ 'AbpSettingManagement::SmtpUseDefaultCredentials' | abpLocalization }}
+    </label>
+  </nz-form-item>
+
+  <div
+    [@collapse]="{
       value: form.get('smtpUseDefaultCredentials')?.value ? 'collapsed' : 'expanded',
       params: { time: '200ms', easing: 'linear' }
-    }">
-    <div class="mb-3 form-group">
-      <label class="form-label">{{ 'AbpSettingManagement::SmtpDomain' | abpLocalization }}</label>
-      <input type="text" class="form-control" formControlName="smtpDomain" />
-    </div>
+    }"
+  >
+    <nz-form-item>
+      <nz-form-label nzFor="smtpDomain">
+        {{ 'AbpSettingManagement::SmtpDomain' | abpLocalization }}
+      </nz-form-label>
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <input type="text" nz-input formControlName="smtpDomain" />
+      </nz-form-control>
+    </nz-form-item>
 
-    <div class="mb-3 form-group">
-      <label class="form-label">{{ 'AbpSettingManagement::SmtpUserName' | abpLocalization }}</label>
-      <input type="text" class="form-control" formControlName="smtpUserName" />
-    </div>
+    <nz-form-item>
+      <nz-form-label nzFor="smtpUserName">
+        {{ 'AbpSettingManagement::SmtpUserName' | abpLocalization }}
+      </nz-form-label>
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <input type="text" nz-input formControlName="smtpUserName" />
+      </nz-form-control>
+    </nz-form-item>
 
-    <div class="mb-3 form-group">
-      <label class="form-label">{{ 'AbpSettingManagement::SmtpPassword' | abpLocalization }}</label>
-      <input type="password" class="form-control" formControlName="smtpPassword" />
-    </div>
+    <nz-form-item>
+      <nz-form-label nzFor="smtpPassword">
+        {{ 'AbpSettingManagement::SmtpPassword' | abpLocalization }}
+      </nz-form-label>
+
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <input type="text" nz-input formControlName="smtpPassword" />
+      </nz-form-control>
+    </nz-form-item>
   </div>
 
-  <hr />
+  <nz-divider></nz-divider>
 
-  <button type="submit" class="btn btn-primary">
+  <button type="submit" nz-button nzType="primary">
     {{ 'AbpSettingManagement::Save' | abpLocalization }}
   </button>
-  <button type="button" (click)="openSendEmailModal()" class="btn btn-primary mx-2" *abpPermission="emailingPolicy">
+
+  <button
+    type="button"
+    (click)="openSendEmailModal()"
+    nz-button
+    nzType="default"
+    *abpPermission="emailingPolicy"
+    style="margin-left: 0.5rem"
+  >
     <i class="fa f-send"></i>
     {{ 'AbpSettingManagement::SendTestEmail' | abpLocalization }}
   </button>
 </form>
 
-<abp-modal [(visible)]="isEmailTestModalOpen" [options]="modalSize">
-  <ng-template #abpHeader>
-    <h3>{{"SendTestEmail" | abpLocalization}}</h3>
-  </ng-template>
-
-  <ng-template #abpBody>
+<nz-modal
+  [(nzVisible)]="isEmailTestModalOpen"
+  [nzTitle]="'SendTestEmail' | abpLocalization"
+  [nzFooter]="footer"
+  (nzOnCancel)="isEmailTestModalOpen = false;"
+>
+  <ng-container *nzModalContent>
     <form [formGroup]="emailTestForm" id="emailTestForm" (ngSubmit)="emailTestFormSubmit()">
+      <nz-form-item>
+        <nz-form-label nzFor="senderEmailAddress">
+          {{ 'AbpSettingManagement::SenderEmailAddress' | abpLocalization }}
+        </nz-form-label>
 
-      <div class="mb-3 form-group">
-        <label class="form-label">{{ 'AbpSettingManagement::SenderEmailAddress' | abpLocalization }}</label>
-        <input class="form-control" formControlName="senderEmailAddress" />
-      </div>
+        <nz-form-control [nzXs]="24">
+          <input type="text" nz-input formControlName="senderEmailAddress" />
+        </nz-form-control>
+      </nz-form-item>
 
-      <div class="mb-3 form-group">
-        <label class="form-label">{{ 'AbpSettingManagement::TargetEmailAddress' | abpLocalization }}</label>
-        <input class="form-control" formControlName="targetEmailAddress" />
-      </div>
+      <nz-form-item>
+        <nz-form-label nzFor="targetEmailAddress">
+          {{ 'AbpSettingManagement::TargetEmailAddress' | abpLocalization }}
+        </nz-form-label>
 
+        <nz-form-control [nzXs]="24">
+          <input type="text" nz-input formControlName="targetEmailAddress" />
+        </nz-form-control>
+      </nz-form-item>
 
-      <div class="mb-3 form-group">
-        <label class="form-label">{{ 'AbpSettingManagement::Subject' | abpLocalization }}</label>
-        <input class="form-control" formControlName="subject" />
-      </div>
+      <nz-form-item>
+        <nz-form-label nzFor="subject">
+          {{ 'AbpSettingManagement::Subject' | abpLocalization }}
+        </nz-form-label>
 
+        <nz-form-control [nzXs]="24">
+          <input type="text" nz-input formControlName="subject" />
+        </nz-form-control>
+      </nz-form-item>
 
-      <div class="mb-3 form-group">
-        <label class="form-label">{{ 'AbpSettingManagement::Body' | abpLocalization }}</label>
-        <textarea class="form-control" formControlName="body"></textarea>
-      </div>
-    </form>
-  </ng-template>
+      <nz-form-item>
+        <nz-form-label nzFor="body">
+          {{ 'AbpSettingManagement::Body' | abpLocalization }}
+        </nz-form-label>
 
+        <nz-form-control [nzXs]="24">
+          <textarea type="text" nz-input formControlName="body"></textarea>
+        </nz-form-control>
+      </nz-form-item></form
+  ></ng-container>
 
-  <ng-template #abpFooter>
-    <abp-button buttonType="submit" iconClass="fa fa-send" formName="emailTestForm"
-      [disabled]="emailTestForm.invalid && emailTestForm.dirty">
+  <ng-template #footer>
+    <button
+      nz-button
+      nzType="primary"
+      type="submit"
+      formName="emailTestForm"
+      [disabled]="emailTestForm.invalid && emailTestForm.dirty"
+    >
+      <i class="fa fa-send" style="margin-right: 4px"></i>
       <span>{{ 'AbpTenantManagement::Send' | abpLocalization }}</span>
-    </abp-button>
+    </button>
 
-    <button type="button" class="btn btn-secondary" abpClose>Close</button>
+    <button type="button" nz-button (click)="isEmailTestModalOpen = false">Close</button>
   </ng-template>
-</abp-modal>
+</nz-modal>

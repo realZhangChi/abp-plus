@@ -25,7 +25,8 @@ export const DEFAULT_ROLES_ENTITY_PROPS = EntityProp.createMany<IdentityRoleDto>
             ? `<span class="badge rounded-pill bg-info ms-1">${t(
                 'AbpIdentity::DisplayName:IsPublic',
               )}</span>`
-            : ''),
+            : '') +
+          `<nz-tag [nzColor]="'magenta'">magenta</nz-tag>`,
       );
     },
   },

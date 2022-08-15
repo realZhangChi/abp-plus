@@ -1,3 +1,4 @@
+import { PageModule } from '@abp/ng.components/page';
 import { CoreModule, LazyModuleFactory } from '@abp/ng.core';
 import { PermissionManagementModule } from '@abp/ng.permission-management';
 import { ThemeSharedModule } from '@abp/ng.theme.shared';
@@ -30,6 +31,7 @@ import {
     NgbDropdownModule,
     PermissionManagementModule,
     NgxValidateCoreModule,
+    PageModule,
   ],
 })
 export class IdentityModule {

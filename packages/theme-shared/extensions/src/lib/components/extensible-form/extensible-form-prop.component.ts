@@ -98,6 +98,14 @@ export class ExtensibleFormPropComponent implements OnChanges, AfterViewInit {
     ).includes('tt');
   }
 
+  get timeFormat() {
+    if (this.meridian) {
+      return 'h:mm a';
+    } else {
+      return 'HH:mm';
+    }
+  }
+
   get isInvalid() {
     const control = this.form.get(this.prop.name);
     return control.touched && control.invalid;

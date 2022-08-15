@@ -104,6 +104,10 @@ export class PermissionManagementComponent
 
   selectAllTab = false;
 
+  selectAllInAllTabsIndeterminate = false;
+
+  selectAllInThisTabsIndeterminate = false;
+
   modalBusy = false;
 
   trackByFn: TrackByFunction<PermissionGroupDto> = (_, item) => item.name;
@@ -169,35 +173,33 @@ export class PermissionManagementComponent
 
   setTabCheckboxState() {
     const selectedPermissions = this.selectedGroupPermissions.filter(per => per.isGranted);
-    const element = document.querySelector('#select-all-in-this-tabs') as any;
-
     if (selectedPermissions.length === this.selectedGroupPermissions.length) {
-      element.indeterminate = false;
+      this.selectAllInThisTabsIndeterminate = false;
       this.selectThisTab = true;
     } else if (selectedPermissions.length === 0) {
-      element.indeterminate = false;
+      this.selectAllInThisTabsIndeterminate = false;
       this.selectThisTab = false;
     } else {
-      element.indeterminate = true;
+      this.selectAllInThisTabsIndeterminate = true;
     }
   }
 
   setGrantCheckboxState() {
     const selectedAllPermissions = this.permissions.filter(per => per.isGranted);
-    const checkboxElement = document.querySelector('#select-all-in-all-tabs') as any;
 
     if (selectedAllPermissions.length === this.permissions.length) {
-      checkboxElement.indeterminate = false;
+      this.selectAllInAllTabsIndeterminate = false;
       this.selectAllTab = true;
     } else if (selectedAllPermissions.length === 0) {
-      checkboxElement.indeterminate = false;
+      this.selectAllInAllTabsIndeterminate = false;
       this.selectAllTab = false;
     } else {
-      checkboxElement.indeterminate = true;
+      this.selectAllInAllTabsIndeterminate = true;
     }
   }
 
   onClickSelectThisTab() {
+    this.selectAllInThisTabsIndeterminate = false;
     this.selectedGroupPermissions.forEach(permission => {
       if (permission.isGranted && this.isGrantedByOtherProviderName(permission.grantedProviders))
         return;
@@ -206,7 +208,7 @@ export class PermissionManagementComponent
 
       this.permissions = [
         ...this.permissions.slice(0, index),
-        { ...this.permissions[index], isGranted: !this.selectThisTab },
+        { ...this.permissions[index], isGranted: this.selectThisTab },
         ...this.permissions.slice(index + 1),
       ];
     });
@@ -215,13 +217,14 @@ export class PermissionManagementComponent
   }
 
   onClickSelectAll() {
+    this.selectAllInAllTabsIndeterminate = false;
     this.permissions = this.permissions.map(permission => ({
       ...permission,
       isGranted:
-        this.isGrantedByOtherProviderName(permission.grantedProviders) || !this.selectAllTab,
+        this.isGrantedByOtherProviderName(permission.grantedProviders) || this.selectAllTab,
     }));
 
-    this.selectThisTab = !this.selectAllTab;
+    this.selectThisTab = this.selectAllTab;
   }
 
   onChangeGroup(group: PermissionGroupDto) {

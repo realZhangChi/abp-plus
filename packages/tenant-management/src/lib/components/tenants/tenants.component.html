@@ -2,8 +2,8 @@
   <div id="data-tables-table-filter" class="data-tables-filter">
     <div class="input-group">
       <input
+        nz-input
         type="search"
-        class="form-control"
         [placeholder]="'AbpUi::PagerSearch' | abpLocalization"
         [(ngModel)]="list.filter"
       />
@@ -27,7 +27,13 @@
     </ng-template>
 
     <ng-template #abpBody>
-      <form nz-form nzLayout="vertical" [formGroup]="tenantForm" (ngSubmit)="save()" [validateOnSubmit]="true">
+      <form
+        nz-form
+        nzLayout="vertical"
+        [formGroup]="tenantForm"
+        (ngSubmit)="save()"
+        [validateOnSubmit]="true"
+      >
         <abp-extensible-form [selectedRecord]="selected"></abp-extensible-form>
       </form>
     </ng-template>

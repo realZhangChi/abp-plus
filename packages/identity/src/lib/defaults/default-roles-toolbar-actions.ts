@@ -10,6 +10,7 @@ export const DEFAULT_ROLES_TOOLBAR_ACTIONS = ToolbarAction.createMany<IdentityRo
       component.add();
     },
     permission: 'AbpIdentity.Roles.Create',
-    icon: 'fa fa-plus',
+    icon: 'plus',
+    btnClass: 'primary'
   },
 ]);
