@@ -129,6 +129,10 @@ export class FeatureManagementComponent
     }
   }
 
+  onChangeGroup(group: Pick<FeatureGroupDto, 'name' | 'displayName'>) {
+    this.selectedGroupDisplayName = group.displayName;
+  }
+
   private uncheckToggleDescendants(feature: FeatureDto) {
     this.findAllDescendantsOfByType(feature, ValueTypes.ToggleStringValueType).forEach(node =>
       this.setFeatureValue(node, false),
