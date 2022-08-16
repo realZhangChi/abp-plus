@@ -180,7 +180,6 @@ export class ModalComponent implements OnInit, OnDestroy, DismissableModal {
   }
 
   ngOnDestroy(): void {
-    console.log('ngOnDestroy');
     this.modalRefService.unregister(this);
     this.toggle(false);
     this.destroy$.next();

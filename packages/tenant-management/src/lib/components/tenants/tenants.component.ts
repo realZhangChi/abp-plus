@@ -70,7 +70,6 @@ export class TenantsComponent implements OnInit {
     this.selected = {} as TenantDto;
     this.createTenantForm();
     this.isModalVisible = true;
-    console.log('this.isModalVisible:' + this.isModalVisible);
   }
 
   editTenant(id: string) {
