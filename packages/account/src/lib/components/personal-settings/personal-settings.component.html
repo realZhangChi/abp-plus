@@ -1,53 +1,67 @@
-<form validateOnSubmit *ngIf="form" [formGroup]="form" (ngSubmit)="submit()">
-  <div class="mb-3 form-group">
-    <label for="username" class="form-label">{{
-      'AbpIdentity::DisplayName:UserName' | abpLocalization
-    }}</label
-    ><span> * </span
-    ><input
-      type="text"
-      id="username"
-      class="form-control"
-      formControlName="userName"
-      autofocus
-      (keydown.space)="$event.preventDefault()"
-    />
-  </div>
-  <div class="row">
-    <div class="col col-md-6">
-      <div class="mb-3 form-group">
-        <label for="name" class="form-label">{{
-          'AbpIdentity::DisplayName:Name' | abpLocalization
-        }}</label
-        ><input type="text" id="name" class="form-control" formControlName="name" />
-      </div>
-    </div>
-    <div class="col col-md-6">
-      <div class="mb-3 form-group">
-        <label for="surname" class="form-label">{{
-          'AbpIdentity::DisplayName:Surname' | abpLocalization
-        }}</label
-        ><input type="text" id="surname" class="form-control" formControlName="surname" />
-      </div>
-    </div>
-  </div>
-  <div class="mb-3 form-group">
-    <label for="email-address" class="form-label">{{
-      'AbpIdentity::DisplayName:Email' | abpLocalization
-    }}</label
-    ><span> * </span
-    ><input type="text" id="email-address" class="form-control" formControlName="email" />
-  </div>
-  <div class="mb-3 form-group">
-    <label for="phone-number" class="form-label">{{
-      'AbpIdentity::DisplayName:PhoneNumber' | abpLocalization
-    }}</label
-    ><input type="text" id="phone-number" class="form-control" formControlName="phoneNumber" />
-  </div>
+<form
+  nz-form
+  nzLayout="vertical"
+  validateOnSubmit
+  *ngIf="form"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="username">
+      {{ 'AbpIdentity::DisplayName:UserName' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input
+        type="text"
+        nz-input
+        formControlName="userName"
+        id="username"
+        autofocus
+        (keydown.space)="$event.preventDefault()"
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="name">
+      {{ 'AbpIdentity::DisplayName:Name' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input type="text" nz-input formControlName="name" id="name" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="surname">
+      {{ 'AbpIdentity::DisplayName:Surname' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input type="text" nz-input formControlName="surname" id="surname" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="email-address">
+      {{ 'AbpIdentity::DisplayName:Email' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input type="text" nz-input formControlName="email" id="email-address" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="phone-number">
+      {{ 'AbpIdentity::DisplayName:PhoneNumber' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input type="text" nz-input formControlName="phoneNumber" id="phone-number" />
+    </nz-form-control>
+  </nz-form-item>
+
   <abp-button
     buttonType="submit"
-    iconClass="fa fa-check"
-    buttonClass="btn btn-primary color-white"
+    iconClass="check"
+    buttonClass="primary"
     [loading]="inProgress"
     [disabled]="form?.invalid"
   >
