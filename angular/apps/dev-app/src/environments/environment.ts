@@ -7,20 +7,20 @@ export const environment = {
   hmr: false,
   application: {
     baseUrl,
-    name: 'AbpNgAntDesign',
+    name: 'DevApp',
     logoUrl: 'https://ng.ant.design/assets/img/logo.svg',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44383/',
-    clientId: 'AbpNgAntDesign_App',
-    scope: 'offline_access AbpNgAntDesign',
+    issuer: 'https://localhost:44372/',
+    clientId: 'DevApp_App',
+    scope: 'offline_access DevApp',
     responseType: 'code',
     redirectUri: baseUrl,
   },
   apis: {
     default: {
-      url: 'https://localhost:44383',
-      rootNamespace: 'AbpNgAntDesign',
+      url: 'https://localhost:44372',
+      rootNamespace: 'DevApp',
     },
     AbpAccount: {
       rootNamespace: 'Volo.Abp',
