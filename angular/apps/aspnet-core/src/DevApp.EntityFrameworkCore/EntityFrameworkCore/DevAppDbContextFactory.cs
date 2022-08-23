@@ -26,7 +26,8 @@ public class DevAppDbContextFactory : IDesignTimeDbContextFactory<DevAppDbContex
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../DevApp.DbMigrator/"))
-            .AddJsonFile("appsettings.json", optional: false);
+            .AddJsonFile("appsettings.json", optional: false)
+            .AddUserSecrets("DevApp-4681b4fd-151f-4221-84a4-929d86723e4c");
 
         return builder.Build();
     }
