@@ -1,10 +1,10 @@
 {
   "name": "@abp-plus/ng.components",
-  "version": "0.0.1",
-  "homepage": "https://abp.io",
+  "version": "6.0.0-rc3",
+  "homepage": "https://github.com/realZhangChi/abp-plus",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abpframework/abp.git"
+    "url": "https://github.com/realzhangchi/abp-plus.git"
   },
   "peerDependencies": {
     "@abp/ng.core": ">=6.0.0-rc.1",

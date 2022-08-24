@@ -1,10 +1,10 @@
 {
   "name": "@abp-plus/ng.setting-management",
   "version": "6.0.0-rc.1",
-  "homepage": "https://abp.io",
+  "homepage": "https://github.com/realZhangChi/abp-plus",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abpframework/abp.git"
+    "url": "https://github.com/realzhangchi/abp-plus.git"
   },
   "dependencies": {
     "@abp-plus/ng.components": "~0.0.1",
