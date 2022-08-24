@@ -1,0 +1,53 @@
+<div *ngIf="actionList.length > 1">
+  <button nz-button nz-dropdown [nzDropdownMenu]="menu">
+    <i nz-icon [nzType]="icon"></i>
+    {{ text | abpLocalization }}
+    <i nz-icon nzType="down"></i>
+  </button>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu>
+      <ng-container *ngFor="let action of actionList; trackBy: trackByFn">
+        <ng-container *ngIf="action.visible(data)">
+          <li
+            nz-menu-item
+            (click)="action.action(data)"
+            *abpPermission="action.permission; runChangeDetection: false"
+          >
+            <ng-container
+              *ngTemplateOutlet="buttonContentTmp; context: { $implicit: action }"
+            ></ng-container>
+          </li>
+        </ng-container>
+      </ng-container>
+    </ul>
+  </nz-dropdown-menu>
+</div>
+
+<ng-container
+  *ngIf="actionList.length === 1"
+  [ngTemplateOutlet]="btnTmp"
+  [ngTemplateOutletContext]="{ $implicit: actionList.get(0).value }"
+></ng-container>
+
+<ng-template #buttonContentTmp let-action>
+  <i nz-icon [nzType]="action.icon" [class.me-1]="action.icon"></i>
+  <span *ngIf="action.icon; else ellipsis">{{ action.text | abpLocalization }}</span>
+  <ng-template #ellipsis>
+    <div abpEllipsis>{{ action.text | abpLocalization }}</div>
+  </ng-template>
+</ng-template>
+
+<ng-template #btnTmp let-action>
+  <ng-container *ngIf="action.visible(data)">
+    <button
+      nz-button
+      *abpPermission="action.permission; runChangeDetection: false"
+      (click)="action.action(data)"
+      type="button"
+    >
+      <ng-container
+        *ngTemplateOutlet="buttonContentTmp; context: { $implicit: action }"
+      ></ng-container>
+    </button>
+  </ng-container>
+</ng-template>

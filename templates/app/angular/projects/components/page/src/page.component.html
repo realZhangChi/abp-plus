@@ -1,0 +1,47 @@
+<div nz-row *ngIf="shouldRenderRow">
+  <div nz-col nzFlex="auto">
+    <ng-container *ngIf="customTitle; else defaultTitleTemplate">
+      <ng-content select="abp-page-title-container"></ng-content>
+    </ng-container>
+
+    <ng-container *ngIf="customBreadcrumb; else defaultBreadcrumbTemplate">
+      <ng-content select="abp-page-breadcrumb-container"></ng-content>
+    </ng-container>
+  </div>
+
+  <div nz-col style="margin-top: auto">
+    <ng-container *ngIf="customToolbar; else defaultPageToolbarTemplate">
+      <ng-content select="abp-page-toolbar-container"></ng-content>
+    </ng-container>
+  </div>
+</div>
+
+<nz-divider></nz-divider>
+
+<ng-content></ng-content>
+
+<ng-template #defaultTitleTemplate>
+  <ng-container *ngIf="title">
+    <div *abpPagePart="pageParts.title">
+      <h1 class="content-header-title">
+        {{ title }}
+      </h1>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #defaultBreadcrumbTemplate>
+  <ng-container *ngIf="breadcrumbVisible">
+    <div style="margin: auto 0" *abpPagePart="pageParts.breadcrumb">
+      <abp-breadcrumb></abp-breadcrumb>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #defaultPageToolbarTemplate>
+  <ng-container *ngIf="toolbarVisible">
+    <div *abpPagePart="pageParts.toolbar; context: toolbarData">
+      <abp-page-toolbar [record]="toolbarData"></abp-page-toolbar>
+    </div>
+  </ng-container>
+</ng-template>

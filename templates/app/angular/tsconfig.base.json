@@ -1,0 +1,45 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": false,
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@abp-plus/ng.account": ["projects/account/src/public-api.ts"],
+      "@abp-plus/ng.account/config": ["projects/account/config/src/public-api.ts"],
+      "@abp-plus/ng.components": ["projects/components/src/public-api.ts"],
+      "@abp-plus/ng.components/chart.js": ["projects/components/chart.js/src/public-api.ts"],
+      "@abp-plus/ng.components/page": ["projects/components/page/src/public-api.ts"],
+      "@abp-plus/ng.components/tree": ["projects/components/tree/src/public-api.ts"],
+      "@abp-plus/ng.feature-management": ["projects/feature-management/src/public-api.ts"],
+      "@abp-plus/ng.feature-management/proxy": ["projects/feature-management/proxy/src/public-api.ts"],
+      "@abp-plus/ng.identity": ["projects/identity/src/public-api.ts"],
+      "@abp-plus/ng.identity/config": ["projects/identity/config/src/public-api.ts"],
+      "@abp-plus/ng.identity/proxy": ["projects/identity/proxy/src/public-api.ts"],
+      "@abp-plus/ng.permission-management": ["projects/permission-management/src/public-api.ts"],
+      "@abp-plus/ng.permission-management/proxy": [
+        "projects/permission-management/proxy/src/public-api.ts"
+      ],
+      "@abp-plus/ng.setting-management": ["projects/setting-management/src/public-api.ts"],
+      "@abp-plus/ng.setting-management/config": ["projects/setting-management/config/src/public-api.ts"],
+      "@abp-plus/ng.tenant-management": ["projects/tenant-management/src/public-api.ts"],
+      "@abp-plus/ng.tenant-management/config": ["projects/tenant-management/config/src/public-api.ts"],
+      "@abp-plus/ng.tenant-management/proxy": ["projects/tenant-management/proxy/src/public-api.ts"],
+      "@abp-plus/ng.theme.basic": ["projects/theme-basic/src/public-api.ts"],
+      "@abp-plus/ng.theme.basic/testing": ["projects/theme-basic/testing/src/public-api.ts"],
+      "@abp-plus/ng.theme.shared": ["projects/theme-shared/src/public-api.ts"],
+      "@abp-plus/ng.theme.shared/extensions": ["projects/theme-shared/extensions/src/public-api.ts"],
+      "@abp-plus/ng.theme.shared/testing": ["projects/theme-shared/testing/src/public-api.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

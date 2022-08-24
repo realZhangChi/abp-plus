@@ -1,0 +1,30 @@
+<div id="AbpContentToolbar"></div>
+
+<div class="" [abpLoading]="!(profile$ | async)?.userName">
+  <ng-container *ngIf="profile$ | async">
+    <nz-tabset nzTabPosition="left">
+      <nz-tab *ngIf="!hideChangePasswordTab" [nzTitle]="'AbpUi::ChangePassword' | abpLocalization">
+        <h4>
+          {{ 'AbpIdentity::ChangePassword' | abpLocalization }}
+        </h4>
+        <nz-divider></nz-divider>
+        <abp-change-password-form
+          *abpReplaceableTemplate="{
+            componentKey: changePasswordKey
+          }"
+        ></abp-change-password-form>
+      </nz-tab>
+      <nz-tab [nzTitle]="'AbpAccount::PersonalSettings' | abpLocalization">
+        <h4>
+          {{ 'AbpIdentity::PersonalSettings' | abpLocalization }}
+        </h4>
+        <nz-divider></nz-divider>
+        <abp-personal-settings-form
+          *abpReplaceableTemplate="{
+            componentKey: personalSettingsKey
+          }"
+        ></abp-personal-settings-form>
+      </nz-tab>
+    </nz-tabset>
+  </ng-container>
+</div>

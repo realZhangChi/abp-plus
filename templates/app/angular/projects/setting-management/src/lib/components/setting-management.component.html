@@ -1,0 +1,14 @@
+<abp-page [title]="'AbpSettingManagement::Settings' | abpLocalization">
+  <div id="SettingManagementWrapper">
+    <div class="row">
+      <nz-tabset nzTabPosition="left">
+        <nz-tab
+          *abpFor="let setting of settings; trackBy: trackByFn"
+          [nzTitle]="setting.name | abpLocalization"
+        >
+          <ng-container *ngComponentOutlet="setting.component"></ng-container>
+        </nz-tab>
+      </nz-tabset>
+    </div>
+  </div>
+</abp-page>

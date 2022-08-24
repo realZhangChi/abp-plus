@@ -1,0 +1,86 @@
+<abp-page [title]="'AbpIdentity::Users' | abpLocalization" [toolbar]="data.items">
+  <div id="data-tables-table-filter" class="data-tables-filter">
+    <div class="input-group">
+      <input
+        nz-input
+        type="search"
+        [placeholder]="'AbpUi::PagerSearch' | abpLocalization"
+        [(ngModel)]="list.filter"
+      />
+    </div>
+  </div>
+
+  <abp-extensible-table
+    [data]="data.items"
+    [recordsTotal]="data.totalCount"
+    [list]="list"
+  ></abp-extensible-table>
+</abp-page>
+
+<abp-modal [(visible)]="isModalVisible" [busy]="modalBusy">
+  <ng-template #abpHeader>
+    <h3>
+      {{ (selected?.id ? 'AbpIdentity::Edit' : 'AbpIdentity::NewUser') | abpLocalization }}
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <ng-template #loaderRef
+      ><div class="text-center"><i class="fa fa-pulse fa-spinner"></i></div
+    ></ng-template>
+
+    <form
+      nz-form
+      nzLayout="vertical"
+      *ngIf="form; else loaderRef"
+      [formGroup]="form"
+      (ngSubmit)="save()"
+    >
+      <nz-tabset>
+        <nz-tab [nzTitle]="'AbpIdentity::UserInformations' | abpLocalization">
+          <abp-extensible-form [selectedRecord]="selected"></abp-extensible-form>
+        </nz-tab>
+        <nz-tab [nzTitle]="'AbpIdentity::Roles' | abpLocalization">
+          <div *ngFor="let roleGroup of roleGroups; let i = index; trackBy: trackByFn" class="mb-2">
+            <label
+              nz-checkbox
+              [attr.id]="'roles-' + i"
+              [formControl]="roleGroup.controls[roles[i].name]"
+              >{{ roles[i].name }}</label
+            >
+          </div>
+        </nz-tab>
+      </nz-tabset>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <nz-space>
+      <button *nzSpaceItem nz-button type="button" abpClose>
+        {{ 'AbpIdentity::Cancel' | abpLocalization }}
+      </button>
+      <abp-button *nzSpaceItem iconClass="check" [disabled]="form?.invalid" (click)="save()">{{
+        'AbpIdentity::Save' | abpLocalization
+      }}</abp-button>
+    </nz-space>
+  </ng-template>
+</abp-modal>
+
+<abp-permission-management
+  #abpPermissionManagement="abpPermissionManagement"
+  *abpReplaceableTemplate="
+    {
+      inputs: {
+        providerName: { value: 'U' },
+        providerKey: { value: providerKey },
+        visible: { value: visiblePermissions, twoWay: true }
+      },
+      outputs: { visibleChange: onVisiblePermissionChange },
+      componentKey: permissionManagementKey
+    };
+    let init = initTemplate
+  "
+  [entityDisplayName]="entityDisplayName"
+  (abpInit)="init(abpPermissionManagement)"
+>
+</abp-permission-management>

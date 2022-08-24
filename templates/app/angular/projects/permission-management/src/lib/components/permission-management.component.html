@@ -1,0 +1,96 @@
+<abp-modal [(visible)]="visible" [busy]="modalBusy" [options]="{ size: 'lg' }">
+  <ng-container *ngIf="data.entityDisplayName || entityDisplayName">
+    <ng-template #abpHeader>
+      <h3>
+        {{ 'AbpPermissionManagement::Permissions' | abpLocalization }} -
+        {{ entityDisplayName || data.entityDisplayName }}
+      </h3>
+    </ng-template>
+
+    <ng-template #abpBody>
+      <label
+        nz-checkbox
+        #selectAllInAllTabsRef
+        [(ngModel)]="selectAllTab"
+        (ngModelChange)="onClickSelectAll()"
+        [nzIndeterminate]="selectAllInAllTabsIndeterminate"
+        nzId="select-all-in-all-tabs"
+        name="select-all-in-all-tabs"
+        >{{ 'AbpPermissionManagement::SelectAllInAllTabs' | abpLocalization }}
+      </label>
+
+      <nz-divider></nz-divider>
+      <div class="row">
+        <nz-tabset nzTabPosition="left">
+          <ng-container *ngFor="let group of data.groups; trackBy: trackByFn">
+            <nz-tab
+              *ngIf="{ assignedCount: getAssignedCount(group.name) } as count"
+              [nzTitle]="tabTitle"
+              (nzClick)="onChangeGroup(group)"
+            >
+              <ng-container *ngTemplateOutlet="content"></ng-container>
+
+              <ng-template #tabTitle>
+                <div [class.font-weight-bold]="count.assignedCount">
+                  {{ group?.displayName }}
+                  <span>({{ count.assignedCount }})</span>
+                </div>
+              </ng-template>
+            </nz-tab>
+          </ng-container>
+        </nz-tabset>
+
+        <ng-template #content>
+          <h4>{{ selectedGroup?.displayName }}</h4>
+          <nz-divider></nz-divider>
+          <div class="ps-1 pt-1">
+            <label
+              #selectAllInThisTabsRef
+              nz-checkbox
+              [(ngModel)]="selectThisTab"
+              (ngModelChange)="onClickSelectThisTab()"
+              [nzIndeterminate]="selectAllInThisTabsIndeterminate"
+              nzId="select-all-in-this-tabs"
+              name="select-all-in-this-tabs"
+              >{{ 'AbpPermissionManagement::SelectAllInThisTab' | abpLocalization }}
+            </label>
+            <nz-divider></nz-divider>
+            <div
+              *ngFor="let permission of selectedGroupPermissions; let i = index; trackBy: trackByFn"
+              [ngStyle]="permission.style"
+              class="mb-2"
+            >
+              <label
+                #permissionCheckbox
+                nz-checkbox
+                [ngModel]="getChecked(permission.name)"
+                (ngModelChange)="onClickCheckbox(permission, $event)"
+                [nzId]="permission.name"
+                [nzDisabled]="isGrantedByOtherProviderName(permission.grantedProviders)"
+                >{{ permission.displayName }}
+                <ng-container *ngIf="!hideBadges">
+                  <span
+                    *ngFor="let provider of permission.grantedProviders"
+                    class="badge bg-light text-dark"
+                    >{{ provider.providerName }}: {{ provider.providerKey }}</span
+                  >
+                </ng-container>
+              </label>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </ng-template>
+
+    <ng-template #abpFooter>
+      <nz-space>
+        <button *nzSpaceItem nz-button type="button" abpClose>
+          {{ 'AbpIdentity::Cancel' | abpLocalization }}
+        </button>
+        <abp-button *nzSpaceItem iconClass="check" (click)="submit()">{{
+          'AbpIdentity::Save' | abpLocalization
+        }}</abp-button>
+      </nz-space>
+    </ng-template>
+  </ng-container>
+</abp-modal>
