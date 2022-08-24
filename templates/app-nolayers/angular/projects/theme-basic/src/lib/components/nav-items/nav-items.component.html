@@ -1,0 +1,15 @@
+<ng-container *ngFor="let item of navItems.items$ | async; trackBy: trackByFn">
+  <ng-container *ngIf="item.visible && item.visible()">
+    <div style="padding-left: 16px;" *abpPermission="item.requiredPolicy">
+      <ng-container
+        *ngIf="item.component; else htmlTemplate"
+        [ngComponentOutlet]="item.component"
+        [ngComponentOutletInjector]="item | toInjector"
+      ></ng-container>
+
+      <ng-template #htmlTemplate>
+        <div [innerHTML]="item.html" (click)="item.action ? item.action() : null"></div>
+      </ng-template>
+    </div>
+  </ng-container>
+</ng-container>

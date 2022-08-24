@@ -1,0 +1,17 @@
+{
+  "name": "@abp-plus/ng.setting-management",
+  "version": "6.0.0-rc.1",
+  "homepage": "https://github.com/realZhangChi/abp-plus",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/realzhangchi/abp-plus.git"
+  },
+  "dependencies": {
+    "@abp-plus/ng.components": "~0.0.1",
+    "@abp-plus/ng.theme.shared": "~0.0.1",
+    "tslib": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

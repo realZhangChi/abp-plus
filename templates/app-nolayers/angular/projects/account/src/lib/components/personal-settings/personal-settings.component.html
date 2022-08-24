@@ -1,0 +1,70 @@
+<form
+  nz-form
+  nzLayout="vertical"
+  validateOnSubmit
+  *ngIf="form"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="username">
+      {{ 'AbpIdentity::DisplayName:UserName' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input
+        type="text"
+        nz-input
+        formControlName="userName"
+        id="username"
+        autofocus
+        (keydown.space)="$event.preventDefault()"
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="name">
+      {{ 'AbpIdentity::DisplayName:Name' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input type="text" nz-input formControlName="name" id="name" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="surname">
+      {{ 'AbpIdentity::DisplayName:Surname' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input type="text" nz-input formControlName="surname" id="surname" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="email-address">
+      {{ 'AbpIdentity::DisplayName:Email' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input type="text" nz-input formControlName="email" id="email-address" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="phone-number">
+      {{ 'AbpIdentity::DisplayName:PhoneNumber' | abpLocalization }}
+    </nz-form-label>
+    <nz-form-control nzLg="12" nzMd="24">
+      <input type="text" nz-input formControlName="phoneNumber" id="phone-number" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <abp-button
+    buttonType="submit"
+    iconClass="check"
+    buttonClass="primary"
+    [loading]="inProgress"
+    [disabled]="form?.invalid"
+  >
+    {{ 'AbpIdentity::Save' | abpLocalization }}</abp-button
+  >
+</form>

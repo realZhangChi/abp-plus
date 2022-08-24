@@ -1,0 +1,11 @@
+<ng-container *ngFor="let alert of service.alerts$ | async; let i = index">
+  <nz-alert
+    style="margin-bottom: 8px"
+    [nzType]="getNzAlertType(alert)"
+    [nzCloseable]="alert.dismissible"
+    [nzMessage]="alert.title | abpLocalization: alert.titleLocalizationParams"
+    [nzDescription]="alert.message | abpLocalization: alert.messageLocalizationParams"
+    (nzOnClose)="service.remove(i)"
+    nzShowIcon
+  ></nz-alert>
+</ng-container>

@@ -1,0 +1,108 @@
+<ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+  <ng-container
+    *ngFor="let route of routesService.visible$ | async; trackBy: trackByFn"
+    [ngTemplateOutlet]="isDropdown(route) ? dropdownLink : defaultLink"
+    [ngTemplateOutletContext]="{ $implicit: route }"
+  >
+    <!-- 一级 -->
+    <ng-container *ngIf="isDropdown(route)">
+      <ng-container *ngIf="route.children?.length">
+        <li
+          nz-submenu
+          [nzTitle]="route.name | abpLocalization"
+          *abpPermission="route.requiredPolicy"
+        >
+          <ul>
+            <!-- 二级 -->
+            <ng-container *ngFor="let child of route.children">
+              <ng-container *ngIf="isDropdown(child)">
+                <li
+                  nz-submenu
+                  [nzTitle]="child.name | abpLocalization"
+                  *abpPermission="child.requiredPolicy"
+                >
+                  <ul>
+                    <!-- 三级 -->
+                    <ng-container *ngFor="let secondChild of child.children">
+                      <ng-container *ngIf="isDropdown(secondChild)">
+                        <li
+                          nz-submenu
+                          [nzTitle]="secondChild.name | abpLocalization"
+                          *abpPermission="secondChild.requiredPolicy"
+                        >
+                          <ul>
+                            <!-- 四级 -->
+                            <ng-container *ngFor="let thirdChild of secondChild.children">
+                              <ng-container *ngIf="isDropdown(thirdChild)">
+                                <li
+                                  nz-submenu
+                                  [nzTitle]="thirdChild.name | abpLocalization"
+                                  *abpPermission="thirdChild.requiredPolicy"
+                                >
+                                  <ul>
+                                    <!-- 五级 -->
+                                    <ng-container *ngFor="let fourthChild of thirdChild.children">
+                                      <ng-container *ngIf="isDropdown(thirdChild)"></ng-container>
+                                      <ng-container *ngIf="!isDropdown(fourthChild)">
+                                        <li
+                                          nz-menu-item
+                                          nzMatchRouter
+                                          *abpPermission="fourthChild.requiredPolicy"
+                                        >
+                                          <a [routerLink]="[fourthChild.path]">{{
+                                            route.name | abpLocalization
+                                          }}</a>
+                                        </li>
+                                      </ng-container>
+                                    </ng-container>
+                                  </ul>
+                                </li>
+                              </ng-container>
+
+                              <ng-container *ngIf="!isDropdown(thirdChild)">
+                                <li
+                                  nz-menu-item
+                                  nzMatchRouter
+                                  *abpPermission="thirdChild.requiredPolicy"
+                                >
+                                  <a [routerLink]="[thirdChild.path]">{{
+                                    route.name | abpLocalization
+                                  }}</a>
+                                </li>
+                              </ng-container>
+                            </ng-container>
+                          </ul>
+                        </li>
+                      </ng-container>
+
+                      <ng-container *ngIf="!isDropdown(secondChild)">
+                        <li nz-menu-item nzMatchRouter *abpPermission="secondChild.requiredPolicy">
+                          <a [routerLink]="[secondChild.path]">{{
+                            secondChild.name | abpLocalization
+                          }}</a>
+                        </li>
+                      </ng-container>
+                    </ng-container>
+                  </ul>
+                </li>
+              </ng-container>
+
+              <ng-container *ngIf="!isDropdown(child)">
+                <li nz-menu-item nzMatchRouter *abpPermission="child.requiredPolicy">
+                  <a [routerLink]="[child.path]">{{ child.name | abpLocalization }}</a>
+                </li>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </li>
+      </ng-container>
+    </ng-container>
+
+    <!-- 一级 -->
+    <ng-container *ngIf="!isDropdown(route)">
+      <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true" *abpPermission="route.requiredPolicy">
+        <a [routerLink]="[route.path]">{{ route.name | abpLocalization }}</a>
+      </li>
+    </ng-container>
+  </ng-container>
+</ul>

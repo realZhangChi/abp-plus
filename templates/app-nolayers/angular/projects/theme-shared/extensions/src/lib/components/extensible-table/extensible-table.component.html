@@ -1,0 +1,80 @@
+<nz-table
+  #table
+  nzBordered
+  nzShowSizeChanger
+  [nzData]="data"
+  [nzFrontPagination]="false"
+  [nzLoading]="list.isLoading$ | async"
+  [nzTotal]="recordsTotal"
+  [nzPageSize]="list.maxResultCount"
+  [nzPageIndex]="list.page + 1"
+  (nzQueryParams)="onQueryParamsChange($event)"
+>
+  <thead>
+    <tr>
+      <th
+        *ngIf="actionsTemplate || (actionList.length && hasAtLeastOnePermittedAction)"
+        [maxWidth]="columnWidths[0]"
+        [width]="columnWidths[0]"
+      >
+        {{ actionsText | abpLocalization }}
+      </th>
+      <ng-container *ngFor="let prop of propList; let i = index; trackBy: trackByFn">
+        <th
+          [nzShowSort]="prop.sortable"
+          [nzSortFn]="true"
+          (nzSortOrderChange)="onShortChange(prop.name, $event)"
+          [width]="columnWidths[i + 1] || 200"
+        >
+          {{ prop.displayName | abpLocalization }}
+        </th></ng-container
+      >
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of table.data; let rowIndex = index">
+      <td *ngIf="actionsTemplate || (actionList.length && hasAtLeastOnePermittedAction)">
+        <ng-container
+          *ngTemplateOutlet="
+            actionsTemplate || gridActions;
+            context: { $implicit: row, index: rowIndex }
+          "
+        ></ng-container>
+        <ng-template #gridActions>
+          <abp-grid-actions
+            [index]="rowIndex"
+            [record]="row"
+            text="AbpUi::Actions"
+          ></abp-grid-actions>
+        </ng-template>
+      </td>
+      <td
+        *ngFor="let prop of propList; let colIndex = index; trackBy: trackByFn"
+        [width]="columnWidths[colIndex + 1] || 200"
+      >
+        <ng-container *abpPermission="prop.permission; runChangeDetection: false">
+          <ng-container *ngIf="row['_' + prop.name]?.visible">
+            <div
+              *ngIf="!row['_' + prop.name].component; else component"
+              [innerHTML]="row['_' + prop.name]?.value | async"
+              (click)="
+                prop.action &&
+                  prop.action({ getInjected: getInjected, record: row, index: colIndex })
+              "
+              [ngClass]="entityPropTypeClasses[prop.type]"
+              [class.pointer]="prop.action"
+            ></div>
+          </ng-container>
+          <ng-template #component>
+            <ng-container
+              *ngComponentOutlet="
+                row['_' + prop.name].component;
+                injector: row['_' + prop.name].injector
+              "
+            ></ng-container>
+          </ng-template>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

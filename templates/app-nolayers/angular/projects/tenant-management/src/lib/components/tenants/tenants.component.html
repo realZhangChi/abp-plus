@@ -1,0 +1,71 @@
+<abp-page [title]="'AbpTenantManagement::Tenants' | abpLocalization" [toolbar]="data.items">
+  <div id="data-tables-table-filter" class="data-tables-filter">
+    <div class="input-group">
+      <input
+        nz-input
+        type="search"
+        [placeholder]="'AbpUi::PagerSearch' | abpLocalization"
+        [(ngModel)]="list.filter"
+      />
+    </div>
+  </div>
+
+  <abp-extensible-table
+    [data]="data.items || []"
+    [recordsTotal]="data.totalCount || 0"
+    [list]="list"
+  ></abp-extensible-table>
+
+  <abp-modal [(visible)]="isModalVisible" [busy]="modalBusy">
+    <ng-template #abpHeader>
+      <h3>
+        {{
+          (selected?.id ? 'AbpTenantManagement::Edit' : 'AbpTenantManagement::NewTenant')
+            | abpLocalization
+        }}
+      </h3>
+    </ng-template>
+
+    <ng-template #abpBody>
+      <form
+        nz-form
+        nzLayout="vertical"
+        [formGroup]="tenantForm"
+        (ngSubmit)="save()"
+        [validateOnSubmit]="true"
+      >
+        <abp-extensible-form [selectedRecord]="selected"></abp-extensible-form>
+      </form>
+    </ng-template>
+
+    <ng-template #abpFooter>
+      <button nz-button abpClose type="button">
+        {{ 'AbpTenantManagement::Cancel' | abpLocalization }}
+      </button>
+      <abp-button
+        iconClass="check"
+        buttonClass="primary"
+        [abpLoading]="modalBusy"
+        (click)="save()"
+        [disabled]="tenantForm?.invalid"
+        >{{ 'AbpTenantManagement::Save' | abpLocalization }}</abp-button
+      >
+    </ng-template>
+  </abp-modal>
+
+  <abp-feature-management
+    *abpReplaceableTemplate="{
+      inputs: {
+        providerName: { value: 'T' },
+        providerKey: { value: providerKey },
+        visible: { value: visibleFeatures, twoWay: true }
+      },
+      outputs: { visibleChange: $any(onVisibleFeaturesChange) },
+      componentKey: featureManagementKey
+    }"
+    [(visible)]="visibleFeatures"
+    providerName="T"
+    [providerKey]="providerKey"
+  >
+  </abp-feature-management>
+</abp-page>
