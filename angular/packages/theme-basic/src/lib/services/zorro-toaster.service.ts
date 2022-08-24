@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalizationParam, LocalizationService } from '@abp/ng.core';
-import { Toaster } from '@abp/ng.theme.shared';
+import { Toaster } from '@abp-plus/ng.theme.shared';
 import { NzNotificationRef, NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable()

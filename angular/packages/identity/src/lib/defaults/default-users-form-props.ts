@@ -1,7 +1,7 @@
 import { ABP } from '@abp/ng.core';
-import { IdentityUserDto } from '@abp/ng.identity/proxy';
-import { getPasswordValidators } from '@abp/ng.theme.shared';
-import { ePropType, FormProp } from '@abp/ng.theme.shared/extensions';
+import { IdentityUserDto } from '@abp-plus/ng.identity/proxy';
+import { getPasswordValidators } from '@abp-plus/ng.theme.shared';
+import { ePropType, FormProp } from '@abp-plus/ng.theme.shared/extensions';
 import { MaxLengthValidator, Validators } from '@angular/forms';
 import { of } from 'rxjs';
 

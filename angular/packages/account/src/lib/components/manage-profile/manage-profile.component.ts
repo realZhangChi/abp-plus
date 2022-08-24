@@ -1,5 +1,5 @@
 import { ProfileService } from '@abp/ng.account.core/proxy';
-import { fadeIn } from '@abp/ng.theme.shared';
+import { fadeIn } from '@abp-plus/ng.theme.shared';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { eAccountComponents } from '../../enums/components';

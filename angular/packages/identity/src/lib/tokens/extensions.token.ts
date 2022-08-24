@@ -1,11 +1,11 @@
-import { IdentityRoleDto, IdentityUserDto } from '@abp/ng.identity/proxy';
+import { IdentityRoleDto, IdentityUserDto } from '@abp-plus/ng.identity/proxy';
 import {
   CreateFormPropContributorCallback,
   EditFormPropContributorCallback,
   EntityActionContributorCallback,
   EntityPropContributorCallback,
   ToolbarActionContributorCallback,
-} from '@abp/ng.theme.shared/extensions';
+} from '@abp-plus/ng.theme.shared/extensions';
 import { InjectionToken } from '@angular/core';
 import { DEFAULT_ROLES_ENTITY_ACTIONS } from '../defaults/default-roles-entity-actions';
 import { DEFAULT_ROLES_ENTITY_PROPS } from '../defaults/default-roles-entity-props';

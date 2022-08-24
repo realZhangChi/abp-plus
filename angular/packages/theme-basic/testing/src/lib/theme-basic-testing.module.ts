@@ -3,7 +3,7 @@ import {
   BASIC_THEME_NAV_ITEM_PROVIDERS,
   BASIC_THEME_STYLES_PROVIDERS,
   ValidationErrorComponent,
-} from '@abp/ng.theme.basic';
+} from '@abp-plus/ng.theme.basic';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import {
   VALIDATION_ERROR_TEMPLATE,

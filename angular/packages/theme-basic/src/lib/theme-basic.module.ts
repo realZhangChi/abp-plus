@@ -1,5 +1,5 @@
 import { CoreModule, noop } from '@abp/ng.core';
-import { ThemeSharedModule, ToasterService } from '@abp/ng.theme.shared';
+import { ThemeSharedModule, ToasterService } from '@abp-plus/ng.theme.shared';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import {

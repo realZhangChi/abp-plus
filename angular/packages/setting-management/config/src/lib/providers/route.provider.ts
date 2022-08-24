@@ -1,5 +1,5 @@
 import { eLayoutType, noop, RoutesService } from '@abp/ng.core';
-import { eThemeSharedRouteNames } from '@abp/ng.theme.shared';
+import { eThemeSharedRouteNames } from '@abp-plus/ng.theme.shared';
 import { APP_INITIALIZER, inject, InjectionToken } from '@angular/core';
 import { debounceTime, map } from 'rxjs/operators';
 import { eSettingManagementRouteNames } from '../enums/route-names';

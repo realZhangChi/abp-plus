@@ -1,5 +1,5 @@
 {
-  "name": "@abp/ng.theme.basic",
+  "name": "@abp-plus/ng.theme.basic",
   "version": "5.3.3",
   "homepage": "https://abp.io",
   "repository": {
@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@abp/ng.account.core": "~5.3.3",
-    "@abp/ng.theme.shared": "~5.3.3",
+    "@abp-plus/ng.theme.shared": "~5.3.3",
     "tslib": "^2.0.0"
   },
   "publishConfig": {

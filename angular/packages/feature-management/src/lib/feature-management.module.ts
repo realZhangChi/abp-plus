@@ -1,5 +1,5 @@
 import { CoreModule } from '@abp/ng.core';
-import { ThemeSharedModule } from '@abp/ng.theme.shared';
+import { ThemeSharedModule } from '@abp-plus/ng.theme.shared';
 import { NgModule } from '@angular/core';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { FeatureManagementComponent } from './components/feature-management/feature-management.component';

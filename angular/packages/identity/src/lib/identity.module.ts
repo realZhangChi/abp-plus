@@ -1,8 +1,8 @@
-import { PageModule } from '@abp/ng.components/page';
+import { PageModule } from '@abp-plus/ng.components/page';
 import { CoreModule, LazyModuleFactory } from '@abp/ng.core';
-import { PermissionManagementModule } from '@abp/ng.permission-management';
-import { ThemeSharedModule } from '@abp/ng.theme.shared';
-import { UiExtensionsModule } from '@abp/ng.theme.shared/extensions';
+import { PermissionManagementModule } from '@abp-plus/ng.permission-management';
+import { ThemeSharedModule } from '@abp-plus/ng.theme.shared';
+import { UiExtensionsModule } from '@abp-plus/ng.theme.shared/extensions';
 import { ModuleWithProviders, NgModule, NgModuleFactory } from '@angular/core';
 import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxValidateCoreModule } from '@ngx-validate/core';

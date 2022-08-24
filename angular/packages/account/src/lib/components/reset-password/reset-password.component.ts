@@ -1,5 +1,5 @@
 import { AccountService } from '@abp/ng.account.core/proxy';
-import { getPasswordValidators } from '@abp/ng.theme.shared';
+import { getPasswordValidators } from '@abp-plus/ng.theme.shared';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';

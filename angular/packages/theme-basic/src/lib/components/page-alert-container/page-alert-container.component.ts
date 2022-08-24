@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { PageAlert, PageAlertService } from '@abp/ng.theme.shared';
+import { PageAlert, PageAlertService } from '@abp-plus/ng.theme.shared';
 
 @Component({
   selector: 'abp-page-alert-container',

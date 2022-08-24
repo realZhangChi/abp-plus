@@ -1,4 +1,4 @@
-import { ThemeSharedModule } from '@abp/ng.theme.shared';
+import { ThemeSharedModule } from '@abp-plus/ng.theme.shared';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CoreModule } from '@abp/ng.core';
 import { NgxValidateCoreModule } from '@ngx-validate/core';

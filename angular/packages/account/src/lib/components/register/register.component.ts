@@ -1,6 +1,6 @@
 import { AccountService, RegisterDto } from '@abp/ng.account.core/proxy';
 import { AuthService, ConfigStateService } from '@abp/ng.core';
-import { getPasswordValidators, ToasterService } from '@abp/ng.theme.shared';
+import { getPasswordValidators, ToasterService } from '@abp-plus/ng.theme.shared';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { throwError } from 'rxjs';

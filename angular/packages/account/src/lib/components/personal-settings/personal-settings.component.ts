@@ -1,5 +1,5 @@
 import { ProfileService } from '@abp/ng.account.core/proxy';
-import { ToasterService } from '@abp/ng.theme.shared';
+import { ToasterService } from '@abp-plus/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';

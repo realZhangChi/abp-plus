@@ -1,5 +1,5 @@
 import { LazyLoadService, LOADING_STRATEGY, LocalizationService } from '@abp/ng.core';
-import { DocumentDirHandlerService } from '@abp/ng.theme.shared';
+import { DocumentDirHandlerService } from '@abp-plus/ng.theme.shared';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
 import { of } from 'rxjs';
 import { BOOTSTRAP, createLazyStyleHref, LazyStyleHandler } from '../handlers';

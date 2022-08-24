@@ -1,5 +1,5 @@
-import { IdentityRoleDto } from '@abp/ng.identity/proxy';
-import { EntityAction } from '@abp/ng.theme.shared/extensions';
+import { IdentityRoleDto } from '@abp-plus/ng.identity/proxy';
+import { EntityAction } from '@abp-plus/ng.theme.shared/extensions';
 import { RolesComponent } from '../components/roles/roles.component';
 
 export const DEFAULT_ROLES_ENTITY_ACTIONS = EntityAction.createMany<IdentityRoleDto>([

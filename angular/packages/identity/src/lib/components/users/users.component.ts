@@ -4,14 +4,14 @@ import {
   IdentityRoleDto,
   IdentityUserDto,
   IdentityUserService,
-} from '@abp/ng.identity/proxy';
-import { ePermissionManagementComponents } from '@abp/ng.permission-management';
-import {Confirmation, ConfirmationService, ToasterService} from '@abp/ng.theme.shared';
+} from '@abp-plus/ng.identity/proxy';
+import { ePermissionManagementComponents } from '@abp-plus/ng.permission-management';
+import {Confirmation, ConfirmationService, ToasterService} from '@abp-plus/ng.theme.shared';
 import {
   EXTENSIONS_IDENTIFIER,
   FormPropData,
   generateFormFromProps,
-} from '@abp/ng.theme.shared/extensions';
+} from '@abp-plus/ng.theme.shared/extensions';
 import {
   Component,
   Injector,

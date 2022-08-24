@@ -1,5 +1,5 @@
 import { eLayoutType, RoutesService } from '@abp/ng.core';
-import { eThemeSharedRouteNames } from '@abp/ng.theme.shared';
+import { eThemeSharedRouteNames } from '@abp-plus/ng.theme.shared';
 import { APP_INITIALIZER } from '@angular/core';
 import { eTenantManagementPolicyNames } from '../enums/policy-names';
 import { eTenantManagementRouteNames } from '../enums/route-names';

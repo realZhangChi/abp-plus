@@ -1,11 +1,11 @@
-import { TenantCreateDto, TenantDto, TenantUpdateDto } from '@abp/ng.tenant-management/proxy';
+import { TenantCreateDto, TenantDto, TenantUpdateDto } from '@abp-plus/ng.tenant-management/proxy';
 import {
   CreateFormPropContributorCallback,
   EditFormPropContributorCallback,
   EntityActionContributorCallback,
   EntityPropContributorCallback,
   ToolbarActionContributorCallback,
-} from '@abp/ng.theme.shared/extensions';
+} from '@abp-plus/ng.theme.shared/extensions';
 import { InjectionToken } from '@angular/core';
 import { DEFAULT_TENANTS_ENTITY_ACTIONS } from '../defaults/default-tenants-entity-actions';
 import { DEFAULT_TENANTS_ENTITY_PROPS } from '../defaults/default-tenants-entity-props';

@@ -1,12 +1,12 @@
 import { ListService, PagedResultDto } from '@abp/ng.core';
-import { eFeatureManagementComponents } from '@abp/ng.feature-management';
-import { GetTenantsInput, TenantDto, TenantService } from '@abp/ng.tenant-management/proxy';
-import {Confirmation, ConfirmationService, ToasterService} from '@abp/ng.theme.shared';
+import { eFeatureManagementComponents } from '@abp-plus/ng.feature-management';
+import { GetTenantsInput, TenantDto, TenantService } from '@abp-plus/ng.tenant-management/proxy';
+import {Confirmation, ConfirmationService, ToasterService} from '@abp-plus/ng.theme.shared';
 import {
   EXTENSIONS_IDENTIFIER,
   FormPropData,
   generateFormFromProps,
-} from '@abp/ng.theme.shared/extensions';
+} from '@abp-plus/ng.theme.shared/extensions';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { finalize } from 'rxjs/operators';

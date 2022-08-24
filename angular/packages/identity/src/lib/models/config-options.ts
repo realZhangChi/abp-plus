@@ -1,11 +1,11 @@
-import { IdentityRoleDto, IdentityUserDto } from '@abp/ng.identity/proxy';
+import { IdentityRoleDto, IdentityUserDto } from '@abp-plus/ng.identity/proxy';
 import {
   CreateFormPropContributorCallback,
   EditFormPropContributorCallback,
   EntityActionContributorCallback,
   EntityPropContributorCallback,
   ToolbarActionContributorCallback,
-} from '@abp/ng.theme.shared/extensions';
+} from '@abp-plus/ng.theme.shared/extensions';
 import { eIdentityComponents } from '../enums/components';
 
 export type IdentityEntityActionContributors = Partial<{

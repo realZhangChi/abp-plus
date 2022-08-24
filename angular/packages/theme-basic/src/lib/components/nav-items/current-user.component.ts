@@ -5,7 +5,7 @@ import {
   NAVIGATE_TO_MANAGE_PROFILE,
   SessionStateService,
 } from '@abp/ng.core';
-import { UserMenu, UserMenuService } from '@abp/ng.theme.shared';
+import { UserMenu, UserMenuService } from '@abp-plus/ng.theme.shared';
 import { Component, Inject, TrackByFunction } from '@angular/core';
 import { Observable } from 'rxjs';
 

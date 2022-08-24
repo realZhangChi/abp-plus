@@ -1,6 +1,6 @@
 import { CoreModule } from '@abp/ng.core';
-import { ThemeSharedModule } from '@abp/ng.theme.shared';
-import { UiExtensionsModule } from '@abp/ng.theme.shared/extensions';
+import { ThemeSharedModule } from '@abp-plus/ng.theme.shared';
+import { UiExtensionsModule } from '@abp-plus/ng.theme.shared/extensions';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PagePartDirective } from './page-part.directive';

@@ -1,5 +1,5 @@
 import { AuthService } from '@abp/ng.core';
-import { PageAlertService, ToasterService } from '@abp/ng.theme.shared';
+import { PageAlertService, ToasterService } from '@abp-plus/ng.theme.shared';
 import { Component } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 

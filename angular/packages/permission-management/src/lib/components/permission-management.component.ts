@@ -6,8 +6,8 @@ import {
   PermissionsService,
   ProviderInfoDto,
   UpdatePermissionDto,
-} from '@abp/ng.permission-management/proxy';
-import { LocaleDirection } from '@abp/ng.theme.shared';
+} from '@abp-plus/ng.permission-management/proxy';
+import { LocaleDirection } from '@abp-plus/ng.theme.shared';
 import {
   Component,
   ElementRef,

@@ -5,7 +5,7 @@ import {
   mapEntitiesToContributors,
   mergeWithDefaultActions,
   mergeWithDefaultProps,
-} from '@abp/ng.theme.shared/extensions';
+} from '@abp-plus/ng.theme.shared/extensions';
 import { Injectable, Injector } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';

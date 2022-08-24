@@ -1,4 +1,4 @@
-import { BaseUiExtensionsModule } from '@abp/ng.theme.shared/extensions';
+import { BaseUiExtensionsModule } from '@abp-plus/ng.theme.shared/extensions';
 import { NgModule } from '@angular/core';
 
 @NgModule({

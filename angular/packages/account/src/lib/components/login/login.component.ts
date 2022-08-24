@@ -1,5 +1,5 @@
 import { AuthService, ConfigStateService } from '@abp/ng.core';
-import { ToasterService } from '@abp/ng.theme.shared';
+import { ToasterService } from '@abp-plus/ng.theme.shared';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { throwError } from 'rxjs';

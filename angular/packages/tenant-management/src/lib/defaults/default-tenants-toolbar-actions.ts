@@ -1,5 +1,5 @@
-import { TenantDto } from '@abp/ng.tenant-management/proxy';
-import { ToolbarAction } from '@abp/ng.theme.shared/extensions';
+import { TenantDto } from '@abp-plus/ng.tenant-management/proxy';
+import { ToolbarAction } from '@abp-plus/ng.theme.shared/extensions';
 import { TenantsComponent } from '../components/tenants/tenants.component';
 
 export const DEFAULT_TENANTS_TOOLBAR_ACTIONS = ToolbarAction.createMany<TenantDto[]>([

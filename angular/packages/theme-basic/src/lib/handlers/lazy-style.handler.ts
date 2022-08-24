@@ -1,5 +1,5 @@
 import { LazyLoadService, LOADING_STRATEGY } from '@abp/ng.core';
-import { DocumentDirHandlerService, LocaleDirection } from '@abp/ng.theme.shared';
+import { DocumentDirHandlerService, LocaleDirection } from '@abp-plus/ng.theme.shared';
 import { Injectable, Injector } from '@angular/core';
 import { LAZY_STYLES } from '../tokens/lazy-styles.token';
 export const BOOTSTRAP = 'bootstrap-{{dir}}.min.css';

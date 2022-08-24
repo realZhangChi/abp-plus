@@ -3,7 +3,7 @@ import {
   DateParserFormatter,
   DEFAULT_VALIDATION_BLUEPRINTS,
   THEME_SHARED_ROUTE_PROVIDERS,
-} from '@abp/ng.theme.shared';
+} from '@abp-plus/ng.theme.shared';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';

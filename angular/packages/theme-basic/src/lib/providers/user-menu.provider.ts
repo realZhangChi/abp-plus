@@ -1,5 +1,5 @@
 import { AuthService, NAVIGATE_TO_MANAGE_PROFILE } from '@abp/ng.core';
-import { UserMenuService } from '@abp/ng.theme.shared';
+import { UserMenuService } from '@abp-plus/ng.theme.shared';
 import { APP_INITIALIZER, Injector } from '@angular/core';
 import { eUserMenuItems } from '../enums/user-menu-items';
 

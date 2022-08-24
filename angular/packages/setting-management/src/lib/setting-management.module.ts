@@ -1,6 +1,6 @@
-import { PageModule } from '@abp/ng.components/page';
+import { PageModule } from '@abp-plus/ng.components/page';
 import { CoreModule, LazyModuleFactory } from '@abp/ng.core';
-import { ThemeSharedModule } from '@abp/ng.theme.shared';
+import { ThemeSharedModule } from '@abp-plus/ng.theme.shared';
 import { ModuleWithProviders, NgModule, NgModuleFactory } from '@angular/core';
 import { SettingManagementComponent } from './components/setting-management.component';
 import { SettingManagementRoutingModule } from './setting-management-routing.module';

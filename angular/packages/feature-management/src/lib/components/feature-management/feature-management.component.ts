@@ -4,8 +4,8 @@ import {
   FeatureGroupDto,
   FeaturesService,
   UpdateFeatureDto,
-} from '@abp/ng.feature-management/proxy';
-import { LocaleDirection } from '@abp/ng.theme.shared';
+} from '@abp-plus/ng.feature-management/proxy';
+import { LocaleDirection } from '@abp-plus/ng.theme.shared';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { FeatureManagement } from '../../models/feature-management';

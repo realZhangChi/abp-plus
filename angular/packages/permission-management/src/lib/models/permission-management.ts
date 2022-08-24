@@ -1,4 +1,4 @@
-import { GetPermissionListResultDto } from '@abp/ng.permission-management/proxy';
+import { GetPermissionListResultDto } from '@abp-plus/ng.permission-management/proxy';
 import { EventEmitter } from '@angular/core';
 
 export namespace PermissionManagement {

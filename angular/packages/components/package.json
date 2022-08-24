@@ -1,5 +1,5 @@
 {
-  "name": "@abp/ng.components",
+  "name": "@abp-plus/ng.components",
   "version": "6.0.0-rc.1",
   "homepage": "https://abp.io",
   "repository": {
@@ -8,7 +8,7 @@
   },
   "peerDependencies": {
     "@abp/ng.core": ">=6.0.0-rc.1",
-    "@abp/ng.theme.shared": ">=6.0.0-rc.1",
+    "@abp-plus/ng.theme.shared": ">=6.0.0-rc.1",
     "@ng-bootstrap/ng-bootstrap": ">=10.0.0"
   },
   "dependencies": {

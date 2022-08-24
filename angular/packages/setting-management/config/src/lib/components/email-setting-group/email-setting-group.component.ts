@@ -1,5 +1,5 @@
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { collapse, ToasterService } from '@abp/ng.theme.shared';
+import { collapse, ToasterService } from '@abp-plus/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';

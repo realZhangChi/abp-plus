@@ -1,4 +1,4 @@
-import { NavItemsService } from '@abp/ng.theme.shared';
+import { NavItemsService } from '@abp-plus/ng.theme.shared';
 import { APP_INITIALIZER } from '@angular/core';
 import { CurrentUserComponent } from '../components/nav-items/current-user.component';
 import { LanguagesComponent } from '../components/nav-items/languages.component';

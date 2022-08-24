@@ -1,5 +1,5 @@
 import { ProfileService } from '@abp/ng.account.core/proxy';
-import { getPasswordValidators, ToasterService } from '@abp/ng.theme.shared';
+import { getPasswordValidators, ToasterService } from '@abp-plus/ng.theme.shared';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { comparePasswords, Validation } from '@ngx-validate/core';
