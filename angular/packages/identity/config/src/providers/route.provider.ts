@@ -16,7 +16,7 @@ export function configureRoutes(routesService: RoutesService) {
         name: eIdentityRouteNames.IdentityManagement,
         parentName: eThemeSharedRouteNames.Administration,
         requiredPolicy: eIdentityPolicyNames.IdentityManagement,
-        iconClass: 'fa fa-id-card-o',
+        iconClass: 'idcard',
         layout: eLayoutType.application,
         order: 1,
       },
@@ -25,6 +25,7 @@ export function configureRoutes(routesService: RoutesService) {
         name: eIdentityRouteNames.Roles,
         parentName: eIdentityRouteNames.IdentityManagement,
         requiredPolicy: eIdentityPolicyNames.Roles,
+        iconClass: 'team',
         order: 1,
       },
       {
@@ -32,6 +33,7 @@ export function configureRoutes(routesService: RoutesService) {
         name: eIdentityRouteNames.Users,
         parentName: eIdentityRouteNames.IdentityManagement,
         requiredPolicy: eIdentityPolicyNames.Users,
+        iconClass: 'user',
         order: 2,
       },
     ]);

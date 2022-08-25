@@ -17,7 +17,7 @@ export function configureRoutes(routes: RoutesService) {
         parentName: eThemeSharedRouteNames.Administration,
         requiredPolicy: eTenantManagementPolicyNames.TenantManagement,
         layout: eLayoutType.application,
-        iconClass: 'fa fa-users',
+        iconClass: 'user',
         order: 2,
       },
       {
