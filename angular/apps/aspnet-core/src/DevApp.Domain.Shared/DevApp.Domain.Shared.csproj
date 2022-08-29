@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -17,6 +17,10 @@
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="6.0.0-rc.3" />
     <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="6.0.0-rc.3" />
     <PackageReference Include="Volo.Abp.OpenIddict.Domain.Shared" Version="6.0.0-rc.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\abp-next-admin\aspnet-core\modules\identity\LINGYUN.Abp.Identity.Domain.Shared\LINGYUN.Abp.Identity.Domain.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

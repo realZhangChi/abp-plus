@@ -1,4 +1,4 @@
-﻿using Localization.Resources.AbpUi;
+using Localization.Resources.AbpUi;
 using DevApp.Localization;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
@@ -8,6 +8,8 @@ using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+
+using AbpIdentityHttpApiModule = LINGYUN.Abp.Identity.AbpIdentityHttpApiModule;
 
 namespace DevApp;
 
@@ -22,20 +24,20 @@ namespace DevApp;
     )]
 public class DevAppHttpApiModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        ConfigureLocalization();
-    }
+  public override void ConfigureServices(ServiceConfigurationContext context)
+  {
+    ConfigureLocalization();
+  }
 
-    private void ConfigureLocalization()
+  private void ConfigureLocalization()
+  {
+    Configure<AbpLocalizationOptions>(options =>
     {
-        Configure<AbpLocalizationOptions>(options =>
-        {
-            options.Resources
-                .Get<DevAppResource>()
-                .AddBaseTypes(
-                    typeof(AbpUiResource)
-                );
-        });
-    }
+      options.Resources
+              .Get<DevAppResource>()
+              .AddBaseTypes(
+                  typeof(AbpUiResource)
+              );
+    });
+  }
 }
