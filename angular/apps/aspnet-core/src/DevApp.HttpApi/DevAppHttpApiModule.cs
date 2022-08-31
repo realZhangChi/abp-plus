@@ -2,14 +2,12 @@ using Localization.Resources.AbpUi;
 using DevApp.Localization;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
-using Volo.Abp.Identity;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
-
-using AbpIdentityHttpApiModule = LINGYUN.Abp.Identity.AbpIdentityHttpApiModule;
+using CatchException.Abp.Identity;
 
 namespace DevApp;
 

@@ -12,7 +12,6 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
-using AbpIdentityDomainSharedModule = LINGYUN.Abp.Identity.AbpIdentityDomainSharedModule;
 
 namespace DevApp;
 
@@ -24,7 +23,7 @@ namespace DevApp;
     typeof(AbpOpenIddictDomainSharedModule),
     typeof(AbpPermissionManagementDomainSharedModule),
     typeof(AbpSettingManagementDomainSharedModule),
-    typeof(AbpTenantManagementDomainSharedModule)    
+    typeof(AbpTenantManagementDomainSharedModule)
     )]
 public class DevAppDomainSharedModule : AbpModule
 {

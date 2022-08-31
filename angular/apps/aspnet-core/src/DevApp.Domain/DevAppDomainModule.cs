@@ -14,8 +14,6 @@ using Volo.Abp.PermissionManagement.OpenIddict;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 
-using AbpIdentityDomainModule = LINGYUN.Abp.Identity.AbpIdentityDomainModule;
-
 namespace DevApp;
 
 [DependsOn(

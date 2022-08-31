@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DevApp.Application.Contracts\DevApp.Application.Contracts.csproj" />
-    <ProjectReference Include="..\..\..\..\..\abp-next-admin\aspnet-core\modules\identity\LINGYUN.Abp.Identity.HttpApi\LINGYUN.Abp.Identity.HttpApi.csproj" />
+    <ProjectReference Include="..\..\..\..\..\modules\identity\src\CatchException.Abp.Identity.HttpApi\CatchException.Abp.Identity.HttpApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

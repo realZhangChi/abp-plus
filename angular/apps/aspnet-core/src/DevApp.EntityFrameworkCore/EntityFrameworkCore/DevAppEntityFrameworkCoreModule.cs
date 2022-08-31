@@ -12,8 +12,6 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
-using AbpIdentityEntityFrameworkCoreModule = LINGYUN.Abp.Identity.EntityFrameworkCore.AbpIdentityEntityFrameworkCoreModule;
-
 namespace DevApp.EntityFrameworkCore;
 
 [DependsOn(
