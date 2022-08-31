@@ -59,6 +59,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 const ZORRO = [
   NzLayoutModule,
@@ -83,7 +84,8 @@ const ZORRO = [
   NzDatePickerModule,
   NzTimePickerModule,
   NzTagModule,
-  NzTreeModule
+  NzTreeModule,
+  NzCardModule
 ];
 
 const declarationsWithExports = [

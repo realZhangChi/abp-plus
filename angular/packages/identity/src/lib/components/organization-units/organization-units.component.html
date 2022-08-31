@@ -1,3 +1,12 @@
 <abp-page [title]="'AbpIdentity::OrganizationUnit' | abpLocalization">
-  <nz-tree [nzData]="treeData" nzBlockNode ></nz-tree>
+  <div nz-row>
+    <div nz-col [nzSm]="24" [nzMd]="8">
+      <nz-card style="width: 300px" [nzBordered]="false" nzTitle="Card title">
+        <nz-tree [nzData]="treeData" nzBlockNode></nz-tree>
+      </nz-card>
+    </div>
+    <div nz-col [nzSm]="24" [nzMd]="16">
+      <nz-tree [nzData]="treeData" nzBlockNode></nz-tree>
+    </div>
+  </div>
 </abp-page>

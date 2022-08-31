@@ -6,7 +6,7 @@ import { createTreeFromList, ListResultDto } from '@abp/ng.core';
   templateUrl: './organization-units.component.html',
 })
 export class OrganizationUnitsComponent implements OnInit {
-  treeData: any;
+  treeData: TreeNode[];
   ous: ListResultDto<OrganizationUnitDto>;
   constructor(protected ouService: OrganizationUnitService) {}
 
@@ -23,11 +23,18 @@ export class OrganizationUnitsComponent implements OnInit {
             key: i.id,
             expanded: false,
             children: [],
-          };
+          } as TreeNode;
         },
       );
 
       console.log(this.treeData);
     });
   }
+}
+
+class TreeNode {
+  title: string | undefined;
+  key: string;
+  expanded: boolean;
+  children: TreeNode[];
 }
