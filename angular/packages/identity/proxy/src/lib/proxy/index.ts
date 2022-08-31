@@ -1,3 +1,4 @@
 import * as Identity from './identity';
+import * as Lingyun from './lingyun';
 import * as Users from './users';
-export { Identity, Users };
+export { Identity, Lingyun, Users };

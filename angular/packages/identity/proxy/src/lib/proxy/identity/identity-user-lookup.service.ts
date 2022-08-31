@@ -9,6 +9,7 @@ import type { UserData } from '../users/models';
 })
 export class IdentityUserLookupService {
   apiName = 'AbpIdentity';
+  
 
   findById = (id: string) =>
     this.restService.request<any, UserData>({
@@ -16,6 +17,7 @@ export class IdentityUserLookupService {
       url: `/api/identity/users/lookup/${id}`,
     },
     { apiName: this.apiName });
+  
 
   findByUserName = (userName: string) =>
     this.restService.request<any, UserData>({
@@ -23,6 +25,7 @@ export class IdentityUserLookupService {
       url: `/api/identity/users/lookup/by-username/${userName}`,
     },
     { apiName: this.apiName });
+  
 
   getCount = (input: UserLookupCountInputDto) =>
     this.restService.request<any, number>({
@@ -31,6 +34,7 @@ export class IdentityUserLookupService {
       params: { filter: input.filter },
     },
     { apiName: this.apiName });
+  
 
   search = (input: UserLookupSearchInputDto) =>
     this.restService.request<any, ListResultDto<UserData>>({

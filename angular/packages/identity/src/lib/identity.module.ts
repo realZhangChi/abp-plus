@@ -18,10 +18,11 @@ import {
   IDENTITY_ENTITY_PROP_CONTRIBUTORS,
   IDENTITY_TOOLBAR_ACTION_CONTRIBUTORS,
 } from './tokens/extensions.token';
+import { OrganizationUnitsComponent } from './components/organization-units/organization-units.component';
 
 @NgModule({
-  declarations: [RolesComponent, UsersComponent],
-  exports: [RolesComponent, UsersComponent],
+  declarations: [RolesComponent, UsersComponent, OrganizationUnitsComponent],
+  exports: [RolesComponent, UsersComponent, OrganizationUnitsComponent],
   imports: [
     CoreModule,
     IdentityRoutingModule,
