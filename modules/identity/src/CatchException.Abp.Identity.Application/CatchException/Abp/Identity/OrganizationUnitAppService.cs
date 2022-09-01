@@ -47,6 +47,7 @@ public class OrganizationUnitAppService :
 
         ou.SetConcurrencyStampIfNotNull(input.ConcurrencyStamp);
 
+        ou.DisplayName = input.DisplayName;
         input.MapExtraPropertiesTo(ou);
         await Manager.UpdateAsync(ou);
         await CurrentUnitOfWork.SaveChangesAsync();
