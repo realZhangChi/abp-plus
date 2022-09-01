@@ -14,7 +14,8 @@ namespace CatchException.Abp.Identity;
 [Route("api/identity/organization-units")]
 public class OrganizationUnitController : AbpControllerBase, IOrganizationUnitAppService
 {
-    protected IOrganizationUnitAppService OrganizationUnitAppService { get; } = default!;
+    protected IOrganizationUnitAppService OrganizationUnitAppService =>
+        LazyServiceProvider.LazyGetRequiredService<IOrganizationUnitAppService>();
     
     [HttpGet]
     [Route("{id}")]

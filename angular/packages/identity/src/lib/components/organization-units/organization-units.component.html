@@ -1,12 +1,76 @@
-<abp-page [title]="'AbpIdentity::OrganizationUnit' | abpLocalization">
-  <div nz-row>
-    <div nz-col [nzSm]="24" [nzMd]="8">
-      <nz-card style="width: 300px" [nzBordered]="false" nzTitle="Card title">
-        <nz-tree [nzData]="treeData" nzBlockNode></nz-tree>
+<abp-page [title]="'AbpIdentity::OrganizationUnits' | abpLocalization">
+  <div nz-row [nzGutter]="8">
+    <div nz-col [nzSm]="24" [nzMd]="10">
+      <nz-card
+        [nzBordered]="false"
+        [nzTitle]="'AbpIdentity::OrganizationTree' | abpLocalization"
+        [nzExtra]="extraTemplate"
+      >
+        <nz-tree [nzData]="treeData" nzBlockNode [nzTreeTemplate]="nzTreeTemplate"></nz-tree>
+        <ng-template #nzTreeTemplate let-node let-origin="origin">
+          <div (contextmenu)="contextMenu($event, menu, node.key)">
+            <span>{{ node.title }}</span>
+          </div>
+        </ng-template>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>{{ 'AbpIdentity::Edit' | abpLocalization }}</li>
+            <li nz-menu-item (click)="addSubUnit()">
+              {{ 'AbpIdentity::AddSubUnit' | abpLocalization }}
+            </li>
+            <li nz-menu-item>{{ 'AbpIdentity::Delete' | abpLocalization }}</li>
+          </ul>
+        </nz-dropdown-menu>
       </nz-card>
+      <ng-template #extraTemplate>
+        <button nz-button nzType="primary" (click)="addRootUnit()">
+          {{ 'AbpIdentity::AddRootUnit' | abpLocalization }}
+        </button>
+      </ng-template>
     </div>
-    <div nz-col [nzSm]="24" [nzMd]="16">
-      <nz-tree [nzData]="treeData" nzBlockNode></nz-tree>
+    <div nz-col [nzSm]="24" [nzMd]="1">
+      <nz-divider nzType="vertical"></nz-divider>
+    </div>
+    <div nz-col [nzSm]="24" [nzMd]="13">
+      <nz-card [nzBordered]="false" class="details-card">
+        <nz-card-tab>
+          <nz-tabset nzSize="large">
+            <nz-tab [nzTitle]="'AbpIdentity::Members' | abpLocalization"></nz-tab>
+            <nz-tab [nzTitle]="'AbpIdentity::Roles' | abpLocalization"></nz-tab>
+          </nz-tabset>
+        </nz-card-tab>
+      </nz-card>
     </div>
   </div>
 </abp-page>
+
+<abp-modal [(visible)]="isModalVisible" [busy]="modalBusy">
+  <ng-template #abpHeader>
+    <h3>
+      {{
+        (this.selected.id ? 'AbpIdentity::AddSubUnit' : 'AbpIdentity::AddRootUnit')
+          | abpLocalization
+      }}
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <h4 *ngIf="this.selected.id">
+      {{ 'AbpIdentity::OrganizationUnit:Parent{0}' | abpLocalization: this.selected.displayName }}
+    </h4>
+    <form [formGroup]="form" (ngSubmit)="save()" validateOnSubmit>
+      <abp-extensible-form [selectedRecord]="selected"></abp-extensible-form>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <nz-space>
+      <button *nzSpaceItem nz-button type="button" abpClose>
+        {{ 'AbpIdentity::Cancel' | abpLocalization }}
+      </button>
+      <abp-button *nzSpaceItem iconClass="check" [disabled]="form?.invalid" (click)="save()">{{
+        'AbpIdentity::Save' | abpLocalization
+      }}</abp-button>
+    </nz-space>
+  </ng-template>
+</abp-modal>

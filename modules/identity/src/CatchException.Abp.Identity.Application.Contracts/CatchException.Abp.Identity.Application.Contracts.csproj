@@ -5,11 +5,23 @@
     
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+	    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
         <RootNamespace />
     </PropertyGroup>
     
     <ItemGroup>
+      <None Remove="CatchException\Abp\Identity\Localization\en.json" />
+      <None Remove="CatchException\Abp\Identity\Localization\zh-Hans.json" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <EmbeddedResource Include="CatchException\Abp\Identity\Localization\*.json" />
+      <Content Remove="CatchException\Abp\Identity\Localization\zh-Hans.json" />
+    </ItemGroup>
+    
+    <ItemGroup>
       <PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="6.0.0-rc.3" />
+      <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.5" />
     </ItemGroup>
 
 </Project>
