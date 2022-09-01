@@ -14,7 +14,7 @@
         </ng-template>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-menu-item>{{ 'AbpIdentity::Edit' | abpLocalization }}</li>
+            <li nz-menu-item (click)="edit()">{{ 'AbpIdentity::Edit' | abpLocalization }}</li>
             <li nz-menu-item (click)="addSubUnit()">
               {{ 'AbpIdentity::AddSubUnit' | abpLocalization }}
             </li>
@@ -48,15 +48,21 @@
   <ng-template #abpHeader>
     <h3>
       {{
-        (this.selected.id ? 'AbpIdentity::AddSubUnit' : 'AbpIdentity::AddRootUnit')
-          | abpLocalization
+        (this.selected.id
+          ? 'AbpIdentity::Edit'
+          : this.contextMenuOu.id
+          ? 'AbpIdentity::AddSubUnit'
+          : 'AbpIdentity::AddRootUnit'
+        ) | abpLocalization
       }}
     </h3>
   </ng-template>
 
   <ng-template #abpBody>
-    <h4 *ngIf="this.selected.id">
-      {{ 'AbpIdentity::OrganizationUnit:Parent{0}' | abpLocalization: this.selected.displayName }}
+    <h4 *ngIf="!this.selected.id && this.contextMenuOu.id">
+      {{
+        'AbpIdentity::OrganizationUnit:Parent{0}' | abpLocalization: this.contextMenuOu.displayName
+      }}
     </h4>
     <form [formGroup]="form" (ngSubmit)="save()" validateOnSubmit>
       <abp-extensible-form [selectedRecord]="selected"></abp-extensible-form>

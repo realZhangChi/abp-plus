@@ -1,5 +1,8 @@
-﻿namespace CatchException.Abp.Identity;
+﻿using Volo.Abp.Domain.Entities;
 
-public class OrganizationUnitUpdateDto : OrganizationUnitCreateOrUpdateDtoBase
+namespace CatchException.Abp.Identity;
+
+public class OrganizationUnitUpdateDto : OrganizationUnitCreateOrUpdateDtoBase, IHasConcurrencyStamp
 {
+    public string ConcurrencyStamp { get; set; } = default!;
 }

@@ -10,6 +10,10 @@ export const DEFAULT_ORGANIZATION_UNITS_CREATE_FORM_PROPS = FormProp.createMany<
     id: 'ou-name',
     validators: () => [Validators.required],
   },
+  {
+    type: ePropType.Hidden,
+    name: 'parentId',
+  }
 ]);
 
 export const DEFAULT_ORGANIZATION_UNITS_EDIT_FORM_PROPS = DEFAULT_ORGANIZATION_UNITS_CREATE_FORM_PROPS;

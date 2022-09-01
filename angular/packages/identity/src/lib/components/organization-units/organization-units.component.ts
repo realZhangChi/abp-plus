@@ -28,6 +28,8 @@ export class OrganizationUnitsComponent implements OnInit {
 
   form: FormGroup;
 
+  contextMenuOu: OrganizationUnitDto;
+
   selected: OrganizationUnitDto;
 
   isModalVisible: boolean;
@@ -47,6 +49,9 @@ export class OrganizationUnitsComponent implements OnInit {
   buildForm() {
     const data = new FormPropData(this.injector, this.selected);
     this.form = generateFormFromProps(data);
+    if (!this.selected.id && this.contextMenuOu.id) {
+      this.form.controls['parentId'].setValue(this.contextMenuOu.id);
+    }
   }
 
   private openModal() {
@@ -55,11 +60,18 @@ export class OrganizationUnitsComponent implements OnInit {
   }
 
   addSubUnit() {
+    this.selected = {} as OrganizationUnitDto;
     this.openModal();
   }
 
   addRootUnit() {
+    this.contextMenuOu = {} as OrganizationUnitDto;
     this.selected = {} as OrganizationUnitDto;
+    this.openModal();
+  }
+
+  edit() {
+    this.selected = this.contextMenuOu;
     this.openModal();
   }
 
@@ -80,8 +92,7 @@ export class OrganizationUnitsComponent implements OnInit {
   }
 
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent, nodeKey: string): void {
-    const ou = this.ous.items.find(ou => ou.id === nodeKey);
-    this.selected = ou;
+    this.contextMenuOu = this.ous.items.filter(ou => ou.id === nodeKey)[0];
     this.nzContextMenuService.create($event, menu);
   }
 

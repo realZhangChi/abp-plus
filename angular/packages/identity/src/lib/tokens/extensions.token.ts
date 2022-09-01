@@ -7,7 +7,7 @@ import {
   ToolbarActionContributorCallback,
 } from '@abp-plus/ng.theme.shared/extensions';
 import { InjectionToken } from '@angular/core';
-import { DEFAULT_ORGANIZATION_UNITS_CREATE_FORM_PROPS } from '../defaults/default-ous-form-props';
+import { DEFAULT_ORGANIZATION_UNITS_CREATE_FORM_PROPS, DEFAULT_ORGANIZATION_UNITS_EDIT_FORM_PROPS } from '../defaults/default-ous-form-props';
 import { DEFAULT_ROLES_ENTITY_ACTIONS } from '../defaults/default-roles-entity-actions';
 import { DEFAULT_ROLES_ENTITY_PROPS } from '../defaults/default-roles-entity-props';
 import {
@@ -48,6 +48,8 @@ export const DEFAULT_IDENTITY_CREATE_FORM_PROPS = {
 export const DEFAULT_IDENTITY_EDIT_FORM_PROPS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_EDIT_FORM_PROPS,
   [eIdentityComponents.Users]: DEFAULT_USERS_EDIT_FORM_PROPS,
+  [eIdentityComponents.OrganizationUnits]: DEFAULT_ORGANIZATION_UNITS_EDIT_FORM_PROPS,
+
 };
 
 export const IDENTITY_ENTITY_ACTION_CONTRIBUTORS = new InjectionToken<EntityActionContributors>(
