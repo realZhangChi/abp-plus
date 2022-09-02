@@ -22,6 +22,12 @@ public class OrganizationUnitAppService :
     protected virtual OrganizationUnitManager Manager =>
         LazyServiceProvider.LazyGetRequiredService<OrganizationUnitManager>();
 
+    protected virtual IIdentityUserRepository IdentityUserRepository =>
+        LazyServiceProvider.LazyGetRequiredService<IIdentityUserRepository>();
+
+    protected virtual IRepository<IdentityRole, Guid> IdentityRoleRepository =>
+        LazyServiceProvider.LazyGetRequiredService<IRepository<IdentityRole, Guid>>();
+
     public OrganizationUnitAppService(IRepository<OrganizationUnit, Guid> repository) : base(repository)
     {
     }
@@ -37,6 +43,33 @@ public class OrganizationUnitAppService :
     public Task MoveAsync(Guid id, OrganizationUnitMoveDto input)
     {
         return Manager.MoveAsync(id, input.NewParentId);
+    }
+
+    public async Task<PagedResultDto<IdentityUserDto>> GetMemberListAsync(Guid id, PagedResultRequestDto input)
+    {
+        var count = await IdentityUserRepository.GetCountAsync(organizationUnitId: id);
+        var members = await IdentityUserRepository
+            .GetListAsync(skipCount: input.SkipCount, maxResultCount: input.MaxResultCount, organizationUnitId: id);
+
+        return new PagedResultDto<IdentityUserDto>(count,
+            ObjectMapper.Map<List<IdentityUser>, List<IdentityUserDto>>(members));
+    }
+
+    public async Task<PagedResultDto<IdentityRoleDto>> GetRoleListAsync(Guid id, PagedResultRequestDto input)
+    {
+        var query = (await Repository.GetQueryableAsync())
+            .Where(ou => ou.Id == id)
+            .SelectMany(ou => ou.Roles)
+            .Join(await IdentityRoleRepository.GetQueryableAsync(),
+                x => x.RoleId,
+                role => role.Id,
+                (x, y) => y);
+
+        var count = await AsyncExecuter.CountAsync(query);
+        var roles = await AsyncExecuter.ToListAsync(query);
+
+        return new PagedResultDto<IdentityRoleDto>(count,
+            ObjectMapper.Map<List<IdentityRole>, List<IdentityRoleDto>>(roles));
     }
 
     [Authorize(IdentityPermissions.OrganizationUnits.Create)]

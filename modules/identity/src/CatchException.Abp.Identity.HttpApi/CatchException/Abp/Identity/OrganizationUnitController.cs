@@ -64,4 +64,16 @@ public class OrganizationUnitController : AbpControllerBase, IOrganizationUnitAp
     {
         return OrganizationUnitAppService.MoveAsync(id, input);
     }
+
+    [HttpGet("{id}/members")]
+    public Task<PagedResultDto<IdentityUserDto>> GetMemberListAsync(Guid id, PagedResultRequestDto input)
+    {
+        return OrganizationUnitAppService.GetMemberListAsync(id, input);
+    }
+
+    [HttpGet("{id}/roles")]
+    public Task<PagedResultDto<IdentityRoleDto>> GetRoleListAsync(Guid id, PagedResultRequestDto input)
+    {
+        return OrganizationUnitAppService.GetRoleListAsync(id, input);
+    }
 }

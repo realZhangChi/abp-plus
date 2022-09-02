@@ -6,7 +6,14 @@
         [nzTitle]="'AbpIdentity::OrganizationTree' | abpLocalization"
         [nzExtra]="extraTemplate"
       >
-        <nz-tree [nzData]="treeData" nzDraggable nzBlockNode [nzTreeTemplate]="nzTreeTemplate" (nzOnDrop)="onNodeDrop($event)"></nz-tree>
+        <nz-tree
+          [nzData]="treeData"
+          nzDraggable
+          nzBlockNode
+          [nzTreeTemplate]="nzTreeTemplate"
+          (nzOnDrop)="onNodeDrop($event)"
+          (nzClick)="onNodeClick($event)"
+        ></nz-tree>
         <ng-template #nzTreeTemplate let-node let-origin="origin">
           <div (contextmenu)="contextMenu($event, menu, node.key)">
             <span>{{ node.title }}</span>
@@ -35,7 +42,13 @@
       <nz-card [nzBordered]="false" class="details-card">
         <nz-card-tab>
           <nz-tabset nzSize="large">
-            <nz-tab [nzTitle]="'AbpIdentity::Members' | abpLocalization"></nz-tab>
+            <nz-tab [nzTitle]="'AbpIdentity::Members' | abpLocalization">
+              <abp-extensible-table
+                [data]="members.items"
+                [recordsTotal]="members.totalCount"
+                [list]="memberList"
+              ></abp-extensible-table>
+            </nz-tab>
             <nz-tab [nzTitle]="'AbpIdentity::Roles' | abpLocalization"></nz-tab>
           </nz-tabset>
         </nz-card-tab>

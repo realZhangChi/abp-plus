@@ -1,6 +1,17 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { OrganizationUnitDto, OrganizationUnitService } from '@abp-plus/ng.identity/proxy';
-import { createTreeFromList, ListResultDto } from '@abp/ng.core';
+import {
+  IdentityRoleDto,
+  IdentityUserDto,
+  OrganizationUnitDto,
+  OrganizationUnitService,
+} from '@abp-plus/ng.identity/proxy';
+import {
+  createTreeFromList,
+  ListResultDto,
+  ListService,
+  PagedResultDto,
+  PagedResultRequestDto,
+} from '@abp/ng.core';
 import { FormGroup } from '@angular/forms';
 import {
   EXTENSIONS_IDENTIFIER,
@@ -17,6 +28,7 @@ import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
   templateUrl: './organization-units.component.html',
   styleUrls: ['./organization-units.component.scss'],
   providers: [
+    ListService,
     {
       provide: EXTENSIONS_IDENTIFIER,
       useValue: eIdentityComponents.OrganizationUnits,
@@ -25,6 +37,7 @@ import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 })
 export class OrganizationUnitsComponent implements OnInit {
   treeData: TreeNode[];
+
   ous: ListResultDto<OrganizationUnitDto>;
 
   form: FormGroup;
@@ -37,7 +50,19 @@ export class OrganizationUnitsComponent implements OnInit {
 
   modalBusy = false;
 
+  members: PagedResultDto<IdentityUserDto> = {
+    items: [],
+    totalCount: 0,
+  } as PagedResultDto<IdentityUserDto>;
+
+  roles: PagedResultDto<IdentityRoleDto> = {
+    items: [],
+    totalCount: 0,
+  } as PagedResultDto<IdentityRoleDto>;
+
   constructor(
+    public readonly memberList: ListService<PagedResultRequestDto>,
+    public readonly roleList: ListService<PagedResultRequestDto>,
     protected service: OrganizationUnitService,
     protected injector: Injector,
     private nzContextMenuService: NzContextMenuService,
@@ -101,6 +126,18 @@ export class OrganizationUnitsComponent implements OnInit {
     this.service
       .move(event.dragNode.key, { newParentId: event.node.key })
       .subscribe(() => this.hookToQuery());
+  }
+
+  onNodeClick(event: NzFormatEmitEvent): void {
+    this.getMembers(event.node.key);
+  }
+
+  private getMembers(ouId: string) {
+    this.memberList
+      .hookToQuery(query => this.service.getMemberList(ouId, { ...query }))
+      .subscribe(members => {
+        this.members = members;
+      });
   }
 
   hookToQuery() {
