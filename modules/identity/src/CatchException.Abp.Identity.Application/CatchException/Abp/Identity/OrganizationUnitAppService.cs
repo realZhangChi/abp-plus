@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Data;
@@ -30,6 +31,12 @@ public class OrganizationUnitAppService :
         var ous = await Repository.GetListAsync();
         return new ListResultDto<OrganizationUnitDto>(
             ObjectMapper.Map<List<OrganizationUnit>, List<OrganizationUnitDto>>(ous));
+    }
+
+    [Authorize(IdentityPermissions.OrganizationUnits.Update)]
+    public Task MoveAsync(Guid id, OrganizationUnitMoveDto input)
+    {
+        return Manager.MoveAsync(id, input.NewParentId);
     }
 
     [Authorize(IdentityPermissions.OrganizationUnits.Create)]

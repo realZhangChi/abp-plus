@@ -6,7 +6,7 @@
         [nzTitle]="'AbpIdentity::OrganizationTree' | abpLocalization"
         [nzExtra]="extraTemplate"
       >
-        <nz-tree [nzData]="treeData" nzBlockNode [nzTreeTemplate]="nzTreeTemplate"></nz-tree>
+        <nz-tree [nzData]="treeData" nzDraggable nzBlockNode [nzTreeTemplate]="nzTreeTemplate" (nzOnDrop)="onNodeDrop($event)"></nz-tree>
         <ng-template #nzTreeTemplate let-node let-origin="origin">
           <div (contextmenu)="contextMenu($event, menu, node.key)">
             <span>{{ node.title }}</span>

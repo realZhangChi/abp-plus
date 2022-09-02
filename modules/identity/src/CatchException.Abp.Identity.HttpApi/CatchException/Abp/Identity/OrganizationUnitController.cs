@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
+
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
@@ -16,7 +18,7 @@ public class OrganizationUnitController : AbpControllerBase, IOrganizationUnitAp
 {
     protected IOrganizationUnitAppService OrganizationUnitAppService =>
         LazyServiceProvider.LazyGetRequiredService<IOrganizationUnitAppService>();
-    
+
     [HttpGet]
     [Route("{id}")]
     public Task<OrganizationUnitDto> GetAsync(Guid id)
@@ -55,5 +57,11 @@ public class OrganizationUnitController : AbpControllerBase, IOrganizationUnitAp
     public Task<ListResultDto<OrganizationUnitDto>> GetAllListAsync()
     {
         return OrganizationUnitAppService.GetAllListAsync();
+    }
+
+    [HttpPut("{id}/move")]
+    public Task MoveAsync(Guid id, OrganizationUnitMoveDto input)
+    {
+        return OrganizationUnitAppService.MoveAsync(id, input);
     }
 }

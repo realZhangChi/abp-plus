@@ -12,4 +12,6 @@ public interface IOrganizationUnitAppService :
         OrganizationUnitUpdateDto>
 {
     Task<ListResultDto<OrganizationUnitDto>> GetAllListAsync();
+
+    Task MoveAsync(Guid id, OrganizationUnitMoveDto input);
 }

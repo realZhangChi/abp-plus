@@ -19,6 +19,10 @@ export interface OrganizationUnitDto extends ExtensibleEntityDto<string> {
   concurrencyStamp?: string;
 }
 
+export interface OrganizationUnitMoveDto {
+  newParentId?: string;
+}
+
 export interface OrganizationUnitUpdateDto extends OrganizationUnitCreateOrUpdateDtoBase {
   concurrencyStamp?: string;
 }

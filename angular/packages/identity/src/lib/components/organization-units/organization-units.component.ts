@@ -10,6 +10,7 @@ import {
 import { eIdentityComponents } from '@abp-plus/ng.identity';
 import { finalize } from 'rxjs/operators';
 import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
+import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 
 @Component({
   selector: 'abp-organization-units',
@@ -94,6 +95,12 @@ export class OrganizationUnitsComponent implements OnInit {
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent, nodeKey: string): void {
     this.contextMenuOu = this.ous.items.filter(ou => ou.id === nodeKey)[0];
     this.nzContextMenuService.create($event, menu);
+  }
+
+  onNodeDrop(event: NzFormatEmitEvent): void {
+    this.service
+      .move(event.dragNode.key, { newParentId: event.node.key })
+      .subscribe(() => this.hookToQuery());
   }
 
   hookToQuery() {

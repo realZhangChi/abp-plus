@@ -1,4 +1,4 @@
-import type { GetOrganizationUnitInput, OrganizationUnitCreateDto, OrganizationUnitDto, OrganizationUnitUpdateDto } from './models';
+import type { GetOrganizationUnitInput, OrganizationUnitCreateDto, OrganizationUnitDto, OrganizationUnitMoveDto, OrganizationUnitUpdateDto } from './models';
 import { RestService } from '@abp/ng.core';
 import type { ListResultDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -48,6 +48,15 @@ export class OrganizationUnitService {
       method: 'GET',
       url: '/api/identity/organization-units',
       params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName });
+  
+
+  move = (id: string, input: OrganizationUnitMoveDto) =>
+    this.restService.request<any, void>({
+      method: 'PUT',
+      url: `/api/identity/organization-units/${id}/move`,
+      body: input,
     },
     { apiName: this.apiName });
   
