@@ -47,7 +47,11 @@
                 <abp-unit-members [organizationUnit]="this.selected"></abp-unit-members>
               </ng-template>
             </nz-tab>
-            <nz-tab [nzTitle]="'AbpIdentity::Roles' | abpLocalization"></nz-tab>
+            <nz-tab [nzTitle]="'AbpIdentity::Roles' | abpLocalization">
+              <ng-template nz-tab>
+                <abp-unit-roles [organizationUnit]="this.selected"></abp-unit-roles>
+              </ng-template>
+            </nz-tab>
           </nz-tabset>
         </nz-card-tab>
       </nz-card>

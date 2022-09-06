@@ -1,0 +1,18 @@
+<abp-page *ngIf="this.organizationUnit.id" [breadcrumb]="false">
+  <abp-page-title-container>
+    <h2 class="content-header-title">
+      {{ organizationUnit.displayName }}
+    </h2>
+  </abp-page-title-container>
+
+  <abp-page-toolbar-container>
+    <abp-page-toolbar [record]="roles.items"></abp-page-toolbar>
+  </abp-page-toolbar-container>
+  <abp-extensible-table
+    [data]="roles.items"
+    [recordsTotal]="roles.totalCount"
+    [list]="roleList"
+  ></abp-extensible-table>
+
+
+</abp-page>

@@ -1,6 +1,7 @@
 import {
   AddMemberDto,
   GetIdentityUsersInput,
+  IdentityRoleDto,
   IdentityUserService,
   OrganizationUnitDto,
   OrganizationUnitService,
@@ -20,17 +21,17 @@ import { debounceTime, finalize } from 'rxjs/operators';
 import { eIdentityComponents } from '../../../enums';
 
 @Component({
-  selector: 'abp-unit-members',
-  templateUrl: './unit-members.component.html',
+  selector: 'abp-unit-roles',
+  templateUrl: './unit-roles.component.html',
   providers: [
     ListService,
     {
       provide: EXTENSIONS_IDENTIFIER,
-      useValue: eIdentityComponents.UnitMembers,
+      useValue: eIdentityComponents.UnitRoles,
     },
   ],
 })
-export class UnitMembersComponent {
+export class UnitRolesComponent {
   @Input()
   get organizationUnit() {
     return this._organizationUnit;
@@ -42,20 +43,20 @@ export class UnitMembersComponent {
   _organizationUnit = {} as OrganizationUnitDto;
 
   private getMembers$ = new Subject<OrganizationUnitDto>();
-  members: PagedResultDto<IdentityUserDto> = {
+  roles: PagedResultDto<IdentityRoleDto> = {
     items: [],
     totalCount: 0,
-  } as PagedResultDto<IdentityUserDto>;
+  };
 
   modalVisible: boolean;
-  modalBusy:boolean;
+  modalBusy: boolean;
   identityUsers: PagedResultDto<IdentityUserDto> = { items: [], totalCount: 0 };
   userAllChecked = false;
   userCheckIndeterminate = false;
   setOfCheckedId = new Set<string>();
 
   constructor(
-    public readonly memberList: ListService<PagedResultRequestDto>,
+    public readonly roleList: ListService<PagedResultRequestDto>,
     public readonly userlist: ListService<GetIdentityUsersInput>,
     private subscription: SubscriptionService,
     private service: OrganizationUnitService,
@@ -84,17 +85,17 @@ export class UnitMembersComponent {
       .subscribe(result => {
         this.identityUsers = result;
         this.setOfCheckedId.clear();
-        this.members.items.forEach(u => this.updateCheckedSet(u.id, true));
+        this.roles.items.forEach(u => this.updateCheckedSet(u.id, true));
         this.refreshUserCheckedStatus();
       });
   }
 
   onUserQueryParamsChange(params: NzTableQueryParams): void {
-    if (this.memberList.page !== params.pageIndex - 1) {
-      this.memberList.page = params.pageIndex - 1;
+    if (this.roleList.page !== params.pageIndex - 1) {
+      this.roleList.page = params.pageIndex - 1;
     }
-    if (this.memberList.maxResultCount != params.pageSize) {
-      this.memberList.maxResultCount = params.pageSize;
+    if (this.roleList.maxResultCount != params.pageSize) {
+      this.roleList.maxResultCount = params.pageSize;
     }
   }
 
@@ -133,10 +134,10 @@ export class UnitMembersComponent {
     if (!organizationUnit?.id) {
       return;
     }
-    this.memberList
-      .hookToQuery(query => this.service.getMemberList(organizationUnit.id, query))
+    this.roleList
+      .hookToQuery(query => this.service.getRoleList(organizationUnit.id, query))
       .subscribe(result => {
-        this.members = result;
+        this.roles = result;
       });
   }
 }

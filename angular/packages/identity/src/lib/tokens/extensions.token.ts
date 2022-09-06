@@ -28,6 +28,8 @@ import {
 } from '../defaults/default-users-form-props';
 import { DEFAULT_USERS_TOOLBAR_ACTIONS } from '../defaults/default-users-toolbar-actions';
 import { eIdentityComponents } from '../enums/components';
+import { DEFAULT_UNIT_ROLES_ENTITY_PROPS } from '../defaults/default-unit-roles-entity-props';
+import { DEFAULT_UNIT_ROLES_TOOLBAR_ACTIONS } from '../defaults/default-unit-roles-toolbar-actions';
 
 export const DEFAULT_IDENTITY_ENTITY_ACTIONS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_ENTITY_ACTIONS,
@@ -38,12 +40,14 @@ export const DEFAULT_IDENTITY_TOOLBAR_ACTIONS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_TOOLBAR_ACTIONS,
   [eIdentityComponents.Users]: DEFAULT_USERS_TOOLBAR_ACTIONS,
   [eIdentityComponents.UnitMembers]: DEFAULT_UNIT_MEMEBERS_TOOLBAR_ACTIONS,
+  [eIdentityComponents.UnitRoles]: DEFAULT_UNIT_ROLES_TOOLBAR_ACTIONS,
 };
 
 export const DEFAULT_IDENTITY_ENTITY_PROPS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_ENTITY_PROPS,
   [eIdentityComponents.Users]: DEFAULT_USERS_ENTITY_PROPS,
   [eIdentityComponents.UnitMembers]: DEFAULT_UNIT_MEMEBERS_ENTITY_PROPS,
+  [eIdentityComponents.UnitRoles]: DEFAULT_UNIT_ROLES_ENTITY_PROPS,
 };
 
 export const DEFAULT_IDENTITY_CREATE_FORM_PROPS = {
