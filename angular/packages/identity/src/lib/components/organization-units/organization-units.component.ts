@@ -11,6 +11,7 @@ import {
   ListService,
   PagedResultDto,
   PagedResultRequestDto,
+  PermissionService,
 } from '@abp/ng.core';
 import { FormGroup } from '@angular/forms';
 import {
@@ -68,6 +69,7 @@ export class OrganizationUnitsComponent implements OnInit {
     protected injector: Injector,
     private nzContextMenuService: NzContextMenuService,
     private confirm: ConfirmationService,
+    private permissionService: PermissionService,
   ) {}
 
   ngOnInit(): void {
@@ -134,6 +136,10 @@ export class OrganizationUnitsComponent implements OnInit {
   }
 
   contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent, nodeKey: string): void {
+    if (!this.permissionService.getGrantedPolicy('AbpIdentity.OrganizationUnits.ManageOU')) {
+      return;
+    }
+
     this.contextMenuOu = this.ous.items.filter(ou => ou.id === nodeKey)[0];
     this.nzContextMenuService.create($event, menu);
   }

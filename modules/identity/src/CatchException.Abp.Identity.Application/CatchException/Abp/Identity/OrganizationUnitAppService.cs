@@ -44,7 +44,7 @@ public class OrganizationUnitAppService :
             ObjectMapper.Map<List<OrganizationUnit>, List<OrganizationUnitDto>>(ous));
     }
 
-    [Authorize(IdentityPermissions.OrganizationUnits.Update)]
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageOU)]
     public Task MoveAsync(Guid id, OrganizationUnitMoveDto input)
     {
         return Manager.MoveAsync(id, input.NewParentId);
@@ -61,6 +61,7 @@ public class OrganizationUnitAppService :
             ObjectMapper.Map<List<IdentityUser>, List<IdentityUserDto>>(members));
     }
 
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageUsers)]
     public async Task UpdateMemberAsync(Guid id, AddMemberDto input)
     {
         var ou = await OuRepository.GetAsync(id);
@@ -83,6 +84,7 @@ public class OrganizationUnitAppService :
         await CurrentUnitOfWork.SaveChangesAsync();
     }
 
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageUsers)]
     public async Task DeleteMemberAsync(Guid ouId, Guid userId)
     {
         await UserManager.RemoveFromOrganizationUnitAsync(userId, ouId);
@@ -90,6 +92,7 @@ public class OrganizationUnitAppService :
         await CurrentUnitOfWork.SaveChangesAsync();
     }
 
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageRoles)]
     public async Task UpdateRoleAsync(Guid id, AddRoleDto input)
     {
         var ou = await OuRepository.GetAsync(id);
@@ -112,6 +115,7 @@ public class OrganizationUnitAppService :
         await CurrentUnitOfWork.SaveChangesAsync();
     }
 
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageRoles)]
     public async Task DeleteRoleAsync(Guid ouId, Guid roleId)
     {
         await Manager.RemoveRoleFromOrganizationUnitAsync(roleId, ouId);
@@ -136,7 +140,7 @@ public class OrganizationUnitAppService :
             ObjectMapper.Map<List<IdentityRole>, List<IdentityRoleDto>>(roles));
     }
 
-    [Authorize(IdentityPermissions.OrganizationUnits.Create)]
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageOU)]
     public override async Task<OrganizationUnitDto> CreateAsync(OrganizationUnitCreateDto input)
     {
         var ou = new OrganizationUnit(GuidGenerator.Create(), input.DisplayName, input.ParentId);
@@ -145,6 +149,7 @@ public class OrganizationUnitAppService :
         return ObjectMapper.Map<OrganizationUnit, OrganizationUnitDto>(ou);
     }
 
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageOU)]
     public override async Task<OrganizationUnitDto> UpdateAsync(Guid id, OrganizationUnitUpdateDto input)
     {
         var ou = await Repository.GetAsync(id);
@@ -159,6 +164,7 @@ public class OrganizationUnitAppService :
         return ObjectMapper.Map<OrganizationUnit, OrganizationUnitDto>(ou);
     }
 
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageOU)]
     public override async Task DeleteAsync(Guid id)
     {
         await Manager.DeleteAsync(id);

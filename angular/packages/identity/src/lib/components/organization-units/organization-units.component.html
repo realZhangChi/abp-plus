@@ -19,18 +19,27 @@
             <span>{{ node.title }}</span>
           </div>
         </ng-template>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
+        <nz-dropdown-menu
+          #menu="nzDropdownMenu"
+        >
           <ul nz-menu>
             <li nz-menu-item (click)="edit()">{{ 'AbpIdentity::Edit' | abpLocalization }}</li>
             <li nz-menu-item (click)="addSubUnit()">
               {{ 'AbpIdentity::AddSubUnit' | abpLocalization }}
             </li>
-            <li nz-menu-item (click)="delete()">{{ 'AbpIdentity::Delete' | abpLocalization }}</li>
+            <li nz-menu-item (click)="delete()">
+              {{ 'AbpIdentity::Delete' | abpLocalization }}
+            </li>
           </ul>
         </nz-dropdown-menu>
       </nz-card>
       <ng-template #extraTemplate>
-        <button nz-button nzType="primary" (click)="addRootUnit()">
+        <button
+          nz-button
+          nzType="primary"
+          (click)="addRootUnit()"
+          *abpPermission="'AbpIdentity.OrganizationUnits.ManageOU'"
+        >
           {{ 'AbpIdentity::AddRootUnit' | abpLocalization }}
         </button>
       </ng-template>

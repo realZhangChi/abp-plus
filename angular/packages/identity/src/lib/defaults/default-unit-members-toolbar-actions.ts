@@ -9,7 +9,7 @@ export const DEFAULT_UNIT_MEMEBERS_TOOLBAR_ACTIONS = ToolbarAction.createMany<Id
       const component = data.getInjected(UnitMembersComponent);
       component.editMembers();
     },
-    permission: 'AbpIdentity.Roles.Create',
+    permission: 'AbpIdentity.OrganizationUnits.ManageUsers',
     icon: 'plus',
     btnClass: 'primary',
   },

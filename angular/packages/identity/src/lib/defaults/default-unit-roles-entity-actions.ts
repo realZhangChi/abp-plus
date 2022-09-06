@@ -9,7 +9,7 @@ export const DEFAULT_UNIT_ROLES_ENTITY_ACTIONS = EntityAction.createMany<Identit
       const component = data.getInjected(UnitRolesComponent);
       component.deleteRole(data.record);
     },
-    permission: 'AbpIdentity.Roles.Delete',
+    permission: 'AbpIdentity.OrganizationUnits.ManageRoles',
     icon: 'delete',
   },
 ]);

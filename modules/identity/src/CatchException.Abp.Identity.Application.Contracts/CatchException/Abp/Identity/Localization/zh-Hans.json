@@ -5,6 +5,7 @@
     "AddRole": "添加角色",
     "AddRootUnit": "添加根机构",
     "AddSubUnit": "添加子机构",
+    "DisplayName": "显示名称",
     "Members": "成员",
     "OrganizationTree": "组织机构树",
     "OrganizationUnit": "组织单位",
@@ -16,6 +17,9 @@
     "OrganizationUnits": "组织机构",
     "OrganizationUnits{0}": "组织机构({0})",
     "Permission:OrganizationUnitManagement": "组织机构管理",
+    "Permission:ManageOU": "管理组织机构树",
+    "Permission:ManageRoles": "角色",
+    "Permission:ManageUsers": "管理用户",
     "RemoveRoleFromOuWarningMessage": "你确定要从组织机构{1}中删除角色{0}吗?",
     "RemoveUserFromOuWarningMessage": "你确定要从组织机构{1}中删除用户{0}吗?"
   }

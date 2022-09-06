@@ -9,7 +9,7 @@ export const DEFAULT_UNIT_ROLES_TOOLBAR_ACTIONS = ToolbarAction.createMany<Ident
       const component = data.getInjected(UnitRolesComponent);
       component.editRoles();
     },
-    permission: 'AbpIdentity.Roles.Create',
+    permission: 'AbpIdentity.OrganizationUnits.ManageRoles',
     icon: 'plus',
     btnClass: 'primary',
   },

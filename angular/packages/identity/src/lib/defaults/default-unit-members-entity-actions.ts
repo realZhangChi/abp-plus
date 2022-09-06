@@ -9,7 +9,7 @@ export const DEFAULT_UNIT_MEMEBERS_ENTITY_ACTIONS = EntityAction.createMany<Iden
       const component = data.getInjected(UnitMembersComponent);
       component.deleteMember(data.record);
     },
-    permission: 'AbpIdentity.Users.Delete',
+    permission: 'AbpIdentity.OrganizationUnits.ManageUsers',
     icon: 'delete',
   },
 ]);
