@@ -1,0 +1,26 @@
+<abp-modal [(visible)]="visible">
+  <ng-template #abpHeader>
+    <h3>{{ 'AbpIdentity::AddMember' | abpLocalization }}</h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <div id="data-tables-table-filter" class="data-tables-filter">
+      <div class="input-group">
+        <input
+          nz-input
+          type="search"
+          [placeholder]="'AbpUi::PagerSearch' | abpLocalization"
+          [(ngModel)]="list.filter"
+        />
+      </div>
+      <abp-extensible-table
+        [data]="data.items"
+        [recordsTotal]="data.totalCount"
+        [list]="list"
+      ></abp-extensible-table>
+      <ng-template #action>
+        
+      </ng-template>
+    </div>
+  </ng-template>
+</abp-modal>

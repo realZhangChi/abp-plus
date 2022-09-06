@@ -43,11 +43,9 @@
         <nz-card-tab>
           <nz-tabset nzSize="large">
             <nz-tab [nzTitle]="'AbpIdentity::Members' | abpLocalization">
-              <abp-extensible-table
-                [data]="members.items"
-                [recordsTotal]="members.totalCount"
-                [list]="memberList"
-              ></abp-extensible-table>
+              <ng-template nz-tab>
+                <abp-unit-members [organizationUnit]="this.selected"></abp-unit-members>
+              </ng-template>
             </nz-tab>
             <nz-tab [nzTitle]="'AbpIdentity::Roles' | abpLocalization"></nz-tab>
           </nz-tabset>

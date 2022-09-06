@@ -7,7 +7,10 @@ import {
   ToolbarActionContributorCallback,
 } from '@abp-plus/ng.theme.shared/extensions';
 import { InjectionToken } from '@angular/core';
-import { DEFAULT_ORGANIZATION_UNITS_CREATE_FORM_PROPS, DEFAULT_ORGANIZATION_UNITS_EDIT_FORM_PROPS } from '../defaults/default-ous-form-props';
+import {
+  DEFAULT_ORGANIZATION_UNITS_CREATE_FORM_PROPS,
+  DEFAULT_ORGANIZATION_UNITS_EDIT_FORM_PROPS,
+} from '../defaults/default-ous-form-props';
 import { DEFAULT_ROLES_ENTITY_ACTIONS } from '../defaults/default-roles-entity-actions';
 import { DEFAULT_ROLES_ENTITY_PROPS } from '../defaults/default-roles-entity-props';
 import {
@@ -15,6 +18,8 @@ import {
   DEFAULT_ROLES_EDIT_FORM_PROPS,
 } from '../defaults/default-roles-form-props';
 import { DEFAULT_ROLES_TOOLBAR_ACTIONS } from '../defaults/default-roles-toolbar-actions';
+import { DEFAULT_UNIT_MEMEBERS_TOOLBAR_ACTIONS } from '../defaults/default-unit-members-toolbar-actions';
+import { DEFAULT_UNIT_MEMEBERS_ENTITY_PROPS } from '../defaults/default-unit-members-entity-props';
 import { DEFAULT_USERS_ENTITY_ACTIONS } from '../defaults/default-users-entity-actions';
 import { DEFAULT_USERS_ENTITY_PROPS } from '../defaults/default-users-entity-props';
 import {
@@ -23,6 +28,7 @@ import {
 } from '../defaults/default-users-form-props';
 import { DEFAULT_USERS_TOOLBAR_ACTIONS } from '../defaults/default-users-toolbar-actions';
 import { eIdentityComponents } from '../enums/components';
+import { DEFAULT_ADD_UNIT_MEMEBER_ENTITY_PROPS } from '../defaults/default-add-unit-member-entity-props';
 
 export const DEFAULT_IDENTITY_ENTITY_ACTIONS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_ENTITY_ACTIONS,
@@ -32,11 +38,14 @@ export const DEFAULT_IDENTITY_ENTITY_ACTIONS = {
 export const DEFAULT_IDENTITY_TOOLBAR_ACTIONS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_TOOLBAR_ACTIONS,
   [eIdentityComponents.Users]: DEFAULT_USERS_TOOLBAR_ACTIONS,
+  [eIdentityComponents.UnitMembers]: DEFAULT_UNIT_MEMEBERS_TOOLBAR_ACTIONS,
 };
 
 export const DEFAULT_IDENTITY_ENTITY_PROPS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_ENTITY_PROPS,
   [eIdentityComponents.Users]: DEFAULT_USERS_ENTITY_PROPS,
+  [eIdentityComponents.UnitMembers]: DEFAULT_UNIT_MEMEBERS_ENTITY_PROPS,
+  [eIdentityComponents.AddUnitMember]: DEFAULT_ADD_UNIT_MEMEBER_ENTITY_PROPS,
 };
 
 export const DEFAULT_IDENTITY_CREATE_FORM_PROPS = {
@@ -49,7 +58,6 @@ export const DEFAULT_IDENTITY_EDIT_FORM_PROPS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_EDIT_FORM_PROPS,
   [eIdentityComponents.Users]: DEFAULT_USERS_EDIT_FORM_PROPS,
   [eIdentityComponents.OrganizationUnits]: DEFAULT_ORGANIZATION_UNITS_EDIT_FORM_PROPS,
-
 };
 
 export const IDENTITY_ENTITY_ACTION_CONTRIBUTORS = new InjectionToken<EntityActionContributors>(

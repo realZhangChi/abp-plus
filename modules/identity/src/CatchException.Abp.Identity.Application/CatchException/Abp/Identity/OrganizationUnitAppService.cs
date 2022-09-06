@@ -28,6 +28,12 @@ public class OrganizationUnitAppService :
     protected virtual IRepository<IdentityRole, Guid> IdentityRoleRepository =>
         LazyServiceProvider.LazyGetRequiredService<IRepository<IdentityRole, Guid>>();
 
+    protected virtual IOrganizationUnitRepository OuRepository =>
+        LazyServiceProvider.LazyGetRequiredService<IOrganizationUnitRepository>();
+
+    protected virtual IdentityUserManager UserManager =>
+        LazyServiceProvider.LazyGetRequiredService<IdentityUserManager>();
+
     public OrganizationUnitAppService(IRepository<OrganizationUnit, Guid> repository) : base(repository)
     {
     }
@@ -47,12 +53,23 @@ public class OrganizationUnitAppService :
 
     public async Task<PagedResultDto<IdentityUserDto>> GetMemberListAsync(Guid id, PagedResultRequestDto input)
     {
-        var count = await IdentityUserRepository.GetCountAsync(organizationUnitId: id);
-        var members = await IdentityUserRepository
-            .GetListAsync(skipCount: input.SkipCount, maxResultCount: input.MaxResultCount, organizationUnitId: id);
+        var ou = await OuRepository.GetAsync(id);
+        var count = await OuRepository.GetMembersCountAsync(ou);
+        var members =
+            await OuRepository.GetMembersAsync(ou, maxResultCount: input.MaxResultCount, skipCount: input.SkipCount);
 
         return new PagedResultDto<IdentityUserDto>(count,
             ObjectMapper.Map<List<IdentityUser>, List<IdentityUserDto>>(members));
+    }
+
+    public async Task AddMemberAsync(Guid ouId, AddMemberDto input)
+    {
+        foreach (var userId in input.UserIds)
+        {
+            await UserManager.AddToOrganizationUnitAsync(userId, ouId);
+        }
+
+        await CurrentUnitOfWork.SaveChangesAsync();
     }
 
     public async Task<PagedResultDto<IdentityRoleDto>> GetRoleListAsync(Guid id, PagedResultRequestDto input)

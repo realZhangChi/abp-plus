@@ -19,4 +19,6 @@ public interface IOrganizationUnitAppService :
     Task<PagedResultDto<IdentityUserDto>> GetMemberListAsync(Guid id, PagedResultRequestDto input);
 
     Task<PagedResultDto<IdentityRoleDto>> GetRoleListAsync(Guid id, PagedResultRequestDto input);
+
+    Task AddMemberAsync(Guid ouId, AddMemberDto input);
 }

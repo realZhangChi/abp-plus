@@ -76,4 +76,10 @@ public class OrganizationUnitController : AbpControllerBase, IOrganizationUnitAp
     {
         return OrganizationUnitAppService.GetRoleListAsync(id, input);
     }
+
+    [HttpPut("{ouId}/members")]
+    public Task AddMemberAsync(Guid ouId, AddMemberDto input)
+    {
+        return OrganizationUnitAppService.AddMemberAsync(ouId, input);
+    }
 }

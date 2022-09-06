@@ -129,15 +129,7 @@ export class OrganizationUnitsComponent implements OnInit {
   }
 
   onNodeClick(event: NzFormatEmitEvent): void {
-    this.getMembers(event.node.key);
-  }
-
-  private getMembers(ouId: string) {
-    this.memberList
-      .hookToQuery(query => this.service.getMemberList(ouId, { ...query }))
-      .subscribe(members => {
-        this.members = members;
-      });
+    this.selected = this.ous.items.filter(ou => ou.id === event.node.key)[0];
   }
 
   hookToQuery() {
