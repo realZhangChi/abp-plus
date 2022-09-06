@@ -4,6 +4,10 @@ export interface AddMemberDto {
   userIds: string[];
 }
 
+export interface AddRoleDto {
+  roleIds: string[];
+}
+
 export interface GetOrganizationUnitInput extends PagedAndSortedResultRequestDto {
   filter?: string;
 }

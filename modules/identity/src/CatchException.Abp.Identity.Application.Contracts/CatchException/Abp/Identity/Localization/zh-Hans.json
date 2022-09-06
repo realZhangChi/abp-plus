@@ -15,6 +15,8 @@
     "OrganizationUnitMoveConfirmMessage": "你确定要在“ {1}”下移动“ {0}”吗？",
     "OrganizationUnits": "组织机构",
     "OrganizationUnits{0}": "组织机构({0})",
-    "Permission:OrganizationUnitManagement": "组织机构管理"
+    "Permission:OrganizationUnitManagement": "组织机构管理",
+    "RemoveRoleFromOuWarningMessage": "你确定要从组织机构{1}中删除角色{0}吗?",
+    "RemoveUserFromOuWarningMessage": "你确定要从组织机构{1}中删除用户{0}吗?"
   }
 }

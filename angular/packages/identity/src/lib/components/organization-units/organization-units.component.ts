@@ -22,6 +22,7 @@ import { eIdentityComponents } from '@abp-plus/ng.identity';
 import { finalize } from 'rxjs/operators';
 import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
 import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
+import { Confirmation, ConfirmationService } from '@abp-plus/ng.theme.shared';
 
 @Component({
   selector: 'abp-organization-units',
@@ -66,6 +67,7 @@ export class OrganizationUnitsComponent implements OnInit {
     protected service: OrganizationUnitService,
     protected injector: Injector,
     private nzContextMenuService: NzContextMenuService,
+    private confirm: ConfirmationService,
   ) {}
 
   ngOnInit(): void {
@@ -83,6 +85,20 @@ export class OrganizationUnitsComponent implements OnInit {
   private openModal() {
     this.buildForm();
     this.isModalVisible = true;
+  }
+
+  delete() {
+    this.confirm
+      .warn('AbpIdentity::OrganizationUnitDeletionConfirmationMessage', 'AbpIdentity::AreYouSure', {
+        messageLocalizationParams: [this.contextMenuOu.displayName],
+      })
+      .subscribe((status: Confirmation.Status) => {
+        if (status === Confirmation.Status.confirm) {
+          this.service.delete(this.contextMenuOu.id).subscribe(() => {
+            this.hookToQuery();
+          });
+        }
+      });
   }
 
   addSubUnit() {

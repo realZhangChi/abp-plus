@@ -30,10 +30,14 @@ import { DEFAULT_USERS_TOOLBAR_ACTIONS } from '../defaults/default-users-toolbar
 import { eIdentityComponents } from '../enums/components';
 import { DEFAULT_UNIT_ROLES_ENTITY_PROPS } from '../defaults/default-unit-roles-entity-props';
 import { DEFAULT_UNIT_ROLES_TOOLBAR_ACTIONS } from '../defaults/default-unit-roles-toolbar-actions';
+import { DEFAULT_UNIT_MEMEBERS_ENTITY_ACTIONS } from '../defaults/default-unit-members-entity-actions';
+import { DEFAULT_UNIT_ROLES_ENTITY_ACTIONS } from '../defaults/default-unit-roles-entity-actions';
 
 export const DEFAULT_IDENTITY_ENTITY_ACTIONS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_ENTITY_ACTIONS,
   [eIdentityComponents.Users]: DEFAULT_USERS_ENTITY_ACTIONS,
+  [eIdentityComponents.UnitMembers]: DEFAULT_UNIT_MEMEBERS_ENTITY_ACTIONS,
+  [eIdentityComponents.UnitRoles]: DEFAULT_UNIT_ROLES_ENTITY_ACTIONS
 };
 
 export const DEFAULT_IDENTITY_TOOLBAR_ACTIONS = {

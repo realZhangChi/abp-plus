@@ -7,7 +7,7 @@ export const DEFAULT_UNIT_ROLES_TOOLBAR_ACTIONS = ToolbarAction.createMany<Ident
     text: 'AbpIdentity::AddRole',
     action: data => {
       const component = data.getInjected(UnitRolesComponent);
-      component.editMembers();
+      component.editRoles();
     },
     permission: 'AbpIdentity.Roles.Create',
     icon: 'plus',

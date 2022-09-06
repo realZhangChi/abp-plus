@@ -25,7 +25,7 @@
             <li nz-menu-item (click)="addSubUnit()">
               {{ 'AbpIdentity::AddSubUnit' | abpLocalization }}
             </li>
-            <li nz-menu-item>{{ 'AbpIdentity::Delete' | abpLocalization }}</li>
+            <li nz-menu-item (click)="delete()">{{ 'AbpIdentity::Delete' | abpLocalization }}</li>
           </ul>
         </nz-dropdown-menu>
       </nz-card>

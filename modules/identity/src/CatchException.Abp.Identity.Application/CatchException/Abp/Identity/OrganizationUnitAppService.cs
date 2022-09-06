@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Data;
@@ -62,7 +61,7 @@ public class OrganizationUnitAppService :
             ObjectMapper.Map<List<IdentityUser>, List<IdentityUserDto>>(members));
     }
 
-    public async Task AddMemberAsync(Guid id, AddMemberDto input)
+    public async Task UpdateMemberAsync(Guid id, AddMemberDto input)
     {
         var ou = await OuRepository.GetAsync(id);
         var members =
@@ -80,6 +79,42 @@ public class OrganizationUnitAppService :
         {
             await UserManager.AddToOrganizationUnitAsync(userId, id);
         }
+
+        await CurrentUnitOfWork.SaveChangesAsync();
+    }
+
+    public async Task DeleteMemberAsync(Guid ouId, Guid userId)
+    {
+        await UserManager.RemoveFromOrganizationUnitAsync(userId, ouId);
+
+        await CurrentUnitOfWork.SaveChangesAsync();
+    }
+
+    public async Task UpdateRoleAsync(Guid id, AddRoleDto input)
+    {
+        var ou = await OuRepository.GetAsync(id);
+        var roles =
+            await OuRepository.GetRolesAsync(ou);
+
+        var rolesToBeRemoved = roles
+            .Where(m => !input.RoleIds.Contains(m.Id))
+            .ToList();
+        foreach (var roleToBeRemoved in rolesToBeRemoved)
+        {
+            await Manager.RemoveRoleFromOrganizationUnitAsync(roleToBeRemoved, ou);
+        }
+
+        foreach (var roleId in input.RoleIds)
+        {
+            await Manager.AddRoleToOrganizationUnitAsync(roleId, id);
+        }
+
+        await CurrentUnitOfWork.SaveChangesAsync();
+    }
+
+    public async Task DeleteRoleAsync(Guid ouId, Guid roleId)
+    {
+        await Manager.RemoveRoleFromOrganizationUnitAsync(roleId, ouId);
 
         await CurrentUnitOfWork.SaveChangesAsync();
     }
@@ -122,5 +157,12 @@ public class OrganizationUnitAppService :
         await CurrentUnitOfWork.SaveChangesAsync();
 
         return ObjectMapper.Map<OrganizationUnit, OrganizationUnitDto>(ou);
+    }
+
+    public override async Task DeleteAsync(Guid id)
+    {
+        await Manager.DeleteAsync(id);
+
+        await CurrentUnitOfWork.SaveChangesAsync();
     }
 }

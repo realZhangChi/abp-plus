@@ -30,11 +30,8 @@
 ></ng-container>
 
 <ng-template #buttonContentTmp let-action>
-  <i nz-icon [nzType]="action.icon" [class.me-1]="action.icon"></i>
-  <span *ngIf="action.icon; else ellipsis">{{ action.text | abpLocalization }}</span>
-  <ng-template #ellipsis>
-    <div abpEllipsis>{{ action.text | abpLocalization }}</div>
-  </ng-template>
+  <i *ngIf="action.icon" nz-icon [nzType]="action.icon" [class.me-1]="action.icon"></i>
+  <span>{{ action.text | abpLocalization }}</span>
 </ng-template>
 
 <ng-template #btnTmp let-action>
