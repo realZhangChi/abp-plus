@@ -20,16 +20,9 @@ import {
 } from './tokens/extensions.token';
 import { OrganizationUnitsComponent } from './components/organization-units/organization-units.component';
 import { UnitMembersComponent } from './components/organization-units/members/unit-members.component';
-import { AddUnitMemberModalComponent } from './components/organization-units/members/add-member/add-unit-member-modal.component';
 
 @NgModule({
-  declarations: [
-    RolesComponent,
-    UsersComponent,
-    OrganizationUnitsComponent,
-    UnitMembersComponent,
-    AddUnitMemberModalComponent,
-  ],
+  declarations: [RolesComponent, UsersComponent, OrganizationUnitsComponent, UnitMembersComponent],
   exports: [RolesComponent, UsersComponent, OrganizationUnitsComponent],
   imports: [
     CoreModule,

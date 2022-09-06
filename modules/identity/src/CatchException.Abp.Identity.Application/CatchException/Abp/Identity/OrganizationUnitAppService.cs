@@ -62,11 +62,23 @@ public class OrganizationUnitAppService :
             ObjectMapper.Map<List<IdentityUser>, List<IdentityUserDto>>(members));
     }
 
-    public async Task AddMemberAsync(Guid ouId, AddMemberDto input)
+    public async Task AddMemberAsync(Guid id, AddMemberDto input)
     {
+        var ou = await OuRepository.GetAsync(id);
+        var members =
+            await OuRepository.GetMembersAsync(ou);
+
+        var membersToBeRemoved = members
+            .Where(m => !input.UserIds.Contains(m.Id))
+            .ToList();
+        foreach (var memberToBeRemoved in membersToBeRemoved)
+        {
+            await UserManager.RemoveFromOrganizationUnitAsync(memberToBeRemoved, ou);
+        }
+
         foreach (var userId in input.UserIds)
         {
-            await UserManager.AddToOrganizationUnitAsync(userId, ouId);
+            await UserManager.AddToOrganizationUnitAsync(userId, id);
         }
 
         await CurrentUnitOfWork.SaveChangesAsync();

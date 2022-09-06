@@ -1,5 +1,9 @@
 import type { ExtensibleEntityDto, ExtensibleObject, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 
+export interface AddMemberDto {
+  userIds: string[];
+}
+
 export interface GetOrganizationUnitInput extends PagedAndSortedResultRequestDto {
   filter?: string;
 }

@@ -1,4 +1,4 @@
-<abp-page [breadcrumb]="false">
+<abp-page *ngIf="this.organizationUnit.id" [breadcrumb]="false">
   <abp-page-title-container>
     <h2 class="content-header-title">
       {{ organizationUnit.displayName }}
@@ -6,80 +6,80 @@
   </abp-page-title-container>
 
   <abp-page-toolbar-container>
-    <abp-page-toolbar *ngIf="this.organizationUnit.id" [record]="members.items"></abp-page-toolbar>
+    <abp-page-toolbar [record]="members.items"></abp-page-toolbar>
   </abp-page-toolbar-container>
   <abp-extensible-table
     [data]="members.items"
     [recordsTotal]="members.totalCount"
     [list]="memberList"
   ></abp-extensible-table>
-</abp-page>
 
-<abp-modal [(visible)]="addMemberModalVisible">
-  <ng-template #abpHeader>
-    <h3>{{ 'AbpIdentity::AddMember' | abpLocalization }}</h3>
-  </ng-template>
+  <abp-modal [(visible)]="modalVisible" [(busy)]="modalBusy">
+    <ng-template #abpHeader>
+      <h3>{{ 'AbpIdentity::AddMember' | abpLocalization }}</h3>
+    </ng-template>
 
-  <ng-template #abpBody>
-    <div id="data-tables-table-filter" class="data-tables-filter">
-      <div class="input-group">
-        <input
-          nz-input
-          type="search"
-          [placeholder]="'AbpUi::PagerSearch' | abpLocalization"
-          [(ngModel)]="userlist.filter"
-        />
+    <ng-template #abpBody>
+      <div id="data-tables-table-filter" class="data-tables-filter">
+        <div class="input-group">
+          <input
+            nz-input
+            type="search"
+            [placeholder]="'AbpUi::PagerSearch' | abpLocalization"
+            [(ngModel)]="userlist.filter"
+          />
+        </div>
       </div>
-    </div>
 
-    <nz-table
-      #table
-      nzBordered
-      nzShowSizeChanger
-      [nzData]="identityUsers.items"
-      [nzFrontPagination]="false"
-      [nzLoading]="userlist.isLoading$ | async"
-      [nzTotal]="identityUsers.totalCount"
-      [nzPageSize]="userlist.maxResultCount"
-      [nzPageIndex]="userlist.page + 1"
-      (nzQueryParams)="onUserQueryParamsChange($event)"
-    >
-      <thead>
-        <tr>
-          <th
-            [nzChecked]="userAllChecked"
-            [nzIndeterminate]="userCheckIndeterminate"
-            (nzCheckedChange)="onAllUserChecked($event)"
-          ></th>
-          <th>{{ 'AbpIdentity::UserName' | abpLocalization }}</th>
-          <th>{{ 'AbpIdentity::EmailAddress' | abpLocalization }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of table.data">
-          <td
-            [nzChecked]="setOfCheckedId.has(data.id)"
-            (nzCheckedChange)="onUserChecked(data.id, $event)"
-          ></td>
-          <td>{{ data.userName }}</td>
-          <td>{{ data.email }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </ng-template>
-
-  <ng-template #abpFooter>
-    <nz-space>
-      <button *nzSpaceItem nz-button type="button" abpClose>
-        {{ 'AbpIdentity::Cancel' | abpLocalization }}
-      </button>
-      <abp-button
-        *nzSpaceItem
-        iconClass="check"
-        [disabled]="form?.invalid"
-        (click)="saveMembers()"
-        >{{ 'AbpIdentity::Save' | abpLocalization }}</abp-button
+      <nz-table
+        #table
+        nzBordered
+        nzShowSizeChanger
+        [nzData]="identityUsers.items"
+        [nzFrontPagination]="false"
+        [nzLoading]="userlist.isLoading$ | async"
+        [nzTotal]="identityUsers.totalCount"
+        [nzPageSize]="userlist.maxResultCount"
+        [nzPageIndex]="userlist.page + 1"
+        (nzQueryParams)="onUserQueryParamsChange($event)"
       >
-    </nz-space>
-  </ng-template>
-</abp-modal>
+        <thead>
+          <tr>
+            <th
+              [nzChecked]="userAllChecked"
+              [nzIndeterminate]="userCheckIndeterminate"
+              (nzCheckedChange)="onAllUserChecked($event)"
+            ></th>
+            <th>{{ 'AbpIdentity::UserName' | abpLocalization }}</th>
+            <th>{{ 'AbpIdentity::EmailAddress' | abpLocalization }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of table.data">
+            <td
+              [nzChecked]="setOfCheckedId.has(data.id)"
+              (nzCheckedChange)="onUserChecked(data.id, $event)"
+            ></td>
+            <td>{{ data.userName }}</td>
+            <td>{{ data.email }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </ng-template>
+
+    <ng-template #abpFooter>
+      <nz-space>
+        <button *nzSpaceItem nz-button type="button" abpClose>
+          {{ 'AbpIdentity::Cancel' | abpLocalization }}
+        </button>
+        <abp-button
+          *nzSpaceItem
+          iconClass="check"
+          [disabled]="form?.invalid"
+          (click)="saveMembers()"
+          >{{ 'AbpIdentity::Save' | abpLocalization }}</abp-button
+        >
+      </nz-space>
+    </ng-template>
+  </abp-modal>
+</abp-page>

@@ -1,4 +1,5 @@
 import {
+  AddMemberDto,
   GetIdentityUsersInput,
   IdentityUserService,
   OrganizationUnitDto,
@@ -15,7 +16,7 @@ import {
 import { Component, Input } from '@angular/core';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
 import { eIdentityComponents } from '../../../enums';
 
 @Component({
@@ -46,7 +47,8 @@ export class UnitMembersComponent {
     totalCount: 0,
   } as PagedResultDto<IdentityUserDto>;
 
-  addMemberModalVisible: boolean;
+  modalVisible: boolean;
+  modalBusy:boolean;
   identityUsers: PagedResultDto<IdentityUserDto> = { items: [], totalCount: 0 };
   userAllChecked = false;
   userCheckIndeterminate = false;
@@ -63,15 +65,27 @@ export class UnitMembersComponent {
   }
 
   saveMembers() {
-    this.addMemberModalVisible = false;
+    this.modalBusy = true;
+    this.service
+      .updateMembers(this.organizationUnit.id, {
+        userIds: Array.from(this.setOfCheckedId),
+      } as AddMemberDto)
+      .pipe(finalize(() => (this.modalBusy = false)))
+      .subscribe(() => {
+        this.modalVisible = false;
+        this.getMembers$.next(this.organizationUnit);
+      });
   }
 
-  addMember() {
-    this.addMemberModalVisible = true;
+  editMembers() {
+    this.modalVisible = true;
     this.userlist
       .hookToQuery(query => this.userService.getList(query))
       .subscribe(result => {
         this.identityUsers = result;
+        this.setOfCheckedId.clear();
+        this.members.items.forEach(u => this.updateCheckedSet(u.id, true));
+        this.refreshUserCheckedStatus();
       });
   }
 
@@ -110,9 +124,8 @@ export class UnitMembersComponent {
   }
 
   private initGetMembersStream() {
-    this.subscription.addOne(
-      this.getMembers$.pipe(debounceTime(0), distinctUntilChanged()),
-      value => this.hookToQuery(value),
+    this.subscription.addOne(this.getMembers$.pipe(debounceTime(0)), value =>
+      this.hookToQuery(value),
     );
   }
 
@@ -124,9 +137,6 @@ export class UnitMembersComponent {
       .hookToQuery(query => this.service.getMemberList(organizationUnit.id, query))
       .subscribe(result => {
         this.members = result;
-        this.setOfCheckedId.clear();
-        this.members.items.forEach(u => this.updateCheckedSet(u.id, true));
-        this.refreshUserCheckedStatus();
       });
   }
 }

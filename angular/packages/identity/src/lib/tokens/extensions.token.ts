@@ -28,7 +28,6 @@ import {
 } from '../defaults/default-users-form-props';
 import { DEFAULT_USERS_TOOLBAR_ACTIONS } from '../defaults/default-users-toolbar-actions';
 import { eIdentityComponents } from '../enums/components';
-import { DEFAULT_ADD_UNIT_MEMEBER_ENTITY_PROPS } from '../defaults/default-add-unit-member-entity-props';
 
 export const DEFAULT_IDENTITY_ENTITY_ACTIONS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_ENTITY_ACTIONS,
@@ -45,7 +44,6 @@ export const DEFAULT_IDENTITY_ENTITY_PROPS = {
   [eIdentityComponents.Roles]: DEFAULT_ROLES_ENTITY_PROPS,
   [eIdentityComponents.Users]: DEFAULT_USERS_ENTITY_PROPS,
   [eIdentityComponents.UnitMembers]: DEFAULT_UNIT_MEMEBERS_ENTITY_PROPS,
-  [eIdentityComponents.AddUnitMember]: DEFAULT_ADD_UNIT_MEMEBER_ENTITY_PROPS,
 };
 
 export const DEFAULT_IDENTITY_CREATE_FORM_PROPS = {
