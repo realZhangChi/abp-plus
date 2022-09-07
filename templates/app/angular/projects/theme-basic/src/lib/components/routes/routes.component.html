@@ -11,6 +11,7 @@
           nz-submenu
           [nzTitle]="route.name | abpLocalization"
           *abpPermission="route.requiredPolicy"
+          [nzIcon]="route.iconClass"
         >
           <ul>
             <!-- 二级 -->
@@ -20,6 +21,7 @@
                   nz-submenu
                   [nzTitle]="child.name | abpLocalization"
                   *abpPermission="child.requiredPolicy"
+                  [nzIcon]="child.iconClass"
                 >
                   <ul>
                     <!-- 三级 -->
@@ -29,6 +31,7 @@
                           nz-submenu
                           [nzTitle]="secondChild.name | abpLocalization"
                           *abpPermission="secondChild.requiredPolicy"
+                          [nzIcon]="secondChild.iconClass"
                         >
                           <ul>
                             <!-- 四级 -->
@@ -38,17 +41,23 @@
                                   nz-submenu
                                   [nzTitle]="thirdChild.name | abpLocalization"
                                   *abpPermission="thirdChild.requiredPolicy"
+                                  [nzIcon]="thirdChild.iconClass"
                                 >
                                   <ul>
                                     <!-- 五级 -->
                                     <ng-container *ngFor="let fourthChild of thirdChild.children">
-                                      <ng-container *ngIf="isDropdown(thirdChild)"></ng-container>
+                                      <ng-container
+                                        *ngIf="isDropdown(thirdChild)"
+                                        [nzIcon]="thirdChild.iconClass"
+                                      ></ng-container>
                                       <ng-container *ngIf="!isDropdown(fourthChild)">
                                         <li
                                           nz-menu-item
                                           nzMatchRouter
                                           *abpPermission="fourthChild.requiredPolicy"
+                                          [nzIcon]="route.iconClass"
                                         >
+                                          <i nz-icon [nzType]="fourthChild.iconClass"></i>
                                           <a [routerLink]="[fourthChild.path]">{{
                                             route.name | abpLocalization
                                           }}</a>
@@ -64,7 +73,9 @@
                                   nz-menu-item
                                   nzMatchRouter
                                   *abpPermission="thirdChild.requiredPolicy"
+                                  [nzIcon]="route.iconClass"
                                 >
+                                  <i nz-icon [nzType]="thirdChild.iconClass"></i>
                                   <a [routerLink]="[thirdChild.path]">{{
                                     route.name | abpLocalization
                                   }}</a>
@@ -76,7 +87,13 @@
                       </ng-container>
 
                       <ng-container *ngIf="!isDropdown(secondChild)">
-                        <li nz-menu-item nzMatchRouter *abpPermission="secondChild.requiredPolicy">
+                        <li
+                          class="menu-leaf"
+                          nz-menu-item
+                          nzMatchRouter
+                          *abpPermission="secondChild.requiredPolicy"
+                        >
+                          <i nz-icon [nzType]="secondChild.iconClass"></i>
                           <a [routerLink]="[secondChild.path]">{{
                             secondChild.name | abpLocalization
                           }}</a>
@@ -88,7 +105,13 @@
               </ng-container>
 
               <ng-container *ngIf="!isDropdown(child)">
-                <li nz-menu-item nzMatchRouter *abpPermission="child.requiredPolicy">
+                <li
+                  class="menu-leaf"
+                  nz-menu-item
+                  nzMatchRouter
+                  *abpPermission="child.requiredPolicy"
+                >
+                  <i nz-icon [nzType]="child.iconClass"></i>
                   <a [routerLink]="[child.path]">{{ child.name | abpLocalization }}</a>
                 </li>
               </ng-container>
@@ -100,7 +123,15 @@
 
     <!-- 一级 -->
     <ng-container *ngIf="!isDropdown(route)">
-      <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true" *abpPermission="route.requiredPolicy">
+      <li
+        class="menu-leaf"
+        nz-menu-item
+        nzMatchRouter
+        [nzMatchRouterExact]="true"
+        *abpPermission="route.requiredPolicy"
+        [nzIcon]="route.iconClass"
+      >
+        <i nz-icon [nzType]="route.iconClass"></i>
         <a [routerLink]="[route.path]">{{ route.name | abpLocalization }}</a>
       </li>
     </ng-container>

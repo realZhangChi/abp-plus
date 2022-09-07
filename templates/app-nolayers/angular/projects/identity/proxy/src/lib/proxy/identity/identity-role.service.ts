@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class IdentityRoleService {
   apiName = 'AbpIdentity';
+  
 
   create = (input: IdentityRoleCreateDto) =>
     this.restService.request<any, IdentityRoleDto>({
@@ -16,6 +17,7 @@ export class IdentityRoleService {
       body: input,
     },
     { apiName: this.apiName });
+  
 
   delete = (id: string) =>
     this.restService.request<any, void>({
@@ -23,6 +25,7 @@ export class IdentityRoleService {
       url: `/api/identity/roles/${id}`,
     },
     { apiName: this.apiName });
+  
 
   get = (id: string) =>
     this.restService.request<any, IdentityRoleDto>({
@@ -30,6 +33,7 @@ export class IdentityRoleService {
       url: `/api/identity/roles/${id}`,
     },
     { apiName: this.apiName });
+  
 
   getAllList = () =>
     this.restService.request<any, ListResultDto<IdentityRoleDto>>({
@@ -37,6 +41,7 @@ export class IdentityRoleService {
       url: '/api/identity/roles/all',
     },
     { apiName: this.apiName });
+  
 
   getList = (input: GetIdentityRolesInput) =>
     this.restService.request<any, PagedResultDto<IdentityRoleDto>>({
@@ -45,6 +50,7 @@ export class IdentityRoleService {
       params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName });
+  
 
   update = (id: string, input: IdentityRoleUpdateDto) =>
     this.restService.request<any, IdentityRoleDto>({

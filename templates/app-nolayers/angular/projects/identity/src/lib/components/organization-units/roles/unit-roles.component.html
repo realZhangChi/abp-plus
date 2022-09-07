@@ -1,0 +1,83 @@
+<abp-page *ngIf="this.organizationUnit.id" [breadcrumb]="false">
+  <abp-page-title-container>
+    <h2 class="content-header-title">
+      {{ organizationUnit.displayName }}
+    </h2>
+  </abp-page-title-container>
+
+  <abp-page-toolbar-container>
+    <abp-page-toolbar [record]="addedRoles.items"></abp-page-toolbar>
+  </abp-page-toolbar-container>
+  <abp-extensible-table
+    [data]="addedRoles.items"
+    [recordsTotal]="addedRoles.totalCount"
+    [list]="roleList"
+  ></abp-extensible-table>
+
+  <abp-modal [(visible)]="modalVisible" [(busy)]="modalBusy">
+    <ng-template #abpHeader>
+      <h3>{{ 'AbpIdentity::AddRole' | abpLocalization }}</h3>
+    </ng-template>
+
+    <ng-template #abpBody>
+      <div id="data-tables-table-filter" class="data-tables-filter">
+        <div class="input-group">
+          <input
+            nz-input
+            type="search"
+            [placeholder]="'AbpUi::PagerSearch' | abpLocalization"
+            [(ngModel)]="allRolelist.filter"
+          />
+        </div>
+      </div>
+
+      <nz-table
+        #table
+        nzBordered
+        nzShowSizeChanger
+        [nzData]="allRoles.items"
+        [nzFrontPagination]="false"
+        [nzLoading]="allRolelist.isLoading$ | async"
+        [nzTotal]="allRoles.totalCount"
+        [nzPageSize]="allRolelist.maxResultCount"
+        [nzPageIndex]="allRolelist.page + 1"
+        (nzQueryParams)="onRoleQueryParamsChange($event)"
+      >
+        <thead>
+          <tr>
+            <th
+              [nzChecked]="roleAllChecked"
+              [nzIndeterminate]="roleCheckIndeterminate"
+              (nzCheckedChange)="onAllRoleChecked($event)"
+            ></th>
+            <th>{{ 'AbpIdentity::RoleName' | abpLocalization }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of table.data">
+            <td
+              [nzChecked]="setOfCheckedId.has(data.id)"
+              (nzCheckedChange)="onRoleChecked(data.id, $event)"
+            ></td>
+            <td>{{ data.name }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </ng-template>
+
+    <ng-template #abpFooter>
+      <nz-space>
+        <button *nzSpaceItem nz-button type="button" abpClose>
+          {{ 'AbpIdentity::Cancel' | abpLocalization }}
+        </button>
+        <abp-button
+          *nzSpaceItem
+          iconClass="check"
+          [disabled]="form?.invalid"
+          (click)="saveRoles()"
+          >{{ 'AbpIdentity::Save' | abpLocalization }}</abp-button
+        >
+      </nz-space>
+    </ng-template>
+  </abp-modal>
+</abp-page>

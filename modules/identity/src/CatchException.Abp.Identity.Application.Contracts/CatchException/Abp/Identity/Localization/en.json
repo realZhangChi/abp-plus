@@ -1,0 +1,26 @@
+{
+  "culture": "en",
+  "texts": {
+    "AddMember": "Add member",
+    "AddRole": "Add Role",
+    "AddRootUnit": "Add root unit",
+    "AddSubUnit": "Add sub-unit",
+    "DisplayName": "Display name",
+    "Members": "Members",
+    "OrganizationTree": "Organization tree",
+    "OrganizationUnit": "Organization Unit",
+    "OrganizationUnit:Parent{0}": "Parent: {0}",
+    "OrganizationUnit:Root": "Root unit",
+    "OrganizationUnitDeletionConfirmationMessage": "Are you sure you want to delete the organization unit '{0}'?",
+    "OrganizationUnitDuplicateDisplayNameWarning": "The organization display name already exists. Please write a different one.",
+    "OrganizationUnitMoveConfirmMessage": "Are you sure you want to move '{0}' under '{1}'?",
+    "OrganizationUnits": "Organization Units",
+    "OrganizationUnits{0}": "Org. units ({0})",
+    "Permission:OrganizationUnitManagement": "Organization unit management",
+    "Permission:ManageOU": "Managing organization tree",
+    "Permission:ManageRoles": "Managing roles",
+    "Permission:ManageUsers": "Managing users",
+    "RemoveRoleFromOuWarningMessage": "Are you sure to you want to remove the role {0} from organization unit {1}?",
+    "RemoveUserFromOuWarningMessage": "Are you sure to you want to remove the user {0} from organization unit {1}?"
+  }
+}

@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class IdentityUserService {
   apiName = 'AbpIdentity';
+  
 
   create = (input: IdentityUserCreateDto) =>
     this.restService.request<any, IdentityUserDto>({
@@ -16,6 +17,7 @@ export class IdentityUserService {
       body: input,
     },
     { apiName: this.apiName });
+  
 
   delete = (id: string) =>
     this.restService.request<any, void>({
@@ -23,6 +25,7 @@ export class IdentityUserService {
       url: `/api/identity/users/${id}`,
     },
     { apiName: this.apiName });
+  
 
   findByEmail = (email: string) =>
     this.restService.request<any, IdentityUserDto>({
@@ -30,6 +33,7 @@ export class IdentityUserService {
       url: `/api/identity/users/by-email/${email}`,
     },
     { apiName: this.apiName });
+  
 
   findByUsername = (userName: string) =>
     this.restService.request<any, IdentityUserDto>({
@@ -37,6 +41,7 @@ export class IdentityUserService {
       url: `/api/identity/users/by-username/${userName}`,
     },
     { apiName: this.apiName });
+  
 
   get = (id: string) =>
     this.restService.request<any, IdentityUserDto>({
@@ -44,6 +49,7 @@ export class IdentityUserService {
       url: `/api/identity/users/${id}`,
     },
     { apiName: this.apiName });
+  
 
   getAssignableRoles = () =>
     this.restService.request<any, ListResultDto<IdentityRoleDto>>({
@@ -51,6 +57,7 @@ export class IdentityUserService {
       url: '/api/identity/users/assignable-roles',
     },
     { apiName: this.apiName });
+  
 
   getList = (input: GetIdentityUsersInput) =>
     this.restService.request<any, PagedResultDto<IdentityUserDto>>({
@@ -59,6 +66,7 @@ export class IdentityUserService {
       params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName });
+  
 
   getRoles = (id: string) =>
     this.restService.request<any, ListResultDto<IdentityRoleDto>>({
@@ -66,6 +74,7 @@ export class IdentityUserService {
       url: `/api/identity/users/${id}/roles`,
     },
     { apiName: this.apiName });
+  
 
   update = (id: string, input: IdentityUserUpdateDto) =>
     this.restService.request<any, IdentityUserDto>({
@@ -74,6 +83,7 @@ export class IdentityUserService {
       body: input,
     },
     { apiName: this.apiName });
+  
 
   updateRoles = (id: string, input: IdentityUserUpdateRolesDto) =>
     this.restService.request<any, void>({

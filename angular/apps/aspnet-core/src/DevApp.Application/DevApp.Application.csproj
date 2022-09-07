@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DevApp.Domain\DevApp.Domain.csproj" />
     <ProjectReference Include="..\DevApp.Application.Contracts\DevApp.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\..\modules\identity\src\CatchException.Abp.Identity.Application\CatchException.Abp.Identity.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

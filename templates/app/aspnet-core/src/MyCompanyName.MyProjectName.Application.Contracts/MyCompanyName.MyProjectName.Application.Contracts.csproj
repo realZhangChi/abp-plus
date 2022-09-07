@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\..\..\..\modules\setting-management\src\Volo.Abp.SettingManagement.Application.Contracts\Volo.Abp.SettingManagement.Application.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	  <PackageReference Include="CatchException.Abp.Identity.Application.Contracts" Version="6.0.0-rc.3" />
+  </ItemGroup>
+
 </Project>

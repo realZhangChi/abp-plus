@@ -12,7 +12,7 @@ export function configureRoutes(routesService: RoutesService) {
       {
         path: undefined,
         name: eThemeSharedRouteNames.Administration,
-        iconClass: 'fa fa-wrench',
+        iconClass: 'tool',
         order: 100,
       },
     ]);

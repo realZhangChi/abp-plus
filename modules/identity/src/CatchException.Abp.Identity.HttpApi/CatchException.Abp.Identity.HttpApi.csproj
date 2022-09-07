@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="..\..\..\..\configureawait.props" />
+    <Import Project="..\..\..\..\common.props" />
+	
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace/>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="6.0.0-rc.3"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CatchException.Abp.Identity.Application.Contracts\CatchException.Abp.Identity.Application.Contracts.csproj"/>
+    </ItemGroup>
+
+</Project>

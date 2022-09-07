@@ -21,4 +21,9 @@
     <ProjectReference Include="..\..\..\..\..\modules\setting-management\src\Volo.Abp.SettingManagement.Application\Volo.Abp.SettingManagement.Application.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+	  <PackageReference Include="CatchException.Abp.Identity.Application" Version="6.0.0-rc.3" />
+  </ItemGroup>
+
 </Project>

@@ -16,8 +16,16 @@ export function configureRoutes(routesService: RoutesService) {
         name: eIdentityRouteNames.IdentityManagement,
         parentName: eThemeSharedRouteNames.Administration,
         requiredPolicy: eIdentityPolicyNames.IdentityManagement,
-        iconClass: 'fa fa-id-card-o',
+        iconClass: 'idcard',
         layout: eLayoutType.application,
+        order: 1,
+      },
+      {
+        path: '/identity/organization-units',
+        name: eIdentityRouteNames.OrganizationUnits,
+        parentName: eIdentityRouteNames.IdentityManagement,
+        requiredPolicy: eIdentityPolicyNames.OrganizationUnits,
+        iconClass: 'apartment',
         order: 1,
       },
       {
@@ -25,14 +33,16 @@ export function configureRoutes(routesService: RoutesService) {
         name: eIdentityRouteNames.Roles,
         parentName: eIdentityRouteNames.IdentityManagement,
         requiredPolicy: eIdentityPolicyNames.Roles,
-        order: 1,
+        iconClass: 'team',
+        order: 2,
       },
       {
         path: '/identity/users',
         name: eIdentityRouteNames.Users,
         parentName: eIdentityRouteNames.IdentityManagement,
         requiredPolicy: eIdentityPolicyNames.Users,
-        order: 2,
+        iconClass: 'user',
+        order: 3,
       },
     ]);
   };

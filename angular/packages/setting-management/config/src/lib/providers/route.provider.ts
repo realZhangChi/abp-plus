@@ -15,7 +15,7 @@ export function configureRoutes(routesService: RoutesService) {
         parentName: eThemeSharedRouteNames.Administration,
         layout: eLayoutType.application,
         order: 100,
-        iconClass: 'fa fa-cog',
+        iconClass: 'setting',
       },
     ]);
   };

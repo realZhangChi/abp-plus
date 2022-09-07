@@ -11,7 +11,7 @@ function configureRoutes(routesService: RoutesService) {
       {
         path: '/',
         name: '::Menu:Home',
-        iconClass: 'fas fa-home',
+        iconClass: 'home',
         order: 1,
         layout: eLayoutType.application,
       },
