@@ -5,6 +5,7 @@ import {
   OrganizationUnitDto,
   OrganizationUnitService,
 } from '@abp-plus/ng.identity/proxy';
+import { Confirmation, ConfirmationService } from '@abp-plus/ng.theme.shared';
 import { EXTENSIONS_IDENTIFIER } from '@abp-plus/ng.theme.shared/extensions';
 import { IdentityUserDto } from '@abp/ng.account.core/proxy';
 import {
@@ -48,7 +49,7 @@ export class UnitMembersComponent {
   } as PagedResultDto<IdentityUserDto>;
 
   modalVisible: boolean;
-  modalBusy:boolean;
+  modalBusy: boolean;
   identityUsers: PagedResultDto<IdentityUserDto> = { items: [], totalCount: 0 };
   userAllChecked = false;
   userCheckIndeterminate = false;
@@ -60,14 +61,29 @@ export class UnitMembersComponent {
     private subscription: SubscriptionService,
     private service: OrganizationUnitService,
     private userService: IdentityUserService,
+    private confirm: ConfirmationService,
   ) {
     this.initGetMembersStream();
+  }
+
+  deleteMember(user: IdentityUserDto) {
+    this.confirm
+      .warn('AbpIdentity::RemoveUserFromOuWarningMessage', 'AbpIdentity::AreYouSure', {
+        messageLocalizationParams: [this.organizationUnit.displayName, user.userName],
+      })
+      .subscribe((status: Confirmation.Status) => {
+        if (status === Confirmation.Status.confirm) {
+          this.service
+            .deleteMember(this.organizationUnit.id, user.id)
+            .subscribe(() => this.getMembers$.next(this.organizationUnit));
+        }
+      });
   }
 
   saveMembers() {
     this.modalBusy = true;
     this.service
-      .updateMembers(this.organizationUnit.id, {
+      .updateMember(this.organizationUnit.id, {
         userIds: Array.from(this.setOfCheckedId),
       } as AddMemberDto)
       .pipe(finalize(() => (this.modalBusy = false)))

@@ -12,9 +12,9 @@ public class IdentityPermissionDefinitionProvider : PermissionDefinitionProvider
 
         var organizationUnitsPermission = identityGroup.AddPermission(IdentityPermissions.OrganizationUnits.Default,
             L("Permission:OrganizationUnitManagement"));
-        organizationUnitsPermission.AddChild(IdentityPermissions.OrganizationUnits.Create, L("Permission:Create"));
-        organizationUnitsPermission.AddChild(IdentityPermissions.OrganizationUnits.Update, L("Permission:Edit"));
-        organizationUnitsPermission.AddChild(IdentityPermissions.OrganizationUnits.Delete, L("Permission:Delete"));
+        organizationUnitsPermission.AddChild(IdentityPermissions.OrganizationUnits.ManageOU, L("Permission:ManageOU"));
+        organizationUnitsPermission.AddChild(IdentityPermissions.OrganizationUnits.ManageRoles, L("Permission:ManageRoles"));
+        organizationUnitsPermission.AddChild(IdentityPermissions.OrganizationUnits.ManageUsers, L("Permission:ManageUsers"));
     }
     
     private static LocalizableString L(string name)

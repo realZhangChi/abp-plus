@@ -34,11 +34,4 @@ export const DEFAULT_UNIT_MEMEBERS_ENTITY_PROPS = EntityProp.createMany<Identity
     sortable: true,
     columnWidth: 250,
   },
-  {
-    type: ePropType.String,
-    name: 'phoneNumber',
-    displayName: 'AbpIdentity::PhoneNumber',
-    sortable: true,
-    columnWidth: 250,
-  },
 ]);

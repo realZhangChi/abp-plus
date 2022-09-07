@@ -1,4 +1,4 @@
-import type { AddMemberDto, GetOrganizationUnitInput, OrganizationUnitCreateDto, OrganizationUnitDto, OrganizationUnitMoveDto, OrganizationUnitUpdateDto } from './models';
+import type { AddMemberDto, AddRoleDto, GetOrganizationUnitInput, OrganizationUnitCreateDto, OrganizationUnitDto, OrganizationUnitMoveDto, OrganizationUnitUpdateDto } from './models';
 import { RestService } from '@abp/ng.core';
 import type { ListResultDto, PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -9,15 +9,6 @@ import type { IdentityRoleDto, IdentityUserDto } from '../../../identity/models'
 })
 export class OrganizationUnitService {
   apiName = 'AbpIdentity';
-  
-
-  updateMembers = (ouId: string, input: AddMemberDto) =>
-    this.restService.request<any, void>({
-      method: 'PUT',
-      url: `/api/identity/organization-units/${ouId}/members`,
-      body: input,
-    },
-    { apiName: this.apiName });
   
 
   create = (input: OrganizationUnitCreateDto) =>
@@ -33,6 +24,22 @@ export class OrganizationUnitService {
     this.restService.request<any, void>({
       method: 'DELETE',
       url: `/api/identity/organization-units/${id}`,
+    },
+    { apiName: this.apiName });
+  
+
+  deleteMember = (ouId: string, userId: string) =>
+    this.restService.request<any, void>({
+      method: 'DELETE',
+      url: `/api/identity/organization-units/${ouId}/members/${userId}`,
+    },
+    { apiName: this.apiName });
+  
+
+  deleteRole = (ouId: string, roleId: string) =>
+    this.restService.request<any, void>({
+      method: 'DELETE',
+      url: `/api/identity/organization-units/${ouId}/roles/${roleId}`,
     },
     { apiName: this.apiName });
   
@@ -93,6 +100,24 @@ export class OrganizationUnitService {
     this.restService.request<any, OrganizationUnitDto>({
       method: 'PUT',
       url: `/api/identity/organization-units/${id}`,
+      body: input,
+    },
+    { apiName: this.apiName });
+  
+
+  updateMember = (id: string, input: AddMemberDto) =>
+    this.restService.request<any, void>({
+      method: 'PUT',
+      url: `/api/identity/organization-units/${id}/members`,
+      body: input,
+    },
+    { apiName: this.apiName });
+  
+
+  updateRole = (id: string, input: AddRoleDto) =>
+    this.restService.request<any, void>({
+      method: 'PUT',
+      url: `/api/identity/organization-units/${id}/roles`,
       body: input,
     },
     { apiName: this.apiName });

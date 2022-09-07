@@ -7,9 +7,9 @@ public static class IdentityPermissions
     public static class OrganizationUnits
     {
         public const string Default = Volo.Abp.Identity.IdentityPermissions.GroupName + ".OrganizationUnits";
-        public const string Create = Default + ".Create";
-        public const string Update = Default + ".Update";
-        public const string Delete = Default + ".Delete";
+        public const string ManageOU = Default + ".ManageOU";
+        public const string ManageRoles = Default + ".ManageRoles";
+        public const string ManageUsers = Default + ".ManageUsers";
     }
 
     public static string[] GetAll()

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Data;
@@ -45,7 +44,7 @@ public class OrganizationUnitAppService :
             ObjectMapper.Map<List<OrganizationUnit>, List<OrganizationUnitDto>>(ous));
     }
 
-    [Authorize(IdentityPermissions.OrganizationUnits.Update)]
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageOU)]
     public Task MoveAsync(Guid id, OrganizationUnitMoveDto input)
     {
         return Manager.MoveAsync(id, input.NewParentId);
@@ -62,7 +61,8 @@ public class OrganizationUnitAppService :
             ObjectMapper.Map<List<IdentityUser>, List<IdentityUserDto>>(members));
     }
 
-    public async Task AddMemberAsync(Guid id, AddMemberDto input)
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageUsers)]
+    public async Task UpdateMemberAsync(Guid id, AddMemberDto input)
     {
         var ou = await OuRepository.GetAsync(id);
         var members =
@@ -84,6 +84,45 @@ public class OrganizationUnitAppService :
         await CurrentUnitOfWork.SaveChangesAsync();
     }
 
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageUsers)]
+    public async Task DeleteMemberAsync(Guid ouId, Guid userId)
+    {
+        await UserManager.RemoveFromOrganizationUnitAsync(userId, ouId);
+
+        await CurrentUnitOfWork.SaveChangesAsync();
+    }
+
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageRoles)]
+    public async Task UpdateRoleAsync(Guid id, AddRoleDto input)
+    {
+        var ou = await OuRepository.GetAsync(id);
+        var roles =
+            await OuRepository.GetRolesAsync(ou);
+
+        var rolesToBeRemoved = roles
+            .Where(m => !input.RoleIds.Contains(m.Id))
+            .ToList();
+        foreach (var roleToBeRemoved in rolesToBeRemoved)
+        {
+            await Manager.RemoveRoleFromOrganizationUnitAsync(roleToBeRemoved, ou);
+        }
+
+        foreach (var roleId in input.RoleIds)
+        {
+            await Manager.AddRoleToOrganizationUnitAsync(roleId, id);
+        }
+
+        await CurrentUnitOfWork.SaveChangesAsync();
+    }
+
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageRoles)]
+    public async Task DeleteRoleAsync(Guid ouId, Guid roleId)
+    {
+        await Manager.RemoveRoleFromOrganizationUnitAsync(roleId, ouId);
+
+        await CurrentUnitOfWork.SaveChangesAsync();
+    }
+
     public async Task<PagedResultDto<IdentityRoleDto>> GetRoleListAsync(Guid id, PagedResultRequestDto input)
     {
         var query = (await Repository.GetQueryableAsync())
@@ -101,7 +140,7 @@ public class OrganizationUnitAppService :
             ObjectMapper.Map<List<IdentityRole>, List<IdentityRoleDto>>(roles));
     }
 
-    [Authorize(IdentityPermissions.OrganizationUnits.Create)]
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageOU)]
     public override async Task<OrganizationUnitDto> CreateAsync(OrganizationUnitCreateDto input)
     {
         var ou = new OrganizationUnit(GuidGenerator.Create(), input.DisplayName, input.ParentId);
@@ -110,6 +149,7 @@ public class OrganizationUnitAppService :
         return ObjectMapper.Map<OrganizationUnit, OrganizationUnitDto>(ou);
     }
 
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageOU)]
     public override async Task<OrganizationUnitDto> UpdateAsync(Guid id, OrganizationUnitUpdateDto input)
     {
         var ou = await Repository.GetAsync(id);
@@ -122,5 +162,13 @@ public class OrganizationUnitAppService :
         await CurrentUnitOfWork.SaveChangesAsync();
 
         return ObjectMapper.Map<OrganizationUnit, OrganizationUnitDto>(ou);
+    }
+
+    [Authorize(IdentityPermissions.OrganizationUnits.ManageOU)]
+    public override async Task DeleteAsync(Guid id)
+    {
+        await Manager.DeleteAsync(id);
+
+        await CurrentUnitOfWork.SaveChangesAsync();
     }
 }

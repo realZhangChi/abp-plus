@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc;
-
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
@@ -77,9 +75,27 @@ public class OrganizationUnitController : AbpControllerBase, IOrganizationUnitAp
         return OrganizationUnitAppService.GetRoleListAsync(id, input);
     }
 
-    [HttpPut("{ouId}/members")]
-    public Task AddMemberAsync(Guid ouId, AddMemberDto input)
+    [HttpPut("{id}/members")]
+    public Task UpdateMemberAsync(Guid id, AddMemberDto input)
     {
-        return OrganizationUnitAppService.AddMemberAsync(ouId, input);
+        return OrganizationUnitAppService.UpdateMemberAsync(id, input);
+    }
+
+    [HttpDelete("{ouId}/members/{userId}")]
+    public Task DeleteMemberAsync(Guid ouId, Guid userId)
+    {
+        return OrganizationUnitAppService.DeleteMemberAsync(ouId, userId);
+    }
+
+    [HttpPut("{id}/roles")]
+    public Task UpdateRoleAsync(Guid id, AddRoleDto input)
+    {
+        return OrganizationUnitAppService.UpdateRoleAsync(id, input);
+    }
+
+    [HttpDelete("{ouId}/roles/{roleId}")]
+    public Task DeleteRoleAsync(Guid ouId, Guid roleId)
+    {
+        return OrganizationUnitAppService.DeleteRoleAsync(ouId, roleId);
     }
 }
