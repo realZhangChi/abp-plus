@@ -21,12 +21,20 @@ export function configureRoutes(routesService: RoutesService) {
         order: 1,
       },
       {
+        path: '/identity/organization-units',
+        name: eIdentityRouteNames.OrganizationUnits,
+        parentName: eIdentityRouteNames.IdentityManagement,
+        requiredPolicy: eIdentityPolicyNames.OrganizationUnits,
+        iconClass: 'apartment',
+        order: 1,
+      },
+      {
         path: '/identity/roles',
         name: eIdentityRouteNames.Roles,
         parentName: eIdentityRouteNames.IdentityManagement,
         requiredPolicy: eIdentityPolicyNames.Roles,
         iconClass: 'team',
-        order: 1,
+        order: 2,
       },
       {
         path: '/identity/users',
@@ -34,7 +42,7 @@ export function configureRoutes(routesService: RoutesService) {
         parentName: eIdentityRouteNames.IdentityManagement,
         requiredPolicy: eIdentityPolicyNames.Users,
         iconClass: 'user',
-        order: 2,
+        order: 3,
       },
     ]);
   };

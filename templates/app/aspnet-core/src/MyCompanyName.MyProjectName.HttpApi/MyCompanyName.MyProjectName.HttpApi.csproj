@@ -20,4 +20,8 @@
     <ProjectReference Include="..\..\..\..\..\modules\setting-management\src\Volo.Abp.SettingManagement.HttpApi\Volo.Abp.SettingManagement.HttpApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	  <PackageReference Include="CatchException.Abp.Identity.HttpApi" Version="6.0.0-rc.3" />
+  </ItemGroup>
+
 </Project>

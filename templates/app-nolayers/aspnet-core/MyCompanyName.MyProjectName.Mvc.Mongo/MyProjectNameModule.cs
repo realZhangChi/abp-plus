@@ -67,8 +67,8 @@ namespace MyCompanyName.MyProjectName;
     // Identity module packages
     typeof(AbpPermissionManagementDomainIdentityModule),
     typeof(AbpPermissionManagementDomainOpenIddictModule),
-    typeof(AbpIdentityApplicationModule),
-    typeof(AbpIdentityHttpApiModule),
+    typeof(CatchException.Abp.Identity.AbpIdentityApplicationModule),
+    typeof(CatchException.Abp.Identity.AbpIdentityHttpApiModule),
     typeof(AbpIdentityMongoDbModule),
     typeof(AbpOpenIddictMongoDbModule),
     typeof(AbpIdentityWebModule),

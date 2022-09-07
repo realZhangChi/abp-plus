@@ -12,6 +12,7 @@ import {
 @Component({
   selector: 'abp-routes',
   templateUrl: 'routes.component.html',
+  styleUrls: ['./routes.component.scss'],
 })
 export class RoutesComponent {
   @Input() smallScreen?: boolean;

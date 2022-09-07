@@ -1,10 +1,13 @@
 import {
-  AuthGuard, PermissionGuard,
+  AuthGuard,
+  PermissionGuard,
   ReplaceableComponents,
-  ReplaceableRouteContainerComponent, RouterOutletComponent
+  ReplaceableRouteContainerComponent,
+  RouterOutletComponent,
 } from '@abp/ng.core';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { OrganizationUnitsComponent } from './components/organization-units/organization-units.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { UsersComponent } from './components/users/users.component';
 import { eIdentityComponents } from './enums/components';
@@ -17,6 +20,17 @@ const routes: Routes = [
     component: RouterOutletComponent,
     canActivate: [AuthGuard, PermissionGuard, IdentityExtensionsGuard],
     children: [
+      {
+        path: 'organization-units',
+        component: ReplaceableRouteContainerComponent,
+        data: {
+          requiredPolicy: 'AbpIdentity.OrganizationUnits',
+          replaceableComponent: {
+            key: eIdentityComponents.OrganizationUnits,
+            defaultComponent: OrganizationUnitsComponent,
+          } as ReplaceableComponents.RouteData<OrganizationUnitsComponent>,
+        },
+      },
       {
         path: 'roles',
         component: ReplaceableRouteContainerComponent,
